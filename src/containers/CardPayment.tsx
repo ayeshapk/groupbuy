@@ -13,8 +13,8 @@ const DescriptionText = '#F26E22';
 const SubText = '#2678BF';
 const ListText = '#D2D2D2';
 let card = [
-    { id: 0, number: '**** **** **** 4543', name: 'David Spade', exp: '09 - 18' },
-    { id: 1, number: '**** **** **** 4500', name: 'David Spade', exp: '09 - 19' },
+    { id: 0, number: '**** **** **** 4543', name: 'David Spade', exp: '09 - 18', select: true },
+    { id: 1, number: '**** **** **** 4500', name: 'David Spade', exp: '09 - 19', select: false },
 ];
 
 // get sum of price prop across all objects in array
@@ -34,32 +34,20 @@ function CardPayment() {
 
     return (
         <div>
-            {itemState && itemState.map((item, index: number) => (
-                <div key={index}>
-                    <AspectRatio ratio="4/2">
-                        <CardActionArea>
-                            {<Card style={{
-                                background: 'white',
-                                boxSizing: 'border-box',
-                                borderRadius: '15px', backgroundColor: '#fafafa',
-                            }}>
-                                <div>
-                                    <AspectRatio ratio="4/2" style={{ objectFit: 'cover' }}>
-                                        <img src={'https://res.cloudinary.com/www-weddingpenguin-co/image/upload/v1600678969/Component_6_1_h15uwi.png'} style={{ objectFit: 'cover', objectPosition: 'center', borderRadius: '15px', }} />
-                                    </AspectRatio>
-                                </div>
-                            </Card>}
-                            <div style={{ margin: '3px' }} />
-                        </CardActionArea>
-                    </AspectRatio>
-                </div>))}
-
-
 
             {itemState && itemState.map((item, index: number) => (
-                <Card key={index} style={{ margin: '10px', paddingTop: '10px', paddingBottom: '10px' }}>
+                <Card key={index} style={{ margin: '10px', position: 'relative' }}>
                     <CardActionArea>
-                        <CardContent>
+                         <CardMedia
+                            component="img"
+                            alt="active Card"
+                            height="140"
+                            image={item.select === true ? "https://res.cloudinary.com/www-weddingpenguin-co/image/upload/v1600678969/Component_6_1_h15uwi.png":"https://res.cloudinary.com/www-weddingpenguin-co/image/upload/v1600691214/Component_7_1_ziew0o.png"}
+                            title="active Card"
+                        />
+                
+                        <CardContent style={{ position: 'absolute', top: '0', left: '0', right: '0', bottom: '0', padding: '16px' }}>
+                            <img style={{ float: 'right' }} src='https://res.cloudinary.com/www-weddingpenguin-co/image/upload/v1600690847/Component_7_1_fnqmez.png' />
                             <Typography gutterBottom variant="h5" component="h2" style={{ textAlign: 'center' }}>
                                 {item.number}
                             </Typography>
@@ -93,7 +81,7 @@ function CardPayment() {
 
                         </CardContent>
                     </CardActionArea>
-            </Card>))}
+                </Card>))}
 
             <AppBar position="fixed" color='inherit' style={{ top: 'auto', bottom: 0, padding: '20px' }}>
                 <Grid container spacing={3} direction="row" justify="center" alignItems="flex-start">
