@@ -99,7 +99,7 @@ function GroupShop() {
                                 <Grid container spacing={3} direction="row" justify="center" alignItems="flex-start">
                                     <Grid item xs={6}>
                                         <Fab
-                                            style={{ backgroundColor: 'white', color: '#F26D85',width:'100%' }}
+                                            style={{ backgroundColor: 'white', color: '#F26D85', width: '100%' }}
                                             variant="extended"
                                             size="small"
                                             aria-label="add"
@@ -111,7 +111,7 @@ function GroupShop() {
                                     </Grid>
                                     <Grid item xs={6}>
                                         <Fab
-                                            style={{backgroundColor: '#F26E22', color: 'white' ,width:'100%'}}
+                                            style={{ backgroundColor: '#F26E22', color: 'white', width: '100%' }}
                                             variant="extended"
                                             size="small"
                                             aria-label="add"
