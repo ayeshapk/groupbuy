@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { MuiThemeProvider, CssBaseline } from '@material-ui/core';
+import { MuiThemeProvider, CssBaseline, NoSsr } from '@material-ui/core';
 import muiTheme from '../theme/mui';
 
 
@@ -12,11 +12,13 @@ const Layout = ({ children }) => {
         <div>
             <React.Fragment>
                 <CssBaseline />
-                    <MuiThemeProvider theme={muiTheme}>
-                            <div>
-                                {children}
-                            </div>
-                    </MuiThemeProvider>
+                <MuiThemeProvider theme={muiTheme}>
+                    <div>
+                        <NoSsr>
+                            {children}
+                        </NoSsr>
+                    </div>
+                </MuiThemeProvider>
             </React.Fragment>
         </div>
     );
