@@ -1,6 +1,6 @@
 # Description
 
-New wedding site with type script support running on next.js / react.js
+New Groupby with type script support running on next.js / react.js
 
 # Set up
 
