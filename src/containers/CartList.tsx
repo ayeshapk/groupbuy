@@ -7,7 +7,7 @@ import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import MenuIcon from '@material-ui/icons/Menu';
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 import AspectRatio from 'react-aspect-ratio';
-
+import { useRouter, Router } from 'next/router'
 const MainText = '#A60321';
 const DescriptionText = '#F26E22';
 const SubText = '#2678BF';
@@ -29,7 +29,7 @@ function CartList() {
     const [totalPriceState, setTotalPriceState] = useState(0);
     const [limiteTimeState, setLimiteTimeState] = useState('16 September');
     const [collectTimeState, setCollectTime] = useState('16 November');
-
+    const router = useRouter()
 
     useEffect(() => {
         if (itemState) {
@@ -46,7 +46,9 @@ function CartList() {
         }
     }
 
-
+    const linkToPagePayment = () =>{
+        router.push('/payment')
+    }
 
 
 
@@ -105,6 +107,7 @@ function CartList() {
                             variant="extended"
                             size="small"
                             aria-label="add"
+                            onClick={linkToPagePayment}
                         >
                             Preorder
                                 <ShoppingBasketIcon fontSize='small' style={{ margin: '5px' }} />

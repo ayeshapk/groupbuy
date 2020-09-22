@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import useWindowSize from '../HookServerData/Windowsize';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import MenuIcon from '@material-ui/icons/Menu';
+import { useRouter } from 'next/router';
 const MainText = '#A60321';
 const DescriptionText = '#F26E22';
 const SubText = '#2678BF';
@@ -24,7 +25,7 @@ function GroupShop() {
 
     const [itemState, setItemState] = useState(items);
     const { width, height } = useWindowSize()
-
+    const router = useRouter()
 
     useEffect(() => {
         if (itemState) {
@@ -33,6 +34,9 @@ function GroupShop() {
     }, [itemState]);
 
 
+    const linkToPageCart = () =>{
+        router.push('/cart')
+    }
 
 
 
@@ -115,6 +119,7 @@ function GroupShop() {
                                             variant="extended"
                                             size="small"
                                             aria-label="add"
+                                            onClick={linkToPageCart}
                                         >
                                             CHECK ITEM
                                 <ArrowForwardIosIcon fontSize='small' />

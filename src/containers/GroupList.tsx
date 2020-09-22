@@ -4,6 +4,7 @@ import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import { useState, useEffect } from 'react';
 import useWindowSize from '../HookServerData/Windowsize';
 
+import { useRouter, Router } from 'next/router'
 const MainText = '#A60321';
 const SubText = '#2678BF';
 const ListText = '#D2D2D2';
@@ -62,7 +63,7 @@ function GroupList() {
 
     const [itemState, setItemState] = useState(items);
     const { width, height } = useWindowSize()
-
+    const router = useRouter()
 
     useEffect(() => {
         if (itemState) {
@@ -71,7 +72,9 @@ function GroupList() {
     }, [itemState]);
 
 
-
+    const linkToPageGroupShop = () =>{
+        router.push('/groupshop')
+    }
 
 
     return (
@@ -86,6 +89,7 @@ function GroupList() {
                                 variant="extended"
                                 size="small"
                                 aria-label="add"
+                                onClick={linkToPageGroupShop}
                             >
                                 JOIN GROUP
                                 <ArrowForwardIosIcon fontSize='small'/>

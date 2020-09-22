@@ -7,13 +7,13 @@ import MenuBar from "../src/containers/MenuBar";
 import OrdersDetail from "../src/containers/OrdersDetail";
 import SearchBar from "../src/containers/SearchBar";
 
-const HomePage = () => {
+const GroupShopPage = () => {
     return (
         <Layout>
             <MenuBar/>
             <SearchBar/>
-            <GroupList/>
+            <GroupShop/>
         </Layout>
     );
 }
-export default HomePage;
+export default GroupShopPage;

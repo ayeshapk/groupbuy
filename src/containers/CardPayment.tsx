@@ -7,6 +7,7 @@ import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import MenuIcon from '@material-ui/icons/Menu';
 import AspectRatio from 'react-aspect-ratio';
 import AddIcon from '@material-ui/icons/Add';
+import { useRouter } from 'next/router';
 
 const MainText = '#A60321';
 const DescriptionText = '#F26E22';
@@ -24,12 +25,17 @@ function CardPayment() {
 
     const [itemState, setItemState] = useState(card);
     const { width, height } = useWindowSize()
-
+    const router = useRouter()
+    
     useEffect(() => {
         if (itemState) {
 
         }
     }, [itemState]);
+
+    const linkToPageHome = () =>{
+        router.push('/')
+    }
 
 
     return (
@@ -103,6 +109,7 @@ function CardPayment() {
                             variant="extended"
                             size="small"
                             aria-label="add"
+                            onClick={linkToPageHome}
                         >
                             CONFIRM
                                 <ArrowForwardIosIcon fontSize='small' />
