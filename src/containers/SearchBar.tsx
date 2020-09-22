@@ -12,7 +12,7 @@ export default function SearchBar() {
 
     return (
         <div >
-            <AppBar position="static" color='inherit' style={{ minHeight: '30px', boxShadow: 'none' }}>
+            <AppBar position="fixed" color='inherit' style={{ minHeight: '30px', boxShadow: 'none',marginTop:'50px' }}>
                 <Toolbar style={{ minHeight: '30px' }}>
                     <Grid container direction="row" justify="space-around" alignItems="center" >
                         <Grid item xs={1}>
@@ -29,8 +29,8 @@ export default function SearchBar() {
                         </Grid>
                     </Grid>
                 </Toolbar>
-
             </AppBar>
+            <div style={{paddingTop:'50px'}}/>
         </div>
     );
 }

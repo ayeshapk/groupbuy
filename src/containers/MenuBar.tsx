@@ -81,7 +81,7 @@ export default function MenuBar() {
 
     return (
         <div >
-            <AppBar position="static" color='inherit' style={{  boxShadow: 'none' }}>
+            <AppBar position="fixed" color='inherit' style={{  boxShadow: 'none' }}>
                 <Toolbar>
                     <Grid container direction="row" justify="space-evenly" alignItems="center" >
                         <Grid item xs={2}>
@@ -94,11 +94,11 @@ export default function MenuBar() {
                                 <MenuIcon style={{color:LOGO_COLOR}}/>
                             </IconButton>
                         </Grid>
-                        <Grid item xs={4}>
+                        <Grid item xs={'auto' } sm ={4}>
                             <Typography onClick={goHome} variant="h6" noWrap style={{ verticalAlign: 'center',color:LOGO_COLOR }}>GROUP BUY</Typography>
                         </Grid>
 
-                        <Grid item xs={5}>
+                        <Grid item sm={5} xs={false}>
                             <IconButton aria-label="show 17 new notifications" color="inherit">
                                 <Badge badgeContent={17} color="secondary">
                                     <NotificationsIcon style={{color:ICON_COLOR}} />
@@ -119,7 +119,7 @@ export default function MenuBar() {
                             </IconButton>
                         </Grid>
 
-                        <Grid item xs={1}>
+                        <Grid item sm={1} xs={false}>
                             <IconButton
                                 aria-label="show more"
                                 aria-controls={mobileMenuId}
@@ -134,6 +134,7 @@ export default function MenuBar() {
                 </Toolbar>
             </AppBar>
             {renderMobileMenu}
+            <div style={{paddingTop:'50px'}}/>
         </div>
     );
 }
