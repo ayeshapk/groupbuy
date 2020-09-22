@@ -15,7 +15,7 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import { Grid } from '@material-ui/core';
+import { Grid, Hidden } from '@material-ui/core';
 import { useRouter } from 'next/router';
 
 const LOGO_COLOR = '#A60321';
@@ -81,60 +81,67 @@ export default function MenuBar() {
 
     return (
         <div >
-            <AppBar position="fixed" color='inherit' style={{  boxShadow: 'none' }}>
+            <AppBar position="fixed" color='inherit' style={{ boxShadow: 'none' }}>
                 <Toolbar>
                     <Grid container direction="row" justify="space-evenly" alignItems="center" >
-                        <Grid item xs={2}>
+                        <Grid item lg={2} xl={2} md={2} sm={2} xs={false}>
                             <IconButton
                                 edge="start"
 
                                 color="inherit"
                                 aria-label="open drawer"
                             >
-                                <MenuIcon style={{color:LOGO_COLOR}}/>
+                                <MenuIcon style={{ color: LOGO_COLOR }} />
                             </IconButton>
                         </Grid>
-                        <Grid item xs={'auto' } sm ={4}>
-                            <Typography onClick={goHome} variant="h6" noWrap style={{ verticalAlign: 'center',color:LOGO_COLOR }}>GROUP BUY</Typography>
-                        </Grid>
 
-                        <Grid item sm={5} xs={false}>
+                        
+                        <Grid item lg={4} xl={4} md={4} sm={4} xs={false}>
+                            <Typography onClick={goHome} variant="h6" noWrap style={{ verticalAlign: 'center', color: LOGO_COLOR }}>GROUP BUY</Typography>
+                        </Grid>
+                        
+
+                       
+                        <Grid item lg={5} xl={5} md={5} sm={5} xs={false}>
                             <IconButton aria-label="show 17 new notifications" color="inherit">
                                 <Badge badgeContent={17} color="secondary">
-                                    <NotificationsIcon style={{color:ICON_COLOR}} />
+                                    <NotificationsIcon style={{ color: ICON_COLOR }} />
                                 </Badge>
                             </IconButton>
 
 
                             <IconButton aria-label="" color="inherit">
                                 <Badge badgeContent={3} color="secondary">
-                                    <ShoppingCartIcon style={{color:ICON_COLOR}} />
+                                    <ShoppingCartIcon style={{ color: ICON_COLOR }} />
                                 </Badge>
                             </IconButton>
 
                             <IconButton aria-label="show 4 new mails" color="inherit">
                                 <Badge badgeContent={4} color="secondary">
-                                    <ChatBubbleIcon style={{color:ICON_COLOR}} />
+                                    <ChatBubbleIcon style={{ color: ICON_COLOR }} />
                                 </Badge>
                             </IconButton>
                         </Grid>
+                        
 
-                        <Grid item sm={1} xs={false}>
-                            <IconButton
-                                aria-label="show more"
-                                aria-controls={mobileMenuId}
-                                aria-haspopup="true"
-                                onClick={handleMobileMenuOpen}
-                                color="inherit"
-                            >
-                                <MoreIcon style={{color:ICON_COLOR}} />
-                            </IconButton>
-                        </Grid>
+                        <Hidden xsDown>
+                            <Grid item lg={1} xl={1} md={1} sm={1} xs={false}>
+                                <IconButton
+                                    aria-label="show more"
+                                    aria-controls={mobileMenuId}
+                                    aria-haspopup="true"
+                                    onClick={handleMobileMenuOpen}
+                                    color="inherit"
+                                >
+                                    <MoreIcon style={{ color: ICON_COLOR }} />
+                                </IconButton>
+                            </Grid>
+                        </Hidden>
                     </Grid>
                 </Toolbar>
             </AppBar>
             {renderMobileMenu}
-            <div style={{paddingTop:'50px'}}/>
+            <div style={{ paddingTop: '50px' }} />
         </div>
     );
 }
