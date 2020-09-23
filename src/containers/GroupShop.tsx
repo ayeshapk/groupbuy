@@ -34,8 +34,8 @@ function GroupShop() {
     }, [itemState]);
 
 
-    const linkToPageCart = () =>{
-        router.push('/cart')
+    const linkToPageOrder = () =>{
+        router.push('/order')
     }
 
 
@@ -119,7 +119,7 @@ function GroupShop() {
                                             variant="extended"
                                             size="small"
                                             aria-label="add"
-                                            onClick={linkToPageCart}
+                                            onClick={linkToPageOrder}
                                         >
                                             CHECK ITEM
                                 <ArrowForwardIosIcon fontSize='small' />

@@ -16,7 +16,6 @@ let items = [
     { id: 0, name: 'coke', price: 15, amount: 3 },
     { id: 1, name: 'pepsi', price: 22, amount: 2 },
     { id: 2, name: '7up', price: 16, amount: 1 },
-    { id: 3, name: 'fanta', price: 30, amount: 0 }
 ];
 
 // get sum of price prop across all objects in array

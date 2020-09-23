@@ -1,0 +1,147 @@
+
+import { AppBar, BottomNavigation, Divider, Fab, Grid, Paper, Typography } from '@material-ui/core';
+import React from 'react'
+import { useState, useEffect } from 'react';
+import useWindowSize from '../HookServerData/Windowsize';
+import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
+import MenuIcon from '@material-ui/icons/Menu';
+import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
+import AspectRatio from 'react-aspect-ratio';
+import { useRouter, Router } from 'next/router'
+
+const DESCRIPTION_COLOR ='#D2D2D2';
+const TEXT_COLOR ='#F26E22';
+
+let items = [
+    { id: 0, name: 'coke', image: 'https://res.cloudinary.com/www-weddingpenguin-co/image/upload/v1600846115/Component_8_1_h4xv5p.png', price: 15, amount: 3, Description: 'lipsum', retailPrice: 16 },
+    { id: 1, name: 'pepsi', image: 'https://res.cloudinary.com/www-weddingpenguin-co/image/upload/v1600846115/Component_8_1_h4xv5p.png', price: 22, amount: 2, Description: 'lipsum', retailPrice: 25 },
+    { id: 2, name: '7up', image: 'https://res.cloudinary.com/www-weddingpenguin-co/image/upload/v1600846115/Component_8_1_h4xv5p.png', price: 16, amount: 1, Description: 'lipsum', retailPrice: 18 },
+    { id: 3, name: 'fanta', image: 'https://res.cloudinary.com/www-weddingpenguin-co/image/upload/v1600846115/Component_8_1_h4xv5p.png', price: 30, amount: 0, Description: 'lipsum', retailPrice: 31 }
+];
+
+// get sum of price prop across all objects in array
+
+
+function OrderProduct() {
+
+    const [itemState, setItemState] = useState(items);
+    const { width, height } = useWindowSize()
+    const [totalPriceState, setTotalPriceState] = useState(0);
+    const [limiteTimeState, setLimiteTimeState] = useState('16 September');
+    const router = useRouter()
+
+    useEffect(() => {
+        if (itemState) {
+            updateTotalPriceState()
+        }
+    }, [itemState]);
+
+    const updateTotalPriceState = () => {
+        if (itemState) {
+            let priceTotal = itemState.reduce(function (prev, cur) {
+                return prev + (cur.price * cur.amount);
+            }, 0);
+            setTotalPriceState(priceTotal)
+        }
+    }
+
+    const linkToPageCart = () => {
+        router.push('/cart')
+    }
+
+
+
+    return (
+        <div>
+
+            {itemState && itemState.map((item, index: number) => (
+                <Paper key={index} style={{ margin: '10px' }}>
+                    <Typography variant='h6' color='primary' style={{ textAlign: 'center', paddingTop: '3vh', paddingBottom: '1vh' }}>{item.name}</Typography>
+
+                    <div style={{ margin: '0 auto', textAlign: 'center' }}>
+                        <div>
+                            <img src={item.image} alt={item.image} style={{ maxHeight: '450px' }} />
+                        </div>
+                    </div>
+
+                    <Grid  style={{ padding: '10px' }} container spacing={0} direction="row" justify="space-evenly" alignItems="center" >
+                        <Grid item xs={6} style={{ padding: '3px' }}>
+                            <Typography variant='subtitle2' style={{ textAlign: 'left',color:DESCRIPTION_COLOR }}>name</Typography>
+                            <Typography variant='body1' style={{ textAlign: 'left', color:TEXT_COLOR}}>{item.name}</Typography>
+                        </Grid>
+                        <Grid item xs={6} style={{ padding: '3px' }}>
+                            <Typography variant='subtitle2' style={{ textAlign: 'right',color:DESCRIPTION_COLOR }}>description</Typography>
+                            <Typography variant='body2' style={{ textAlign: 'right',color:TEXT_COLOR }}>{item.Description}</Typography>
+                        </Grid>
+                    </Grid>
+
+                    <Grid  style={{ padding: '10px' }} container spacing={0} direction="row" justify="space-evenly" alignItems="center" >
+                        <Grid item xs={6} style={{ padding: '3px' }}>
+                            <Typography variant='subtitle2' style={{ textAlign: 'left', color:DESCRIPTION_COLOR }}>price</Typography>
+                            <Typography variant='body1' style={{ textAlign: 'left', color:TEXT_COLOR }}>{item.price} $</Typography>
+                        </Grid>
+                        <Grid item xs={6} style={{ padding: '3px' }}>
+                            <Typography variant='subtitle2' style={{ textAlign: 'right', color:DESCRIPTION_COLOR }}>retail price</Typography>
+                            <Typography variant='body1' style={{ textAlign: 'right', color:DESCRIPTION_COLOR }}>{item.retailPrice} $</Typography>
+                        </Grid>
+                    </Grid>
+                    
+                    <Divider />
+
+                    <Grid  style={{ padding: '10px' }} container spacing={0} direction="row" justify="space-evenly" alignItems="center" >
+                        <Grid item xs={6} style={{ padding: '3px' }}>
+                            <Typography variant='body1' style={{ textAlign: 'left',color:TEXT_COLOR  }}>$ {item.price*item.amount}</Typography>
+                        </Grid>
+                        <Grid item xs={6} style={{ padding: '3px' }}>
+                        <Grid container spacing={0} justify="center" alignItems="center" >
+                                    <Grid item xs={4} style={{ padding: '3px' }}>
+                                        <Typography variant='body1' style={{ textAlign: 'center', }}>-</Typography>
+                                    </Grid>
+                                    <Grid item xs={4} style={{ padding: '3px' }}>
+                                        <Typography variant='body1' style={{ textAlign: 'center',color:TEXT_COLOR  }}>{item.amount}</Typography>
+                                    </Grid>
+                                    <Grid item xs={4} style={{ padding: '3px' }}>
+                                        <Typography variant='body1' style={{ textAlign: 'center', }}>+</Typography>
+                                    </Grid>
+                                </Grid>
+                        </Grid>
+                    </Grid>
+
+                </Paper>))}
+
+            <div style={{ paddingBottom: '20%' }}>
+                <Typography variant='caption' style={{
+                    color: '#ED2939', marginLeft: '10px',
+                }}>After meet condition it will confirm detail</Typography>
+            </div>
+
+
+            <AppBar position="fixed" color='inherit' style={{ top: 'auto', bottom: 0, }}>
+                <Grid container spacing={0} direction="row" justify="space-evenly" alignItems="center" >
+                    <Grid item xs={6} style={{ padding: '10px' }}>
+                        <Typography variant='caption'>Total</Typography>
+                        <Typography variant='body1'>$ {totalPriceState}</Typography>
+                    </Grid>
+                    <Grid item xs={6} style={{ padding: '3px' }}>
+                        <Fab
+                            style={{ backgroundColor: '#ED2939', color: 'white', float: 'right', margin: '5px' }}
+                            variant="extended"
+                            size="small"
+                            aria-label="add"
+                            onClick={linkToPageCart}
+                        >
+                            Place Order
+                                <ShoppingBasketIcon fontSize='small' style={{ margin: '5px' }} />
+
+                        </Fab>
+                    </Grid>
+                </Grid>
+            </AppBar>
+        </div >
+    );
+
+}
+
+
+
+export default OrderProduct;
