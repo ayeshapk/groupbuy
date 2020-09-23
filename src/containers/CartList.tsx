@@ -1,5 +1,5 @@
 
-import { AppBar, BottomNavigation, Divider, Fab, Grid, Paper, Typography } from '@material-ui/core';
+import { AppBar, BottomNavigation, CardMedia, Divider, Fab, Grid, Paper, Typography } from '@material-ui/core';
 import React from 'react'
 import { useState, useEffect } from 'react';
 import useWindowSize from '../HookServerData/Windowsize';
@@ -13,9 +13,9 @@ const DescriptionText = '#F26E22';
 const SubText = '#2678BF';
 const ListText = '#D2D2D2';
 let items = [
-    { id: 0, name: 'coke', price: 15, amount: 3 },
-    { id: 1, name: 'pepsi', price: 22, amount: 2 },
-    { id: 2, name: '7up', price: 16, amount: 1 },
+    { id: 0, name: 'coke', price: 15, amount: 3, image: 'https://res.cloudinary.com/www-weddingpenguin-co/image/upload/v1600851614/001397056_qsr44y.jpg' },
+    { id: 1, name: 'pepsi', price: 22, amount: 2, image: 'https://res.cloudinary.com/www-weddingpenguin-co/image/upload/v1600851613/172935e5ab484423dd674574b205a77d_whbquq.jpg' },
+    { id: 2, name: '7up', price: 16, amount: 1, image: 'https://res.cloudinary.com/www-weddingpenguin-co/image/upload/v1600851614/71wN2KS-i1L._SL1500__qahrbm.jpg' },
 ];
 
 // get sum of price prop across all objects in array
@@ -45,7 +45,7 @@ function CartList() {
         }
     }
 
-    const linkToPagePayment = () =>{
+    const linkToPagePayment = () => {
         router.push('/payment')
     }
 
@@ -55,13 +55,20 @@ function CartList() {
         <div>
 
             {itemState && itemState.map((item, index: number) => (
-                <Grid key={index} container spacing={0} direction="row" justify="space-evenly" alignItems="center" >
+                <Grid key={index} container spacing={0} direction="row" justify="space-around" alignItems="flex-end" >
                     <Grid item xs={4} >
-                        <AspectRatio ratio="1/1" >
-                            <img src={'https://res.cloudinary.com/www-weddingpenguin-co/image/upload/v1600676233/Component_5_1_ohgjlv.png'} />
+                        <AspectRatio ratio="1/1" style={{margin:'10px'}}>
+                            {/*<img src={item.image} style={{margin:'0 auto' ,height:'auto'}} />*/}
+                            <CardMedia
+                                component="img"
+                                alt={item.image}
+                                height="140"
+                                image={item.image}
+                                title={item.image}
+                            />
                         </AspectRatio>
                     </Grid>
-                    <Grid item xs={8} style={{ padding: '3px' }}>
+                    <Grid item xs={8} style={{ padding: '3px' ,margin:'0 auto' }}>
                         <Typography variant='h6'>{item.name}</Typography>
                         <Typography variant='body2' style={{ color: DescriptionText }}>${item.price}</Typography>
 
@@ -89,7 +96,7 @@ function CartList() {
 
             <div style={{ paddingBottom: '20%' }}>
                 <Typography variant='caption' style={{
-                    color: '#ED2939', marginLeft:'10px',
+                    color: '#ED2939', marginLeft: '10px',
                 }}>After meet condition it will confirm detail</Typography>
             </div>
             <AppBar position="fixed" color='inherit' style={{ top: 'auto', bottom: 0, }}>

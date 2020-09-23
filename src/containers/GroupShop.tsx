@@ -12,10 +12,15 @@ const SubText = '#2678BF';
 const ListText = '#D2D2D2';
 let items = [
     {
-        id: 0, groupName: 'Drink And Vegetable', description: 'Storage 2-3 day in chiller', current: 0, required: 35, type: 'money',
+        id: 0, groupName: 'Drink', description: 'Storage 2-3 day in chiller', current: 0, required: 35, type: 'money',
         location: `1°20'48.0"N 103°57'21.7"E 132 Simei Street 1, Block 132`, limit: '16 September', collect: '17 Septemper',
         item: [{ id: 0, item: 'coke', }, { id: 1, item: 'pepsi', }, { id: 2, item: '7 Up', }, { id: 2, item: 'fanta', }]
-    },
+    }, 
+    {
+        id: 1, groupName: 'Vegetable', description: 'Storage 2-3 day in chiller', current: 0, required: 35, type: 'money',
+        location: `1°20'48.0"N 103°57'21.7"E 132 Simei Street 1, Block 132`, limit: '16 September', collect: '17 Septemper',
+        item: [{ id: 0, item: 'Chinese pomfret', }, { id: 1, item: 'brown mushroom', }, { id: 2, item: 'oyster mushroom', },]
+    }
 ];
 
 // get sum of price prop across all objects in array

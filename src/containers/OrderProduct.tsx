@@ -13,10 +13,10 @@ const DESCRIPTION_COLOR ='#D2D2D2';
 const TEXT_COLOR ='#F26E22';
 
 let items = [
-    { id: 0, name: 'coke', image: 'https://res.cloudinary.com/www-weddingpenguin-co/image/upload/v1600846115/Component_8_1_h4xv5p.png', price: 15, amount: 3, Description: 'lipsum', retailPrice: 16 },
-    { id: 1, name: 'pepsi', image: 'https://res.cloudinary.com/www-weddingpenguin-co/image/upload/v1600846115/Component_8_1_h4xv5p.png', price: 22, amount: 2, Description: 'lipsum', retailPrice: 25 },
-    { id: 2, name: '7up', image: 'https://res.cloudinary.com/www-weddingpenguin-co/image/upload/v1600846115/Component_8_1_h4xv5p.png', price: 16, amount: 1, Description: 'lipsum', retailPrice: 18 },
-    { id: 3, name: 'fanta', image: 'https://res.cloudinary.com/www-weddingpenguin-co/image/upload/v1600846115/Component_8_1_h4xv5p.png', price: 30, amount: 0, Description: 'lipsum', retailPrice: 31 }
+    { id: 0, name: 'coke', image: 'https://res.cloudinary.com/www-weddingpenguin-co/image/upload/v1600851614/001397056_qsr44y.jpg', price: 15, amount: 3, Description: 'lipsum', retailPrice: 16 },
+    { id: 1, name: 'pepsi', image: 'https://res.cloudinary.com/www-weddingpenguin-co/image/upload/v1600851613/172935e5ab484423dd674574b205a77d_whbquq.jpg', price: 22, amount: 2, Description: 'lipsum', retailPrice: 25 },
+    { id: 2, name: '7up', image: 'https://res.cloudinary.com/www-weddingpenguin-co/image/upload/v1600851614/71wN2KS-i1L._SL1500__qahrbm.jpg', price: 16, amount: 1, Description: 'lipsum', retailPrice: 18 },
+    { id: 3, name: 'fanta', image: 'https://res.cloudinary.com/www-weddingpenguin-co/image/upload/v1600851613/c47555d95d284d6de5abeaf1049b0474b53b906c-large_ptsrtr.jpg', price: 30, amount: 0, Description: 'lipsum', retailPrice: 31 }
 ];
 
 // get sum of price prop across all objects in array
@@ -60,7 +60,9 @@ function OrderProduct() {
 
                     <div style={{ margin: '0 auto', textAlign: 'center' }}>
                         <div>
-                            <img src={item.image} alt={item.image} style={{ maxHeight: '450px' }} />
+                        <AspectRatio ratio="1/1" >
+                            <img src={item.image} alt={item.image} style={{ maxHeight: '450px'}} />
+                            </AspectRatio>
                         </div>
                     </div>
 
