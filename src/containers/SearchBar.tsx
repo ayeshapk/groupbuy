@@ -4,7 +4,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import InputBase from '@material-ui/core/InputBase';
 import SearchIcon from '@material-ui/icons/Search';
 import CameraAltIcon from '@material-ui/icons/CameraAlt';
-import { Grid } from '@material-ui/core';
+import { Card, CardActionArea, Grid } from '@material-ui/core';
 
 const ICON_COLOR = '#2678BF';
 
@@ -12,11 +12,11 @@ export default function SearchBar() {
 
     return (
         <div >
-            <AppBar position="fixed" color='inherit' style={{ minHeight: '30px', boxShadow: 'none',marginTop:'50px' }}>
+            <AppBar position="fixed" color='inherit' style={{ minHeight: '30px', boxShadow: 'none', marginTop: '50px' }}>
                 <Toolbar style={{ minHeight: '30px' }}>
-                    <Grid container direction="row" justify="space-around" alignItems="center" >
+                    <Grid container direction="row" justify="space-around" alignItems="center" style={{ border: '1px solid #2678bf' }}>
                         <Grid item xs={1}>
-                            <SearchIcon style={{color:ICON_COLOR}} />
+                            <SearchIcon  fontSize='large'  style={{ color: ICON_COLOR, margin: '0 auto', paddingTop: '7px' }} />
                         </Grid>
                         <Grid item xs={10}>
                             <InputBase
@@ -25,12 +25,14 @@ export default function SearchBar() {
                             />
                         </Grid>
                         <Grid item xs={1}>
-                            <CameraAltIcon  style={{color:ICON_COLOR}} />
+                                <CardActionArea style={{ color: ICON_COLOR, margin: '0 auto',textAlign: 'center',paddingBottom:'1px'  }}>
+                                    <CameraAltIcon fontSize='large' style={{ color: ICON_COLOR, margin: '0 auto', paddingTop: '7px' }} />
+                                </CardActionArea>
                         </Grid>
                     </Grid>
                 </Toolbar>
             </AppBar>
-            <div style={{paddingTop:'50px'}}/>
+            <div style={{ paddingTop: '50px' }} />
         </div>
     );
 }
