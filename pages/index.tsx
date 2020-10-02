@@ -13,7 +13,6 @@ const HomePage = () => {
         <Layout>
             <MenuBar/>
             <SearchBar/>
-            <p>1) the page with a list of groups.</p>
             <GroupList/>
         </Layout>
     );

@@ -12,7 +12,6 @@ const GroupShopPage = () => {
         <Layout>
             <MenuBar/>
             <SearchBar/>
-            <p>2) inside one group page where there is a list of shops</p>
             <GroupShop/>
         </Layout>
     );

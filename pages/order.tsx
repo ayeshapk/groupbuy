@@ -12,7 +12,6 @@ const OrderPage = () => {
         <Layout>
               <MenuBar/>
             <SearchBar/>
-            <p>3) inside one shop page where user can choose the drinks</p>
             <OrderProduct/>
         </Layout>
     );

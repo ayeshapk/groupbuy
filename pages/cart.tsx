@@ -12,7 +12,6 @@ const CartPage = () => {
      
               <MenuBar/>
             <SearchBar/>
-            <p>4) a confirmation page with the selected drinks</p>
             <CartList/>
         </Layout>
     );
