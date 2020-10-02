@@ -13,9 +13,9 @@ const DescriptionText = '#F26E22';
 const SubText = '#2678BF';
 const ListText = '#D2D2D2';
 let items = [
-    { id: 0, name: 'coke', price: 15, amount: 3, image: 'https://res.cloudinary.com/www-weddingpenguin-co/image/upload/v1600851614/001397056_qsr44y.jpg' },
-    { id: 1, name: 'pepsi', price: 22, amount: 2, image: 'https://res.cloudinary.com/www-weddingpenguin-co/image/upload/v1600851613/172935e5ab484423dd674574b205a77d_whbquq.jpg' },
-    { id: 2, name: '7up', price: 16, amount: 1, image: 'https://res.cloudinary.com/www-weddingpenguin-co/image/upload/v1600851614/71wN2KS-i1L._SL1500__qahrbm.jpg' },
+    { id: 0, name: 'coke', price: 15, amount: 3, },
+    { id: 1, name: 'pepsi', price: 22, amount: 2,  },
+    { id: 2, name: '7up', price: 16, amount: 1,},
 ];
 
 // get sum of price prop across all objects in array
@@ -56,25 +56,15 @@ function CartList() {
 
             {itemState && itemState.map((item, index: number) => (
                 <Grid key={index} container spacing={0} direction="row" justify="space-around" alignItems="flex-end" >
-                    <Grid item xs={4} >
-                        <AspectRatio ratio="1/1" style={{margin:'10px'}}>
-                            {/*<img src={item.image} style={{margin:'0 auto' ,height:'auto'}} />*/}
-                            <CardMedia
-                                component="img"
-                                alt={item.image}
-                                height="140"
-                                image={item.image}
-                                title={item.image}
-                            />
-                        </AspectRatio>
-                    </Grid>
-                    <Grid item xs={8} style={{ padding: '3px' ,margin:'0 auto' }}>
+                   
+                    <Grid item xs={12} style={{ padding: '15px' ,margin:'0 auto' }}>
                         <Typography variant='h6'>{item.name}</Typography>
-                        <Typography variant='body2' style={{ color: DescriptionText }}>${item.price}</Typography>
+                       
 
                         <Grid container spacing={0} direction="row" justify="space-evenly" alignItems="center" >
                             <Grid item xs={4}>
-                                <Typography variant='body2' style={{ color: MainText }}>${item.amount * item.price}</Typography>
+                            <Typography variant='body2' style={{ color: DescriptionText }}>Each: ${item.price}</Typography>
+                               
                             </Grid>
                             <Grid item xs={8} style={{ padding: '3px' }}>
                                 <Grid container spacing={0} justify="center" alignItems="center" >
@@ -90,7 +80,9 @@ function CartList() {
                                 </Grid>
                             </Grid>
                         </Grid>
-                        <Divider style={{ width: '95%', textAlign: 'center', alignItems: 'center', margin: '0 auto' }} />
+
+                        <Typography variant='body2' style={{ color: MainText ,textAlign:'right',paddingTop:'5px',paddingBottom:'5px' }}> Price : ${item.amount * item.price}</Typography>
+                        <Divider style={{ width: '98%', textAlign: 'center', alignItems: 'center', margin: '0 auto' }} />
                     </Grid>
                 </Grid>))}
 

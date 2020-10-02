@@ -1,4 +1,4 @@
-import { Button, Fab, Paper, Typography } from '@material-ui/core';
+import { Button, Divider, Fab, Paper, Typography } from '@material-ui/core';
 import React from 'react'
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import { useState, useEffect } from 'react';
@@ -15,7 +15,7 @@ let items = [
             {
                 id: 0,
                 group: 'Drink',
-                item: [{ id: 0, item: 'coke', }, { id: 1, item: 'pepsi', }, { id: 2, item: '7 Up', }, { id: 2, item: 'fanta', }]
+                description:'Just softdrink sent every week',
             },
         ]
     },
@@ -25,17 +25,17 @@ let items = [
             {
                 id: 0,
                 group: 'Drink And Vegetable',
-                item: [{ id: 0, item: 'Chinese pomfret', }, { id: 1, item: 'brown mushroom', }, { id: 2, item: 'CocaCola 1.25 L', },]
+                description:'This is Orchard group buy for vegetable. Deliver every Wednesday afternoon'
             },
             {
                 id: 1,
                 group: 'Cold storage',
-                item: [{ id: 0, item: 'salmon fillet', }, { id: 1, item: 'kembongg fish', }, { id: 2, item: 'oyster mushroom', }, { id: 2, item: 'tiger prawn ', }]
+                description:'This is Orchard group buy for Cold Storage. Deliver every Friday afternoon'
             },
             {
                 id: 2,
                 group: 'Everyday food',
-                item: [{ id: 0, item: 'Javanese belacan', }, { id: 1, item: 'lime', }, { id: 2, item: 'Authentic Japanese sweet potato', }, { id: 3, item: 'Coriander', }, { id: 4, item: 'Cauliflower', }]
+                description:'This is Orchard group buy for everyday food. Deliver every Sunday night'
             },
         ]
     },
@@ -45,12 +45,13 @@ let items = [
             {
                 id: 0,
                 group: 'Soap',
-                item: [{ id: 0, item: 'Lux', }, { id: 1, item: 'Protect', }, { id: 2, item: 'Detol', },]
+                description:'Just soap i order in whole sales'
+                
             },
             {
                 id: 1,
                 group: 'Cold storage',
-                item: [{ id: 0, item: 'Batang fillet', }, { id: 1, item: 'fresh baby sotong', }, { id: 2, item: 'Tiger prawns', }, { id: 3, item: 'French bean ', }]
+                description:'Just cold storage i order in whole sales'
             },
         ]
     },
@@ -72,7 +73,7 @@ function GroupList() {
     }, [itemState]);
 
 
-    const linkToPageGroupShop = () =>{
+    const linkToPageGroupShop = () => {
         router.push('/groupshop')
     }
 
@@ -85,31 +86,40 @@ function GroupList() {
                         <div style={{ margin: '10px' }}>
 
                             <Fab
-                                style={{ float: 'right' ,backgroundColor:'#F26D85',color:'white'}}
+                                style={{ float: 'right', backgroundColor: '#F26D85', color: 'white' }}
                                 variant="extended"
                                 size="small"
                                 aria-label="add"
                                 onClick={linkToPageGroupShop}
                             >
                                 JOIN GROUP
-                                <ArrowForwardIosIcon fontSize='small'/>
+                                <ArrowForwardIosIcon fontSize='small' />
 
-        </Fab>
+                            </Fab>
 
 
 
                             <Typography variant='h6' style={{ color: MainText }}>{shop.name}</Typography>
-                            {shop.groupList && <Typography variant='caption' style={{ color: ListText }}>GroupList</Typography>}
+                            
+                            
+                           
+                            {/*shop.groupList && <Typography variant='caption' style={{ color: ListText }}>GroupList</Typography>*/}
+                            
                             {shop.groupList && shop.groupList.map((groupListitem, index: number) => (
                                 <div key={index}>
                                     <Typography style={{ color: MainText }} variant='body1'> {groupListitem.group}</Typography>
-                                    {groupListitem.item && groupListitem.item.map((goods, index: number) => (
+                                    <Typography variant='caption' style={{ color: ListText }}>Description</Typography>
+                                    <Typography  variant='body2'> {groupListitem.description}</Typography>
+                                    <Divider style={{margin:'10px'}}/>
+                                    {/*groupListitem.item && groupListitem.item.map((goods, index: number) => (
                                         <div key={index}>
                                             <Typography style={{ color: SubText, textIndent: '20px' }} variant='body2'>{goods.item}</Typography>
                                         </div>))}
-                                </div>))}
+                                        */}
+                                    </div>))}
                         </div>
                     </Paper>))}
+
         </div >
     );
 
