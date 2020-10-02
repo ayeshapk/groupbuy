@@ -91,13 +91,13 @@ export default function MenuBar() {
                                 color="inherit"
                                 aria-label="open drawer"
                             >
-                                <MenuIcon style={{ color: LOGO_COLOR }} />
+                                <img src='https://res.cloudinary.com/www-weddingpenguin-co/image/upload/v1601605405/lobang_ujaiwi.png' width='auto' height='30px'/>
                             </IconButton>
                         </Grid>
 
                         
                         <Grid item lg={4} xl={4} md={4} sm={4} xs={false}>
-                            <Typography onClick={goHome} variant="h6" noWrap style={{ verticalAlign: 'center', color: LOGO_COLOR }}>GROUP BUY</Typography>
+                            <Typography onClick={goHome} variant="h6" noWrap style={{ verticalAlign: 'center', color: LOGO_COLOR }}>Lobang</Typography>
                         </Grid>
                         
 

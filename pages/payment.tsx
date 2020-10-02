@@ -11,6 +11,7 @@ const PaymentPage = () => {
         <Layout>
             <MenuBar />
             <SearchBar />
+            <p>5) the payment page to choose which payment method</p>
             <CardPayment />
         </Layout>
     );
