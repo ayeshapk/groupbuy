@@ -15,7 +15,12 @@ let items = [
             {
                 id: 0,
                 group: 'Drink',
-                description:'Just softdrink sent every week',
+                description:'Just softdrink sent every week Storage 2-3 day in chiller',
+            },
+            {
+                id: 0,
+                group: 'Vagetable',
+                description:'Just Vagetable sent every week Storage 2-3 day in chiller',
             },
         ]
     },
