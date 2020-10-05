@@ -10,55 +10,13 @@ const SubText = '#2678BF';
 const ListText = '#D2D2D2';
 let items = [
     {
-        id: 0, name: 'Demo SHOP',
-        groupList: [
-            {
-                id: 0,
-                group: 'Drink',
-                description:'Just softdrink sent every week Storage 2-3 day in chiller',
-            },
-            {
-                id: 0,
-                group: 'Vagetable',
-                description:'Just Vagetable sent every week Storage 2-3 day in chiller',
-            },
-        ]
+        id: 0, name: 'Demo SHOP', description:'Just softdrink sent every week Storage 2-3 day in chiller',
     },
     {
-        id: 1, name: 'Jane Doe Shop',
-        groupList: [
-            {
-                id: 0,
-                group: 'Drink And Vegetable',
-                description:'This is Orchard group buy for vegetable. Deliver every Wednesday afternoon'
-            },
-            {
-                id: 1,
-                group: 'Cold storage',
-                description:'This is Orchard group buy for Cold Storage. Deliver every Friday afternoon'
-            },
-            {
-                id: 2,
-                group: 'Everyday food',
-                description:'This is Orchard group buy for everyday food. Deliver every Sunday night'
-            },
-        ]
+        id: 1, name: 'Jane Doe Shop', description:'This is Orchard group buy for vegetable. Deliver every Wednesday afternoon',
     },
     {
-        id: 2, name: 'KingCrap Shop',
-        groupList: [
-            {
-                id: 0,
-                group: 'Soap',
-                description:'Just soap i order in whole sales'
-                
-            },
-            {
-                id: 1,
-                group: 'Cold storage',
-                description:'Just cold storage i order in whole sales'
-            },
-        ]
+        id: 2, name: 'KingCrap Shop', description:'Just soap i order in whole sales',
     },
 ];
 
@@ -105,23 +63,23 @@ function GroupList() {
 
 
                             <Typography variant='h6' style={{ color: MainText }}>{shop.name}</Typography>
-                            
-                            
+                            <Typography variant='caption' style={{ color: ListText }}>Description</Typography>
+                            <Typography  variant='body2'> {shop.description}</Typography>
                            
                             {/*shop.groupList && <Typography variant='caption' style={{ color: ListText }}>GroupList</Typography>*/}
                             
-                            {shop.groupList && shop.groupList.map((groupListitem, index: number) => (
+                            {/*shop.groupList && shop.groupList.map((groupListitem, index: number) => (
                                 <div key={index}>
                                     <Typography style={{ color: MainText }} variant='body1'> {groupListitem.group}</Typography>
                                     <Typography variant='caption' style={{ color: ListText }}>Description</Typography>
                                     <Typography  variant='body2'> {groupListitem.description}</Typography>
                                     <Divider style={{margin:'10px'}}/>
-                                    {/*groupListitem.item && groupListitem.item.map((goods, index: number) => (
+                                    {groupListitem.item && groupListitem.item.map((goods, index: number) => (
                                         <div key={index}>
                                             <Typography style={{ color: SubText, textIndent: '20px' }} variant='body2'>{goods.item}</Typography>
                                         </div>))}
-                                        */}
-                                    </div>))}
+                                        }
+                                    </div>))*/}
                         </div>
                     </Paper>))}
 

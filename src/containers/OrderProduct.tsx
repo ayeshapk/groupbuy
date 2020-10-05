@@ -11,7 +11,7 @@ import { useRouter, Router } from 'next/router'
 
 const DESCRIPTION_COLOR = '#D2D2D2';
 const TEXT_COLOR = '#F26E22';
-const PRICE_COLOR ='#ED2939';
+const PRICE_COLOR = '#ED2939';
 
 let items = [
     { id: 0, name: 'coke', image: 'https://res.cloudinary.com/www-weddingpenguin-co/image/upload/v1600851614/001397056_qsr44y.jpg', price: 15, amount: 3, Description: 'lipsum', retailPrice: 16 },
@@ -54,42 +54,40 @@ function OrderProduct() {
 
     return (
         <div>
-            <Grid container spacing={0} direction="row" justify="space-evenly" alignItems="center" style={{padding:'1px' }}>
+            <Grid container spacing={0} direction="row" justify="space-evenly" alignItems="center" style={{ padding: '1px' }}>
                 {itemState && itemState.map((item, index: number) => (
-                    <Grid item xs={6} key={index} style={{padding:'3px' }} >
+                    <Grid item xs={12} key={index} style={{ padding: '3px' }} >
                         <Typography variant='h6' color='primary' style={{ textAlign: 'center', paddingTop: '3vh', paddingBottom: '1vh' }}>{item.name}</Typography>
 
-                        <div style={{ margin: '0 auto', textAlign: 'center' }}>
-                            {/*<div>
-                        <AspectRatio ratio="1/1" >
-                            <img src={item.image} alt={item.image} style={{ maxHeight: '450px'}} />
-                            </AspectRatio>
-                        </div>*/}
-
-                            <CardMedia
-                                component="img"
-                                alt={item.image}
-                                image={item.image}
-                                title={item.image}
-                            />
-                        </div>
-
                         <Grid style={{ padding: '10px' }} container spacing={0} direction="row" justify="space-evenly" alignItems="center" >
-                            <Grid item xs={12} style={{ padding: '3px' }}>
-                                <Typography variant='subtitle2' style={{ textAlign: 'left', color: DESCRIPTION_COLOR }}>name</Typography>
-                                <Typography variant='body1' style={{ textAlign: 'left', color: TEXT_COLOR }}>{item.name}</Typography>
+                            <Grid item xs={6} style={{ padding: '3px' }}>
+                                <div style={{ margin: '0 auto', textAlign: 'center' }}>
+                                    <CardMedia
+                                        component="img"
+                                        alt={item.image}
+                                        image={item.image}
+                                        title={item.image}
+                                    />
+                                </div>
                             </Grid>
-                            <Grid item xs={12} style={{ padding: '3px' }}>
-                                <Typography variant='subtitle2' style={{ textAlign: 'left', color: DESCRIPTION_COLOR }}>description</Typography>
-                                <Typography variant='body2' style={{ textAlign: 'left', color: TEXT_COLOR }}>{item.Description}</Typography>
-                            </Grid>
-                            <Grid item xs={12} style={{ padding: '3px' }}>
-                                <Typography variant='subtitle2' style={{ textAlign: 'left', color: DESCRIPTION_COLOR }}>retail price</Typography>
-                                <Typography variant='body1' style={{ textAlign: 'left', color: DESCRIPTION_COLOR }}>{item.retailPrice} $</Typography>
-                            </Grid>
-                            <Grid item xs={12} style={{ padding: '3px' }}>
-                                <Typography variant='subtitle2' style={{ textAlign: 'left', color: DESCRIPTION_COLOR }}>price</Typography>
-                                <Typography variant='body1' style={{ textAlign: 'left', color: PRICE_COLOR }}>{item.price} $</Typography>
+
+                            <Grid item xs={6} style={{ padding: '3px' }}>
+                                <Grid item xs={12} style={{ padding: '3px' }}>
+                                    <Typography variant='subtitle2' style={{ textAlign: 'left', color: DESCRIPTION_COLOR }}>name</Typography>
+                                    <Typography variant='body1' style={{ textAlign: 'left', color: TEXT_COLOR }}>{item.name}</Typography>
+                                </Grid>
+                                <Grid item xs={12} style={{ padding: '3px' }}>
+                                    <Typography variant='subtitle2' style={{ textAlign: 'left', color: DESCRIPTION_COLOR }}>description</Typography>
+                                    <Typography variant='body2' style={{ textAlign: 'left', color: TEXT_COLOR }}>{item.Description}</Typography>
+                                </Grid>
+                                <Grid item xs={12} style={{ padding: '3px' }}>
+                                    <Typography variant='subtitle2' style={{ textAlign: 'left', color: DESCRIPTION_COLOR }}>retail price</Typography>
+                                    <Typography variant='body1' style={{ textAlign: 'left', color: DESCRIPTION_COLOR }}>{item.retailPrice} $</Typography>
+                                </Grid>
+                                <Grid item xs={12} style={{ padding: '3px' }}>
+                                    <Typography variant='subtitle2' style={{ textAlign: 'left', color: DESCRIPTION_COLOR }}>price</Typography>
+                                    <Typography variant='body1' style={{ textAlign: 'left', color: PRICE_COLOR }}>{item.price} $</Typography>
+                                </Grid>
                             </Grid>
                         </Grid>
 
@@ -98,11 +96,11 @@ function OrderProduct() {
                            
                     </Grid>*/}
 
-                        <Divider />
+                       
 
                         <Grid style={{ padding: '10px' }} container spacing={0} direction="row" justify="space-evenly" alignItems="center" >
-                           
-                            <Grid item xs={12} style={{ padding: '3px' }}>
+
+                            <Grid item xs={6} style={{ padding: '3px' }}>
                                 <Grid container spacing={0} justify="center" alignItems="center" >
                                     <Grid item xs={4} style={{ padding: '3px' }}>
                                         <Typography variant='body1' style={{ textAlign: 'center', }}>-</Typography>
@@ -116,13 +114,20 @@ function OrderProduct() {
                                 </Grid>
                             </Grid>
 
-                            <Grid item xs={12} style={{ padding: '3px' }}>
-                            <Typography variant='body1' style={{ textAlign: 'right', color: TEXT_COLOR }}>Price</Typography>
-                                <Typography variant='h6' style={{ textAlign: 'right', color: PRICE_COLOR }}>$ {item.price * item.amount}</Typography>
+                            <Grid item xs={6} style={{ padding: '3px', }}>
+                            <Grid container spacing={0} justify="center" alignItems="center" >
+                                <Grid item xs={6} style={{ padding: '3px' }}>
+                                    <Typography variant='body1' style={{ textAlign: 'right', color: TEXT_COLOR }}>Price</Typography>
+                                </Grid>
+                                <Grid item xs={6} style={{ padding: '3px' }}>
+                                    <Typography variant='h6' style={{ textAlign: 'right', color: PRICE_COLOR }}>$ {item.price * item.amount}</Typography>
+                                </Grid>
+                                </Grid>
                             </Grid>
                         </Grid>
-
+                        <Divider />
                     </Grid>))}
+
 
             </Grid>
 
@@ -139,7 +144,7 @@ function OrderProduct() {
                 <Grid container spacing={0} direction="row" justify="space-evenly" alignItems="center" >
                     <Grid item xs={6} style={{ padding: '10px' }}>
                         <Typography variant='caption'>Total</Typography>
-                        <Typography variant='body1' style={{color:PRICE_COLOR}}>$ {totalPriceState}</Typography>
+                        <Typography variant='body1' style={{ color: PRICE_COLOR }}>$ {totalPriceState}</Typography>
                     </Grid>
                     <Grid item xs={6} style={{ padding: '3px' }}>
                         <Fab

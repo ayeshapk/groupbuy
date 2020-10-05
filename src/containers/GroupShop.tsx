@@ -1,5 +1,5 @@
 
-import { Fab, Grid, Paper, Typography } from '@material-ui/core';
+import { CardMedia, Fab, Grid, Paper, Typography } from '@material-ui/core';
 import React from 'react'
 import { useState, useEffect } from 'react';
 import useWindowSize from '../HookServerData/Windowsize';
@@ -14,12 +14,12 @@ let items = [
     {
         id: 0, groupName: 'Drink', description: 'Storage 2-3 day in chiller', current: 0, required: 35, type: 'money',
         location: `1°20'48.0"N 103°57'21.7"E 132 Simei Street 1, Block 132`, limit: '16 September', collect: '17 Septemper',
-        item: [{ id: 0, item: 'coke', }, { id: 1, item: 'pepsi', }, { id: 2, item: '7 Up', }, { id: 2, item: 'fanta', }]
-    }, 
+        item: [{ id: 0, item: 'coke', image: 'https://res.cloudinary.com/www-weddingpenguin-co/image/upload/v1600851614/001397056_qsr44y.jpg' }, { id: 1, item: 'pepsi', image: 'https://res.cloudinary.com/www-weddingpenguin-co/image/upload/v1600851613/172935e5ab484423dd674574b205a77d_whbquq.jpg' }, { id: 2, item: '7 Up', image: 'https://res.cloudinary.com/www-weddingpenguin-co/image/upload/v1600851614/71wN2KS-i1L._SL1500__qahrbm.jpg' }, { id: 2, item: 'fanta', image: 'https://res.cloudinary.com/www-weddingpenguin-co/image/upload/v1600851613/c47555d95d284d6de5abeaf1049b0474b53b906c-large_ptsrtr.jpg' }]
+    },
     {
         id: 1, groupName: 'Vegetable', description: 'Storage 2-3 day in chiller', current: 0, required: 35, type: 'money',
         location: `1°20'48.0"N 103°57'21.7"E 132 Simei Street 1, Block 132`, limit: '16 September', collect: '17 Septemper',
-        item: [{ id: 0, item: 'Chinese pomfret', }, { id: 1, item: 'brown mushroom', }, { id: 2, item: 'oyster mushroom', },]
+        item: [{ id: 0, item: 'Chinese pomfret', image: 'https://res.cloudinary.com/www-weddingpenguin-co/image/upload/v1601875546/IMG_9641_copy_grande_bts0yp.webp' }, { id: 1, item: 'brown mushroom', image: 'https://res.cloudinary.com/www-weddingpenguin-co/image/upload/v1601875547/0000020985646_hgcsbe.webp' }, { id: 2, item: 'oyster mushroom', image: 'https://res.cloudinary.com/www-weddingpenguin-co/image/upload/v1601875546/product-jpeg-500x500_z04c43.jpg' },]
     }
 ];
 
@@ -39,7 +39,7 @@ function GroupShop() {
     }, [itemState]);
 
 
-    const linkToPageOrder = () =>{
+    const linkToPageOrder = () => {
         router.push('/order')
     }
 
@@ -92,13 +92,25 @@ function GroupShop() {
                                 </Grid>
 
                                 <Grid container spacing={3} direction="row" justify="center" alignItems="flex-start">
-                                    <Grid item xs={6}>
+                                    <Grid item xs={12}>
                                         <Typography variant='body2' style={{ color: MainText }} >Item List</Typography>
                                     </Grid>
-                                    <Grid item xs={6}>
+                                    <Grid item xs={12}>
                                         {item.item && item.item.map((list, index: number) => (
                                             <div key={index}>
-                                                <Typography variant='caption' style={{ color: SubText }}>{list.item}</Typography>
+                                                <Grid container spacing={3} direction="row" justify="center" alignItems="center">
+                                                    <Grid item xs={6}>
+                                                        <CardMedia
+                                                            component="img"
+                                                            alt={list.image}
+                                                            image={list.image}
+                                                            title={list.image}
+                                                        />
+                                                    </Grid>
+                                                    <Grid item xs={6}>
+                                                        <Typography variant='h6' style={{ color: SubText }}>{list.item}</Typography>
+                                                    </Grid>
+                                                </Grid>
                                             </div>
                                         ))}
                                     </Grid>
