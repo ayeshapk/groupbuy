@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import useWindowSize from '../HookServerData/Windowsize';
 
 import { useRouter, Router } from 'next/router'
+import MyGoogleMap from './Map';
 const MainText = '#A60321';
 const SubText = '#2678BF';
 const ListText = '#D2D2D2';
