@@ -13,13 +13,13 @@ const LOCATION = `1°20'48.0"N 103°57'21.7"E 132 Simei Street 1, Block 132'`
 const DISTANCE = `1KM`
 let items = [
     {
-        id: 0, name: 'Demo SHOP', description: 'Just softdrink sent every week Storage 2-3 day in chiller',
+        id: 0, name: 'Demo SHOP',host:'ayesha', description: 'Just softdrink sent every week Storage 2-3 day in chiller',image:'https://res.cloudinary.com/www-weddingpenguin-co/image/upload/v1559550999/ING_33849_10771_v61zjx.jpg',location:'Jurong, Tuas , 611140',date:'10 october 2020'
     },
     {
-        id: 1, name: 'Jane Doe Shop', description: 'This is Orchard group buy for vegetable. Deliver every Wednesday afternoon',
+        id: 1, name: 'Jane Doe Shop',host:'jane', description: 'This is Orchard group buy for vegetable. Deliver every Wednesday afternoon',image:'https://res.cloudinary.com/www-weddingpenguin-co/image/upload/v1539843351/Cvendor_avmhjr.png',location:'Jurong, Tuas , 611140',date:'10 october 2020'
     },
     {
-        id: 2, name: 'KingCrap Shop', description: 'Just soap i order in whole sales',
+        id: 2, name: 'KingCrap Shop',host:'king', description: 'Just soap i order in whole sales',image:'https://res.cloudinary.com/www-weddingpenguin-co/image/upload/v1539751624/iss_4567_02880_dcbbfp.jpg',location:'Jurong, Tuas , 611140',date:'10 october 2020'
     },
 ];
 
@@ -82,6 +82,16 @@ function GroupList() {
                     <Paper variant="outlined" key={index} style={{ margin: '10px' }} >
                         <div style={{ margin: '10px' }}>
 
+                            <CardMedia
+                                component="img"
+                                alt={shop.image}
+                                image={shop.image}
+                                title={shop.image}
+                                style={{height:'250px'}}
+                            />
+
+                            <div style={{marginTop:'10px',marginBottom:'10px'}} />
+
                             <Fab
                                 style={{ float: 'right', backgroundColor: '#F26D85', color: 'white' }}
                                 variant="extended"
@@ -97,8 +107,18 @@ function GroupList() {
 
 
                             <Typography variant='h6' style={{ color: MainText }}>{shop.name}</Typography>
+
+                            <Typography variant='caption' style={{ color: ListText }}>Host by</Typography>
+                            <Typography variant='body2' style={{ color: SubText }}> {shop.host}</Typography>
+
                             <Typography variant='caption' style={{ color: ListText }}>Description</Typography>
-                            <Typography variant='body2'> {shop.description}</Typography>
+                            <Typography variant='body2' style={{ color: SubText }}> {shop.description}</Typography>
+
+                            <Typography variant='caption' style={{ color: ListText }}>Location</Typography>
+                            <Typography variant='body2' style={{ color: SubText }}> {shop.location}</Typography>
+
+                            <Typography variant='caption' style={{ color: ListText }}>Est. Collection</Typography>
+                            <Typography variant='body2' style={{ color: SubText }}> {shop.date}</Typography>
 
                             {/*shop.groupList && <Typography variant='caption' style={{ color: ListText }}>GroupList</Typography>*/}
 
