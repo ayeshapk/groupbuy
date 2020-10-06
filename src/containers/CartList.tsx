@@ -14,12 +14,9 @@ const SubText = '#2678BF';
 const ListText = '#D2D2D2';
 let items = [
     { id: 0, name: 'coke', price: 15, amount: 3, },
-    { id: 1, name: 'pepsi', price: 22, amount: 2,  },
-    { id: 2, name: '7up', price: 16, amount: 1,},
+    { id: 1, name: 'pepsi', price: 22, amount: 2, },
+    { id: 2, name: '7up', price: 16, amount: 1, },
 ];
-
-// get sum of price prop across all objects in array
-
 
 function CartList() {
 
@@ -50,38 +47,56 @@ function CartList() {
     }
 
 
+    const _changeAmount = (key: number, number: number) => {
+        let newArr = [...itemState]
+        for (var i in items) {
+            if (newArr[i].id == key) {
+                if (number < 0) {
+                    newArr[i].amount = 0;
+                    setItemState(newArr)
+                } else {
+                    newArr[i].amount = number;
+                    setItemState(newArr)
+                }
+                break; //Stop this loop, we found it!
+            }
+        }
+    }
 
     return (
         <div>
-
+            <Typography variant='h6' color='primary' style={{ marginLeft: '15px' }}>Your Cart</Typography>
+        
             {itemState && itemState.map((item, index: number) => (
                 <Grid key={index} container spacing={0} direction="row" justify="space-around" alignItems="flex-end" >
-                   
-                    <Grid item xs={12} style={{ padding: '15px' ,margin:'0 auto' }}>
+
+                    <Grid item xs={12} style={{ padding: '15px', margin: '0 auto' }}>
                         <Typography variant='h6'>{item.name}</Typography>
-                       
+
 
                         <Grid container spacing={0} direction="row" justify="space-evenly" alignItems="center" >
                             <Grid item xs={4}>
-                            <Typography variant='body2' style={{ color: DescriptionText }}>Each: ${item.price}</Typography>
-                               
+                                <Typography variant='body2' style={{ color: DescriptionText }}>Each: ${item.price}</Typography>
+
                             </Grid>
                             <Grid item xs={8} style={{ padding: '3px' }}>
                                 <Grid container spacing={0} justify="center" alignItems="center" >
                                     <Grid item xs={4} style={{ padding: '3px' }}>
-                                        <Typography variant='body1' style={{ textAlign: 'center', }}>-</Typography>
+                                        {/*<Typography variant='body1' style={{ textAlign: 'center', }} >-</Typography>*/}
+                                        <Typography variant='body1' style={{ textAlign: 'center', }} onClick={() => _changeAmount(item.id, item.amount - 1)}>-</Typography>
                                     </Grid>
                                     <Grid item xs={4} style={{ padding: '3px' }}>
                                         <Typography variant='body1' style={{ textAlign: 'center', }}>{item.amount}</Typography>
                                     </Grid>
                                     <Grid item xs={4} style={{ padding: '3px' }}>
-                                        <Typography variant='body1' style={{ textAlign: 'center', }}>+</Typography>
+                                        {/*<Typography variant='body1' style={{ textAlign: 'center', }}>+</Typography>*/}
+                                        <Typography variant='body1' style={{ textAlign: 'center', }} onClick={() => _changeAmount(item.id, item.amount + 1)}>+</Typography>
                                     </Grid>
                                 </Grid>
                             </Grid>
                         </Grid>
 
-                        <Typography variant='body2' style={{ color: MainText ,textAlign:'right',paddingTop:'5px',paddingBottom:'5px' }}> Price : ${item.amount * item.price}</Typography>
+                        <Typography variant='body2' style={{ color: MainText, textAlign: 'right', paddingTop: '5px', paddingBottom: '5px' }}> Price : ${item.amount * item.price}</Typography>
                         <Divider style={{ width: '98%', textAlign: 'center', alignItems: 'center', margin: '0 auto' }} />
                     </Grid>
                 </Grid>))}

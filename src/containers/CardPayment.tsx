@@ -40,7 +40,7 @@ function CardPayment() {
 
     return (
         <div>
-
+  <Typography variant='h6' color='primary' style={{ marginLeft: '15px' }}>My Card</Typography>
             {itemState && itemState.map((item, index: number) => (
                 <Card key={index} style={{ margin: '10px', position: 'relative' }}>
                     <CardActionArea>
