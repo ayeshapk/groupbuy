@@ -1,5 +1,5 @@
 
-import { AppBar, BottomNavigation, CardMedia, Divider, Fab, Grid, Paper, Typography } from '@material-ui/core';
+import { AppBar, BottomNavigation, CardMedia, Divider, Fab, Grid, Paper, TextField, Typography } from '@material-ui/core';
 import React from 'react'
 import { useState, useEffect } from 'react';
 import useWindowSize from '../HookServerData/Windowsize';
@@ -65,6 +65,29 @@ function OrderProduct() {
         }
      }
 
+     const _fixAmount = (event, key: number,) => {
+        let newArr = [...itemState]
+        let newEvent = event.currentTarget.value
+        //console.log(newEvent)
+        //console.log(key)
+        for (var i in items) {
+            if (newArr[i].id == key) {
+                newArr[i].amount = newEvent;
+                if (newArr[i].amount <= 0) {
+                    newArr[i].amount = 0;
+                    setItemState(newArr)
+                }
+                if (newArr[i].amount >= 99) {
+                    newArr[i].amount = 99;
+                    setItemState(newArr)
+                } else {
+                    setItemState(newArr)
+                }
+                break; //Stop this loop, we found it!
+            }
+        }
+    }
+
     return (
         <div>
             <Grid container spacing={0} direction="row" justify="space-evenly" alignItems="center" style={{ padding: '1px' }}>
@@ -119,7 +142,8 @@ function OrderProduct() {
                                         <Typography variant='body1' style={{ textAlign: 'center', }} onClick={()=>_changeAmount(item.id,item.amount-1)}>-</Typography>
                                     </Grid>
                                     <Grid item xs={4} style={{ padding: '3px' }}>
-                                        <Typography variant='body1' style={{ textAlign: 'center', color: TEXT_COLOR }}>{item.amount}</Typography>
+                                        {/*<Typography variant='body1' style={{ textAlign: 'center', color: TEXT_COLOR }}>{item.amount}</Typography>*/}
+                                        <TextField type='number' value={item.amount} size="small" onChange={(event) => _fixAmount(event, item.id)} />
                                     </Grid>
                                     <Grid item xs={4} style={{ padding: '3px' }}>
                                         <Typography variant='body1' style={{ textAlign: 'center', }} onClick={()=>_changeAmount(item.id,item.amount+1)}>+</Typography>

@@ -51,10 +51,15 @@ function CartList() {
         let newArr = [...itemState]
         for (var i in items) {
             if (newArr[i].id == key) {
-                if (number < 0) {
+                if (number <= 0) {
                     newArr[i].amount = 0;
                     setItemState(newArr)
-                } else {
+                }
+                if (number >= 99) {
+                    newArr[i].amount = 99;
+                    setItemState(newArr)
+                }
+                else {
                     newArr[i].amount = number;
                     setItemState(newArr)
                 }
@@ -64,17 +69,22 @@ function CartList() {
     }
 
 
-    const _fixAmount = (event: number) => (key: number,) => {
+    const _fixAmount = (event, key: number,) => {
         let newArr = [...itemState]
-        let newEvent = event
+        let newEvent = event.currentTarget.value
+        //console.log(newEvent)
+        //console.log(key)
         for (var i in items) {
             if (newArr[i].id == key) {
-                if (newEvent < 0) {
+                newArr[i].amount = newEvent;
+                if (newArr[i].amount <= 0) {
                     newArr[i].amount = 0;
                     setItemState(newArr)
+                }
+                if (newArr[i].amount >= 99) {
+                    newArr[i].amount = 99;
+                    setItemState(newArr)
                 } else {
-                    newArr[i].amount = newEvent;
-                    console.log(newArr)
                     setItemState(newArr)
                 }
                 break; //Stop this loop, we found it!
@@ -107,7 +117,7 @@ function CartList() {
                                     </Grid>
                                     <Grid item xs={4} style={{ padding: '3px' }}>
                                         {/*<Typography variant='body1' style={{ textAlign: 'center', }}>{item.amount}</Typography>*/}
-                                        <TextField value={item.amount} size="small" onChange={() => _fixAmount(item.id)} />
+                                        <TextField type='number' value={item.amount} size="small" onChange={(event) => _fixAmount(event, item.id)} />
                                     </Grid>
                                     <Grid item xs={4} style={{ padding: '3px' }}>
                                         {/*<Typography variant='body1' style={{ textAlign: 'center', }}>+</Typography>*/}

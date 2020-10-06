@@ -138,7 +138,7 @@ function GroupShop() {
                                             aria-label="add"
                                             onClick={linkToPageOrder}
                                         >
-                                            CHECK ITEM
+                                            CHECK LIST
                                 <ArrowForwardIosIcon fontSize='small' />
 
                                         </Fab>
