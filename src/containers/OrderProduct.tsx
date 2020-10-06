@@ -28,7 +28,6 @@ function OrderProduct() {
     const [itemState, setItemState] = useState(items);
     const { width, height } = useWindowSize()
     const [totalPriceState, setTotalPriceState] = useState(0);
-    const [limiteTimeState, setLimiteTimeState] = useState('16 September');
     const router = useRouter()
 
     useEffect(() => {
@@ -50,7 +49,21 @@ function OrderProduct() {
         router.push('/cart')
     }
 
-
+    const _changeAmount =( key: number, number: number ) =>{
+               let newArr = [...itemState]
+        for (var i in items) {
+          if (newArr[i].id == key) {
+            if(number<0){
+                newArr[i].amount = 0;
+                setItemState(newArr)
+            } else {
+                newArr[i].amount = number;
+                setItemState(newArr)
+            }
+             break; //Stop this loop, we found it!
+          }
+        }
+     }
 
     return (
         <div>
@@ -103,13 +116,13 @@ function OrderProduct() {
                             <Grid item xs={6} style={{ padding: '3px' }}>
                                 <Grid container spacing={0} justify="center" alignItems="center" >
                                     <Grid item xs={4} style={{ padding: '3px' }}>
-                                        <Typography variant='body1' style={{ textAlign: 'center', }}>-</Typography>
+                                        <Typography variant='body1' style={{ textAlign: 'center', }} onClick={()=>_changeAmount(item.id,item.amount-1)}>-</Typography>
                                     </Grid>
                                     <Grid item xs={4} style={{ padding: '3px' }}>
                                         <Typography variant='body1' style={{ textAlign: 'center', color: TEXT_COLOR }}>{item.amount}</Typography>
                                     </Grid>
                                     <Grid item xs={4} style={{ padding: '3px' }}>
-                                        <Typography variant='body1' style={{ textAlign: 'center', }}>+</Typography>
+                                        <Typography variant='body1' style={{ textAlign: 'center', }} onClick={()=>_changeAmount(item.id,item.amount+1)}>+</Typography>
                                     </Grid>
                                 </Grid>
                             </Grid>
