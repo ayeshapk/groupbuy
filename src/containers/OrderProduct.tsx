@@ -99,13 +99,12 @@ function OrderProduct() {
 
     return (
         <div>
-            <Typography variant='h6' color='primary' style={{ textAlign: 'left', textIndent: '3vw', paddingTop: '3vh', paddingBottom: '1vh' }}>Menu</Typography>
+            <Typography variant='h6' color='primary' style={{ textAlign: 'left', textIndent: '3vw', paddingTop: '3vh', paddingBottom: '1vh' }}>Menu {groupState.groupName}</Typography>
 
         
             <div style={{ marginTop: '10px', marginBottom: '10px' }} />
 
-            <Typography variant='body2' style={{ textIndent: '3vw',color: SubText }}> {groupState.groupName} </Typography>
-            <Typography variant='body2' style={{ textIndent: '3vw',color: SubText }}> {groupState.description}</Typography>
+            <Typography variant='body2' style={{ textIndent: '3vw',color: MainText }}> {groupState.description}</Typography>
             <Typography variant='body2' style={{ textIndent: '3vw',color: SubText }}> {groupState.location}</Typography>
             <Typography variant='body2' style={{ textIndent: '3vw',color: SubText }}> {groupState.limit}</Typography>
 
