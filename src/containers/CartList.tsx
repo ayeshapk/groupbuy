@@ -166,8 +166,8 @@ function CartList() {
 
                 <Grid container spacing={0} direction="row" justify="space-evenly" alignItems="center" >
                     <Grid item xs={8} style={{ padding: '10px' }}>
-                        <Typography color='primary' variant='caption'>Order Summary</Typography>
-                        <Typography variant='body1'>$ {totalPriceState} ({totalAmountState} unit)</Typography>
+                        <Typography color='secondary' variant='caption'>Order Summary</Typography>
+                        <Typography variant='h6' color='primary'>$ {totalPriceState} ({totalAmountState} unit)</Typography>
                         <Typography variant='caption'>Collect At Host At : {collectTimeState}</Typography>
                     </Grid>
                     <Grid item xs={4} style={{ padding: '3px' }}>
