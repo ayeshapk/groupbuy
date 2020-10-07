@@ -12,13 +12,21 @@ import { useRouter, Router } from 'next/router'
 const DESCRIPTION_COLOR = '#D2D2D2';
 const TEXT_COLOR = '#F26E22';
 const PRICE_COLOR = '#ED2939';
+const MainText = '#A60321';
+const SubText = '#2678BF';
+const ListText = '#D2D2D2';
 
-let items = [
+const items = [
     { id: 0, name: 'coke', image: 'https://res.cloudinary.com/www-weddingpenguin-co/image/upload/v1600851614/001397056_qsr44y.jpg', price: 15, amount: 3, Description: 'lipsum', retailPrice: 16 },
     { id: 1, name: 'pepsi', image: 'https://res.cloudinary.com/www-weddingpenguin-co/image/upload/v1600851613/172935e5ab484423dd674574b205a77d_whbquq.jpg', price: 22, amount: 2, Description: 'lipsum', retailPrice: 25 },
     { id: 2, name: '7up', image: 'https://res.cloudinary.com/www-weddingpenguin-co/image/upload/v1600851614/71wN2KS-i1L._SL1500__qahrbm.jpg', price: 16, amount: 1, Description: 'lipsum', retailPrice: 18 },
     { id: 3, name: 'fanta', image: 'https://res.cloudinary.com/www-weddingpenguin-co/image/upload/v1600851613/c47555d95d284d6de5abeaf1049b0474b53b906c-large_ptsrtr.jpg', price: 30, amount: 0, Description: 'lipsum', retailPrice: 31 }
 ];
+
+const group = {
+    id: 0, groupName: 'Drink', description: 'Storage 2-3 day in chiller', current: 0, required: 35, type: 'money',
+    location: `1°20'48.0"N 103°57'21.7"E 132 Simei Street 1, Block 132`, limit: '16 September', collect: '17 Septemper',
+};
 
 // get sum of price prop across all objects in array
 
@@ -26,6 +34,7 @@ let items = [
 function OrderProduct() {
 
     const [itemState, setItemState] = useState(items);
+    const [groupState, setgroupState] = useState(group);
     const { width, height } = useWindowSize()
     const [totalPriceState, setTotalPriceState] = useState(0);
     const router = useRouter()
@@ -49,23 +58,23 @@ function OrderProduct() {
         router.push('/cart')
     }
 
-    const _changeAmount =( key: number, number: number ) =>{
-               let newArr = [...itemState]
+    const _changeAmount = (key: number, number: number) => {
+        let newArr = [...itemState]
         for (var i in items) {
-          if (newArr[i].id == key) {
-            if(number<0){
-                newArr[i].amount = 0;
-                setItemState(newArr)
-            } else {
-                newArr[i].amount = number;
-                setItemState(newArr)
+            if (newArr[i].id == key) {
+                if (number < 0) {
+                    newArr[i].amount = 0;
+                    setItemState(newArr)
+                } else {
+                    newArr[i].amount = number;
+                    setItemState(newArr)
+                }
+                break; //Stop this loop, we found it!
             }
-             break; //Stop this loop, we found it!
-          }
         }
-     }
+    }
 
-     const _fixAmount = (event, key: number,) => {
+    const _fixAmount = (event, key: number,) => {
         let newArr = [...itemState]
         let newEvent = event.currentTarget.value
         //console.log(newEvent)
@@ -90,13 +99,23 @@ function OrderProduct() {
 
     return (
         <div>
+            <Typography variant='h6' color='primary' style={{ textAlign: 'left', textIndent: '3vw', paddingTop: '3vh', paddingBottom: '1vh' }}>Menu</Typography>
+
+        
+            <div style={{ marginTop: '10px', marginBottom: '10px' }} />
+
+            <Typography variant='body2' style={{ textIndent: '3vw',color: SubText }}> {groupState.groupName} </Typography>
+            <Typography variant='body2' style={{ textIndent: '3vw',color: SubText }}> {groupState.description}</Typography>
+            <Typography variant='body2' style={{ textIndent: '3vw',color: SubText }}> {groupState.location}</Typography>
+            <Typography variant='body2' style={{ textIndent: '3vw',color: SubText }}> {groupState.limit}</Typography>
+
             <Grid container spacing={0} direction="row" justify="space-evenly" alignItems="center" style={{ padding: '1px' }}>
                 {itemState && itemState.map((item, index: number) => (
                     <Grid item xs={12} key={index} style={{ padding: '3px' }} >
-                        <Typography variant='h6' color='primary' style={{ textAlign: 'center', paddingTop: '3vh', paddingBottom: '1vh' }}>{item.name}</Typography>
+                        <Typography variant='h6' color='primary' style={{ textAlign: 'left', textIndent: '3vw', paddingTop: '3vh', paddingBottom: '1vh' }}>{item.name}</Typography>
 
                         <Grid style={{ padding: '10px' }} container spacing={0} direction="row" justify="space-evenly" alignItems="center" >
-                            <Grid item xs={6} style={{ padding: '3px' }}>
+                            <Grid item xs={4} style={{ padding: '3px' }}>
                                 <div style={{ margin: '0 auto', textAlign: 'center' }}>
                                     <CardMedia
                                         component="img"
@@ -107,23 +126,38 @@ function OrderProduct() {
                                 </div>
                             </Grid>
 
-                            <Grid item xs={6} style={{ padding: '3px' }}>
+                            <Grid item xs={8} style={{ padding: '3px' }}>
                                 <Grid item xs={12} style={{ padding: '3px' }}>
-                                    <Typography variant='subtitle2' style={{ textAlign: 'left', color: DESCRIPTION_COLOR }}>name</Typography>
-                                    <Typography variant='body1' style={{ textAlign: 'left', color: TEXT_COLOR }}>{item.name}</Typography>
+                                    <Grid container spacing={0} direction="row" justify="space-evenly" alignItems="center" style={{ padding: '1px' }}>
+                                        <Grid item xs={6} style={{ padding: '3px' }}>
+                                            <Typography variant='subtitle2' style={{ textAlign: 'left', color: DESCRIPTION_COLOR }}>name</Typography>
+                                        </Grid>
+                                        <Grid item xs={6} style={{ padding: '3px' }}>
+                                            <Typography variant='subtitle2' style={{ textAlign: 'right', color: DESCRIPTION_COLOR }}>each</Typography>
+                                        </Grid>
+                                    </Grid>
+
+                                    <Grid container spacing={0} direction="row" justify="space-evenly" alignItems="center" style={{ padding: '1px' }}>
+                                        <Grid item xs={6} style={{ padding: '3px' }}>
+                                            <Typography variant='body1' style={{ textAlign: 'left', color: TEXT_COLOR }}>{item.name}</Typography>
+                                        </Grid>
+                                        <Grid item xs={6} style={{ padding: '3px' }}>
+                                            <Typography variant='body1' style={{ textAlign: 'right', color: PRICE_COLOR }}>{item.price} $</Typography>
+                                        </Grid>
+                                    </Grid>
                                 </Grid>
                                 <Grid item xs={12} style={{ padding: '3px' }}>
                                     <Typography variant='subtitle2' style={{ textAlign: 'left', color: DESCRIPTION_COLOR }}>description</Typography>
                                     <Typography variant='body2' style={{ textAlign: 'left', color: TEXT_COLOR }}>{item.Description}</Typography>
                                 </Grid>
-                                <Grid item xs={12} style={{ padding: '3px' }}>
+                                {/*<Grid item xs={12} style={{ padding: '3px' }}>
                                     <Typography variant='subtitle2' style={{ textAlign: 'left', color: DESCRIPTION_COLOR }}>retail price</Typography>
                                     <Typography variant='body1' style={{ textAlign: 'left', color: DESCRIPTION_COLOR }}>{item.retailPrice} $</Typography>
-                                </Grid>
-                                <Grid item xs={12} style={{ padding: '3px' }}>
+                </Grid>*/}
+                                {/*<Grid item xs={12} style={{ padding: '3px' }}>
                                     <Typography variant='subtitle2' style={{ textAlign: 'left', color: DESCRIPTION_COLOR }}>price</Typography>
                                     <Typography variant='body1' style={{ textAlign: 'left', color: PRICE_COLOR }}>{item.price} $</Typography>
-                                </Grid>
+            </Grid>*/}
                             </Grid>
                         </Grid>
 
@@ -132,37 +166,37 @@ function OrderProduct() {
                            
                     </Grid>*/}
 
-                       
+
 
                         <Grid style={{ padding: '10px' }} container spacing={0} direction="row" justify="space-evenly" alignItems="center" >
 
                             <Grid item xs={6} style={{ padding: '3px' }}>
                                 <Grid container spacing={0} justify="center" alignItems="center" >
                                     <Grid item xs={4} style={{ padding: '3px' }}>
-                                        <Typography variant='body1' style={{ textAlign: 'center', }} onClick={()=>_changeAmount(item.id,item.amount-1)}>-</Typography>
+                                        <Typography variant='body1' style={{ textAlign: 'center', }} onClick={() => _changeAmount(item.id, item.amount - 1)}>-</Typography>
                                     </Grid>
                                     <Grid item xs={4} style={{ padding: '3px' }}>
                                         {/*<Typography variant='body1' style={{ textAlign: 'center', color: TEXT_COLOR }}>{item.amount}</Typography>*/}
                                         <TextField type='number' value={item.amount} size="small" onChange={(event) => _fixAmount(event, item.id)} />
                                     </Grid>
                                     <Grid item xs={4} style={{ padding: '3px' }}>
-                                        <Typography variant='body1' style={{ textAlign: 'center', }} onClick={()=>_changeAmount(item.id,item.amount+1)}>+</Typography>
+                                        <Typography variant='body1' style={{ textAlign: 'center', }} onClick={() => _changeAmount(item.id, item.amount + 1)}>+</Typography>
                                     </Grid>
                                 </Grid>
                             </Grid>
 
                             <Grid item xs={6} style={{ padding: '3px', }}>
-                            <Grid container spacing={0} justify="center" alignItems="center" >
-                                <Grid item xs={6} style={{ padding: '3px' }}>
-                                    <Typography variant='body1' style={{ textAlign: 'right', color: TEXT_COLOR }}>Price</Typography>
-                                </Grid>
-                                <Grid item xs={6} style={{ padding: '3px' }}>
-                                    <Typography variant='h6' style={{ textAlign: 'right', color: PRICE_COLOR }}>$ {item.price * item.amount}</Typography>
-                                </Grid>
+                                <Grid container spacing={0} justify="center" alignItems="center" >
+                                    <Grid item xs={6} style={{ padding: '3px' }}>
+                                        <Typography variant='body1' style={{ textAlign: 'right', color: TEXT_COLOR }}>Price</Typography>
+                                    </Grid>
+                                    <Grid item xs={6} style={{ padding: '3px' }}>
+                                        <Typography variant='h6' style={{ textAlign: 'right', color: PRICE_COLOR }}>$ {item.price * item.amount}</Typography>
+                                    </Grid>
                                 </Grid>
                             </Grid>
                         </Grid>
-                        <Divider />
+                        <Divider style={{ width: '90vw', margin: '3% auto' }} />
                     </Grid>))}
 
 
