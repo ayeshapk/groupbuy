@@ -177,7 +177,7 @@ function OrderProduct() {
                                     </Grid>
                                     <Grid item xs={4} style={{ padding: '3px' }}>
                                         {/*<Typography variant='body1' style={{ textAlign: 'center', color: TEXT_COLOR }}>{item.amount}</Typography>*/}
-                                        <TextField type='number' value={item.amount} size="small" onChange={(event) => _fixAmount(event, item.id)} />
+                                        <TextField inputProps={{ style: {textAlign: 'center'} }} type='number' value={item.amount} size="small" onChange={(event) => _fixAmount(event, item.id)} />
                                     </Grid>
                                     <Grid item xs={4} style={{ padding: '3px' }}>
                                         <Typography variant='body1' style={{ textAlign: 'center', }} onClick={() => _changeAmount(item.id, item.amount + 1)}>+</Typography>

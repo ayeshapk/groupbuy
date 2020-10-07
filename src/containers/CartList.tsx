@@ -55,7 +55,7 @@ function CartList() {
                     newArr[i].amount = 0;
                     setItemState(newArr)
                 }
-                if (number >= 99) {
+                else if (number >= 99) {
                     newArr[i].amount = 99;
                     setItemState(newArr)
                 }
@@ -117,7 +117,7 @@ function CartList() {
                                     </Grid>
                                     <Grid item xs={4} style={{ padding: '3px' }}>
                                         {/*<Typography variant='body1' style={{ textAlign: 'center', }}>{item.amount}</Typography>*/}
-                                        <TextField type='number' value={item.amount} size="small" onChange={(event) => _fixAmount(event, item.id)} />
+                                        <TextField type='number' inputProps={{ style: {textAlign: 'center'} }} value={item.amount} size="small" onChange={(event) => _fixAmount(event, item.id)} />
                                     </Grid>
                                     <Grid item xs={4} style={{ padding: '3px' }}>
                                         {/*<Typography variant='body1' style={{ textAlign: 'center', }}>+</Typography>*/}
