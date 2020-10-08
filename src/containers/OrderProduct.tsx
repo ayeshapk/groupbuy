@@ -222,6 +222,7 @@ function OrderProduct() {
 
 
             <MerchantName
+            type={'div'}
                 image={merchantState.image}
                 imageAlt={merchantState.alt}
                 merchantName={merchantState.name}

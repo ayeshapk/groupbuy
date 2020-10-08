@@ -125,6 +125,7 @@ function CartList() {
             <Paper style={{ margin: '2%',paddingTop:'2%' }}>
 
                 <MerchantName
+                type={'div'}
                     image={merchantState.image}
                     imageAlt={merchantState.alt}
                     merchantName={merchantState.name}

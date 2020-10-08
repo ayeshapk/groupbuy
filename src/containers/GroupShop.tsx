@@ -55,6 +55,7 @@ function GroupShop() {
     return (
         <div>
             <MerchantName 
+            type={'Paper'}
               image={merchantState.image}
               imageAlt={merchantState.alt}
               merchantName={merchantState.name}
