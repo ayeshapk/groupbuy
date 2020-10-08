@@ -17,8 +17,8 @@ const MainText = '#A60321';
 const SubText = '#2678BF';
 const ListText = '#D2D2D2';
 
-const merchant =   {
-    id: 0, name: 'Demo SHOP',host:'ayesha', description: 'Just softdrink sent every week Storage 2-3 day in chiller',alt:'1',image:'https://res.cloudinary.com/www-weddingpenguin-co/image/upload/v1559550999/ING_33849_10771_v61zjx.jpg',location:'Jurong, Tuas , 611140',date:'10 october 2020'
+const merchant = {
+    id: 0, name: 'Demo SHOP', host: 'ayesha', description: 'Just softdrink sent every week Storage 2-3 day in chiller', alt: '1', image: 'https://res.cloudinary.com/www-weddingpenguin-co/image/upload/v1559550999/ING_33849_10771_v61zjx.jpg', location: 'Jurong, Tuas , 611140', date: '10 october 2020'
 };
 
 const items = [
@@ -42,12 +42,14 @@ function OrderProduct() {
     const [groupState, setgroupState] = useState(group);
     const [merchantState, setMerchantState] = useState(merchant);
     const { width, height } = useWindowSize()
+    const [totalAmountState, setAmountState] = useState(0);
     const [totalPriceState, setTotalPriceState] = useState(0);
     const router = useRouter()
 
     useEffect(() => {
         if (itemState) {
             updateTotalPriceState()
+            updateAmountState()
         }
     }, [itemState]);
 
@@ -59,6 +61,16 @@ function OrderProduct() {
             setTotalPriceState(priceTotal)
         }
     }
+
+    const updateAmountState = () => {
+        if (itemState) {
+            let amountTotal = itemState.reduce(function (prev, cur) {
+                return prev + (cur.amount);
+            }, 0);
+            setAmountState(amountTotal)
+        }
+    }
+
 
     const linkToPageCart = () => {
         router.push('/cart')
@@ -107,12 +119,12 @@ function OrderProduct() {
         <div>
             <Typography variant='h6' color='primary' style={{ textAlign: 'left', textIndent: '3vw', paddingTop: '3vh', paddingBottom: '1vh' }}>Menu {groupState.groupName}</Typography>
 
-        
+
             <div style={{ marginTop: '10px', marginBottom: '10px' }} />
 
-            <Typography variant='body2' style={{ textIndent: '3vw',color: MainText }}> {groupState.description}</Typography>
-            <Typography variant='body2' style={{ textIndent: '3vw',color: SubText }}> {groupState.location}</Typography>
-            <Typography variant='body2' style={{ textIndent: '3vw',color: SubText }}> {groupState.limit}</Typography>
+            <Typography variant='body2' style={{ textIndent: '3vw', color: MainText }}> {groupState.description}</Typography>
+            <Typography variant='body2' style={{ textIndent: '3vw', color: SubText }}> {groupState.location}</Typography>
+            <Typography variant='body2' style={{ textIndent: '3vw', color: SubText }}> {groupState.limit}</Typography>
 
             <Grid container spacing={0} direction="row" justify="space-evenly" alignItems="center" style={{ padding: '1px' }}>
                 {itemState && itemState.map((item, index: number) => (
@@ -182,7 +194,7 @@ function OrderProduct() {
                                     </Grid>
                                     <Grid item xs={4} style={{ padding: '3px' }}>
                                         {/*<Typography variant='body1' style={{ textAlign: 'center', color: TEXT_COLOR }}>{item.amount}</Typography>*/}
-                                        <TextField inputProps={{ style: {textAlign: 'center'} }} type='number' value={item.amount} size="small" onChange={(event) => _fixAmount(event, item.id)} />
+                                        <TextField inputProps={{ style: { textAlign: 'center' } }} type='number' value={item.amount} size="small" onChange={(event) => _fixAmount(event, item.id)} />
                                     </Grid>
                                     <Grid item xs={4} style={{ padding: '3px' }}>
                                         <Typography variant='body1' style={{ textAlign: 'center', }} onClick={() => _changeAmount(item.id, item.amount + 1)}>+</Typography>
@@ -194,6 +206,7 @@ function OrderProduct() {
                                 <Grid container spacing={0} justify="center" alignItems="center" >
                                     <Grid item xs={6} style={{ padding: '3px' }}>
                                         <Typography variant='body1' style={{ textAlign: 'right', color: TEXT_COLOR }}>Price</Typography>
+                                  
                                     </Grid>
                                     <Grid item xs={6} style={{ padding: '3px' }}>
                                         <Typography variant='h6' style={{ textAlign: 'right', color: PRICE_COLOR }}>$ {item.price * item.amount}</Typography>
@@ -208,10 +221,10 @@ function OrderProduct() {
             </Grid>
 
 
-            <MerchantName 
-              image={merchantState.image}
-              imageAlt={merchantState.alt}
-              merchantName={merchantState.name}
+            <MerchantName
+                image={merchantState.image}
+                imageAlt={merchantState.alt}
+                merchantName={merchantState.name}
             />
 
             <div style={{ paddingBottom: '20%' }}>
@@ -225,7 +238,8 @@ function OrderProduct() {
                 <Grid container spacing={0} direction="row" justify="space-evenly" alignItems="center" >
                     <Grid item xs={6} style={{ padding: '10px' }}>
                         <Typography variant='caption'>Total</Typography>
-                        <Typography variant='body1' style={{ color: PRICE_COLOR }}>$ {totalPriceState}</Typography>
+                        
+                                        <Typography variant='h6' color='primary'>$ {totalPriceState} ({totalAmountState} unit)</Typography>
                     </Grid>
                     <Grid item xs={6} style={{ padding: '3px' }}>
                         <Fab

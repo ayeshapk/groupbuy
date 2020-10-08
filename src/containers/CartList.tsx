@@ -8,6 +8,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 import AspectRatio from 'react-aspect-ratio';
 import { useRouter, Router } from 'next/router'
+import MerchantName from '../component/MerchantName';
 const MainText = '#A60321';
 const DescriptionText = '#F26E22';
 const SubText = '#2678BF';
@@ -23,10 +24,16 @@ const group = {
     location: `1°20'48.0"N 103°57'21.7"E 132 Simei Street 1, Block 132`, limit: '16 September', collect: '17 Septemper',
 };
 
+const merchant = {
+    id: 0, name: 'Demo SHOP', host: 'ayesha', description: 'Just softdrink sent every week Storage 2-3 day in chiller', alt: '1', image: 'https://res.cloudinary.com/www-weddingpenguin-co/image/upload/v1559550999/ING_33849_10771_v61zjx.jpg', location: 'Jurong, Tuas , 611140', date: '10 october 2020'
+};
+
+
 function CartList() {
 
     const [itemState, setItemState] = useState(items);
     const [groupState, setGroupState] = useState(group);
+    const [merchantState, setMerchantState] = useState(merchant);
     const { width, height } = useWindowSize()
     const [totalPriceState, setTotalPriceState] = useState(0);
     const [totalAmountState, setAmountState] = useState(0);
@@ -115,7 +122,13 @@ function CartList() {
         <div>
             <Typography variant='h6' color='primary' style={{ marginLeft: '15px' }}>Shopping Bag</Typography>
 
-            <Paper style={{ margin: '2%' }}>
+            <Paper style={{ margin: '2%',paddingTop:'2%' }}>
+
+                <MerchantName
+                    image={merchantState.image}
+                    imageAlt={merchantState.alt}
+                    merchantName={merchantState.name}
+                />
 
                 <div style={{ marginTop: '10px', marginBottom: '10px' }} />
                 <Typography variant='h6' color='primary' style={{ textAlign: 'left', textIndent: '3vw', paddingTop: '3vh', paddingBottom: '1vh' }}>{groupState.groupName}</Typography>
@@ -150,11 +163,11 @@ function CartList() {
 
                             <Typography variant='body2' style={{ color: MainText, textAlign: 'right', paddingTop: '5px', paddingBottom: '5px' }}> Price : ${item.amount * item.price}</Typography>
                             <Divider style={{ width: '98%', textAlign: 'center', alignItems: 'center', margin: '0 auto' }} />
-                         
+
                         </Grid>
                     </Grid>))}
-                    <Typography variant='body2' style={{ marginLeft: '3vw',color: SubText }}> Location : {groupState.location}</Typography>
-                    <div style={{paddingBottom:'2vh'}}/>
+                <Typography variant='body2' style={{ marginLeft: '3vw', color: SubText }}> Location : {groupState.location}</Typography>
+                <div style={{ paddingBottom: '2vh' }} />
             </Paper>
 
             <div style={{ paddingBottom: '25%' }}>
