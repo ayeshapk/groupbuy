@@ -6,10 +6,16 @@ import useWindowSize from '../HookServerData/Windowsize';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import MenuIcon from '@material-ui/icons/Menu';
 import { useRouter } from 'next/router';
+import MerchantName from '../component/MerchantName';
 const MainText = '#A60321';
 const DescriptionText = '#F26E22';
 const SubText = '#2678BF';
 const ListText = '#D2D2D2';
+
+const merchant =   {
+    id: 0, name: 'Demo SHOP',host:'ayesha', description: 'Just softdrink sent every week Storage 2-3 day in chiller',alt:'1',image:'https://res.cloudinary.com/www-weddingpenguin-co/image/upload/v1559550999/ING_33849_10771_v61zjx.jpg',location:'Jurong, Tuas , 611140',date:'10 october 2020'
+};
+
 let items = [
     {
         id: 0, groupName: 'Drink', description: 'Storage 2-3 day in chiller', current: 0, required: 35, type: 'money',
@@ -29,6 +35,7 @@ let items = [
 function GroupShop() {
 
     const [itemState, setItemState] = useState(items);
+    const [merchantState, setMerchantState] = useState(merchant);
     const { width, height } = useWindowSize()
     const router = useRouter()
 
@@ -47,6 +54,11 @@ function GroupShop() {
 
     return (
         <div>
+            <MerchantName 
+              image={merchantState.image}
+              imageAlt={merchantState.alt}
+              merchantName={merchantState.name}
+            />
             {
                 itemState && itemState.map((item, index: number) => (
                     <Paper variant="outlined" key={index} style={{ margin: '10px' }} >

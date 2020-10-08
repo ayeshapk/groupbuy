@@ -13,13 +13,13 @@ const LOCATION = `1°20'48.0"N 103°57'21.7"E 132 Simei Street 1, Block 132'`
 const DISTANCE = `1KM`
 let items = [
     {
-        id: 0, name: 'Demo SHOP',host:'ayesha', description: 'Just softdrink sent every week Storage 2-3 day in chiller',image:'https://res.cloudinary.com/www-weddingpenguin-co/image/upload/v1559550999/ING_33849_10771_v61zjx.jpg',location:'Jurong, Tuas , 611140',date:'10 october 2020'
+        id: 0, name: 'Demo SHOP',host:'ayesha', description: 'Just softdrink sent every week Storage 2-3 day in chiller',alt:'1',image:'https://res.cloudinary.com/www-weddingpenguin-co/image/upload/v1559550999/ING_33849_10771_v61zjx.jpg',location:'Jurong, Tuas , 611140',date:'10 october 2020'
     },
     {
-        id: 1, name: 'Jane Doe Shop',host:'jane', description: 'This is Orchard group buy for vegetable. Deliver every Wednesday afternoon',image:'https://res.cloudinary.com/www-weddingpenguin-co/image/upload/v1539843351/Cvendor_avmhjr.png',location:'Jurong, Tuas , 611140',date:'10 october 2020'
+        id: 1, name: 'Jane Doe Shop',host:'jane', description: 'This is Orchard group buy for vegetable. Deliver every Wednesday afternoon',alt:'2',image:'https://res.cloudinary.com/www-weddingpenguin-co/image/upload/v1539843351/Cvendor_avmhjr.png',location:'Jurong, Tuas , 611140',date:'10 october 2020'
     },
     {
-        id: 2, name: 'KingCrap Shop',host:'king', description: 'Just soap i order in whole sales',image:'https://res.cloudinary.com/www-weddingpenguin-co/image/upload/v1539751624/iss_4567_02880_dcbbfp.jpg',location:'Jurong, Tuas , 611140',date:'10 october 2020'
+        id: 2, name: 'KingCrap Shop',host:'king', description: 'Just soap i order in whole sales',alt:'3',image:'https://res.cloudinary.com/www-weddingpenguin-co/image/upload/v1539751624/iss_4567_02880_dcbbfp.jpg',location:'Jurong, Tuas , 611140',date:'10 october 2020'
     },
 ];
 

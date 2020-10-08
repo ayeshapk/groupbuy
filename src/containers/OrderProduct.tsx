@@ -8,6 +8,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 import AspectRatio from 'react-aspect-ratio';
 import { useRouter, Router } from 'next/router'
+import MerchantName from '../component/MerchantName';
 
 const DESCRIPTION_COLOR = '#D2D2D2';
 const TEXT_COLOR = '#F26E22';
@@ -15,6 +16,10 @@ const PRICE_COLOR = '#ED2939';
 const MainText = '#A60321';
 const SubText = '#2678BF';
 const ListText = '#D2D2D2';
+
+const merchant =   {
+    id: 0, name: 'Demo SHOP',host:'ayesha', description: 'Just softdrink sent every week Storage 2-3 day in chiller',alt:'1',image:'https://res.cloudinary.com/www-weddingpenguin-co/image/upload/v1559550999/ING_33849_10771_v61zjx.jpg',location:'Jurong, Tuas , 611140',date:'10 october 2020'
+};
 
 const items = [
     { id: 0, name: 'coke', image: 'https://res.cloudinary.com/www-weddingpenguin-co/image/upload/v1600851614/001397056_qsr44y.jpg', price: 15, amount: 3, Description: 'lipsum', retailPrice: 16 },
@@ -35,6 +40,7 @@ function OrderProduct() {
 
     const [itemState, setItemState] = useState(items);
     const [groupState, setgroupState] = useState(group);
+    const [merchantState, setMerchantState] = useState(merchant);
     const { width, height } = useWindowSize()
     const [totalPriceState, setTotalPriceState] = useState(0);
     const router = useRouter()
@@ -202,6 +208,11 @@ function OrderProduct() {
             </Grid>
 
 
+            <MerchantName 
+              image={merchantState.image}
+              imageAlt={merchantState.alt}
+              merchantName={merchantState.name}
+            />
 
             <div style={{ paddingBottom: '20%' }}>
                 <Typography variant='caption' style={{
