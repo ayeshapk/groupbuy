@@ -13,8 +13,6 @@ let card = [
     { id: 1, number: '**** **** **** 4500', name: 'David Spade', exp: '09 - 19', select: false },
 ];
 
-// get sum of price prop across all objects in array
-
 
 function CardPayment() {
 

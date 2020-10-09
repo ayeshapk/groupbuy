@@ -1,4 +1,4 @@
-import { Grid, IconButton, Paper, Typography } from "@material-ui/core";
+import { Grid, Paper, Typography } from "@material-ui/core";
 import AspectRatio from 'react-aspect-ratio';
 import * as React from "react";
 
