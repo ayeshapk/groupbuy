@@ -4,10 +4,8 @@ import Toolbar from '@material-ui/core/Toolbar';
 import InputBase from '@material-ui/core/InputBase';
 import SearchIcon from '@material-ui/icons/Search';
 import CameraAltIcon from '@material-ui/icons/CameraAlt';
-import { Card, CardActionArea, Grid } from '@material-ui/core';
-
-const ICON_COLOR = '#2678BF';
-
+import { CardActionArea, Grid } from '@material-ui/core';
+import { ICON_COLOR } from '../consts/const';
 
 export default function SearchBar() {
 

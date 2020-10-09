@@ -7,10 +7,8 @@ import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import MenuIcon from '@material-ui/icons/Menu';
 import { useRouter } from 'next/router';
 import MerchantName from '../component/MerchantName';
-const MainText = '#A60321';
-const DescriptionText = '#F26E22';
-const SubText = '#2678BF';
-const ListText = '#D2D2D2';
+import { DescriptionText, MainText, SubText } from '../consts/const';
+
 
 const merchant =   {
     id: 0, name: 'Demo SHOP',host:'ayesha', description: 'Just softdrink sent every week Storage 2-3 day in chiller',alt:'1',image:'https://res.cloudinary.com/www-weddingpenguin-co/image/upload/v1559550999/ING_33849_10771_v61zjx.jpg',location:'Jurong, Tuas , 611140',date:'10 october 2020'

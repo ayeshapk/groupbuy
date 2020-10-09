@@ -1,17 +1,14 @@
 import React, { Component } from 'react';
 import { GoogleMap, LoadScript } from '@react-google-maps/api';
 import { Typography } from '@material-ui/core';
-import { AppBar, BottomNavigation, CardMedia, Divider, Fab, Grid, Paper, } from '@material-ui/core';
+import {  Divider, Grid, Paper, } from '@material-ui/core';
 
 import { useState, useEffect } from 'react';
 import useWindowSize from '../HookServerData/Windowsize';
 
-import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
+
 import { useRouter, Router } from 'next/router'
-const MainText = '#A60321';
-const DescriptionText = '#F26E22';
-const SubText = '#2678BF';
-const ListText = '#D2D2D2';
+
 
 
 

@@ -1,21 +1,14 @@
 
-import { AppBar, BottomNavigation, CardMedia, Divider, Fab, Grid, Paper, TextField, Typography } from '@material-ui/core';
+import { AppBar, CardMedia, Divider, Fab, Grid, TextField, Typography } from '@material-ui/core';
 import React from 'react'
 import { useState, useEffect } from 'react';
 import useWindowSize from '../HookServerData/Windowsize';
-import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
-import MenuIcon from '@material-ui/icons/Menu';
+
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
-import AspectRatio from 'react-aspect-ratio';
+
 import { useRouter, Router } from 'next/router'
 import MerchantName from '../component/MerchantName';
-
-const DESCRIPTION_COLOR = '#D2D2D2';
-const TEXT_COLOR = '#F26E22';
-const PRICE_COLOR = '#ED2939';
-const MainText = '#A60321';
-const SubText = '#2678BF';
-const ListText = '#D2D2D2';
+import { DESCRIPTION_COLOR, MainText, PRICE_COLOR, SubText, TEXT_COLOR } from '../consts/const';
 
 const merchant = {
     id: 0, name: 'Demo SHOP', host: 'ayesha', description: 'Just softdrink sent every week Storage 2-3 day in chiller', alt: '1', image: 'https://res.cloudinary.com/www-weddingpenguin-co/image/upload/v1559550999/ING_33849_10771_v61zjx.jpg', location: 'Jurong, Tuas , 611140', date: '10 october 2020'

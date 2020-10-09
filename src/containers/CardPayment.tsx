@@ -1,18 +1,13 @@
 
-import { AppBar, BottomNavigation, Card, CardActionArea, CardContent, CardMedia, Divider, Fab, Grid, Paper, Typography } from '@material-ui/core';
+import { AppBar, Card, CardActionArea, CardContent, CardMedia,  Fab, Grid,  Typography } from '@material-ui/core';
 import React from 'react'
 import { useState, useEffect } from 'react';
 import useWindowSize from '../HookServerData/Windowsize';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
-import MenuIcon from '@material-ui/icons/Menu';
-import AspectRatio from 'react-aspect-ratio';
+
 import AddIcon from '@material-ui/icons/Add';
 import { useRouter } from 'next/router';
 
-const MainText = '#A60321';
-const DescriptionText = '#F26E22';
-const SubText = '#2678BF';
-const ListText = '#D2D2D2';
 let card = [
     { id: 0, number: '**** **** **** 4543', name: 'David Spade', exp: '09 - 18', select: true },
     { id: 1, number: '**** **** **** 4500', name: 'David Spade', exp: '09 - 19', select: false },

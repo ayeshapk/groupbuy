@@ -3,23 +3,18 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import InputBase from '@material-ui/core/InputBase';
 import Badge from '@material-ui/core/Badge';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
-import MenuIcon from '@material-ui/icons/Menu';
-import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import CameraAltIcon from '@material-ui/icons/CameraAlt';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import { Grid, Hidden } from '@material-ui/core';
 import { useRouter } from 'next/router';
+import { ICON_COLOR, LOGO_COLOR } from '../consts/const';
 
-const LOGO_COLOR = '#A60321';
-const ICON_COLOR = '#2678BF';
 
 export default function MenuBar() {
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);

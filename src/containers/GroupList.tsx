@@ -1,4 +1,4 @@
-import { Button, CardMedia, Divider, Fab, Grid, Paper, Typography } from '@material-ui/core';
+import { CardMedia, Divider, Fab, Grid, Paper, Typography } from '@material-ui/core';
 import React from 'react'
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import { useState, useEffect } from 'react';
@@ -6,9 +6,8 @@ import useWindowSize from '../HookServerData/Windowsize';
 
 import { useRouter, Router } from 'next/router'
 import MyGoogleMap from './Map';
-const MainText = '#A60321';
-const SubText = '#2678BF';
-const ListText = '#D2D2D2';
+import { ListText, MainText, SubText } from '../consts/const';
+
 const LOCATION = `1°20'48.0"N 103°57'21.7"E 132 Simei Street 1, Block 132'`
 const DISTANCE = `1KM`
 let items = [

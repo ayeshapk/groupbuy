@@ -1,18 +1,15 @@
 
-import { AppBar, BottomNavigation, CardMedia, Divider, Fab, Grid, Paper, TextField, Typography } from '@material-ui/core';
+import { AppBar, Divider, Fab, Grid, Paper, TextField, Typography } from '@material-ui/core';
 import React from 'react'
 import { useState, useEffect } from 'react';
 import useWindowSize from '../HookServerData/Windowsize';
-import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
-import MenuIcon from '@material-ui/icons/Menu';
+
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
-import AspectRatio from 'react-aspect-ratio';
+
 import { useRouter, Router } from 'next/router'
 import MerchantName from '../component/MerchantName';
-const MainText = '#A60321';
-const DescriptionText = '#F26E22';
-const SubText = '#2678BF';
-const ListText = '#D2D2D2';
+import { DescriptionText, MainText, SubText } from '../consts/const';
+
 let items = [
     { id: 0, name: 'coke', price: 15, amount: 3, },
     { id: 1, name: 'pepsi', price: 22, amount: 2, },
