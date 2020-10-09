@@ -110,15 +110,14 @@ function OrderProduct() {
 
     return (
         <div>
+            
+           
             <Typography variant='h6' color='primary' style={{ textAlign: 'left', textIndent: '3vw', paddingTop: '3vh', paddingBottom: '1vh' }}>Menu {groupState.groupName}</Typography>
-
-
             <div style={{ marginTop: '10px', marginBottom: '10px' }} />
-
             <Typography variant='body2' style={{ textIndent: '3vw', color: MainText }}> {groupState.description}</Typography>
             <Typography variant='body2' style={{ textIndent: '3vw', color: SubText }}> {groupState.location}</Typography>
             <Typography variant='body2' style={{ textIndent: '3vw', color: SubText }}> {groupState.limit}</Typography>
-
+            
             <Grid container spacing={0} direction="row" justify="space-evenly" alignItems="center" style={{ padding: '1px' }}>
                 {itemState && itemState.map((item, index: number) => (
                     <Grid item xs={12} key={index} style={{ padding: '3px' }} >

@@ -119,19 +119,24 @@ function CartList() {
         <div>
             <Typography variant='h6' color='primary' style={{ marginLeft: '15px' }}>Shopping Bag</Typography>
 
-            <Paper style={{ margin: '2%',paddingTop:'2%' }}>
+            <Paper style={{ margin: '2%', paddingTop: '2%' }}>
 
                 <MerchantName
-                type={'div'}
+                    type={'div'}
                     image={merchantState.image}
                     imageAlt={merchantState.alt}
                     merchantName={merchantState.name}
                 />
 
                 <div style={{ marginTop: '10px', marginBottom: '10px' }} />
-                <Typography variant='h6' color='primary' style={{ textAlign: 'left', textIndent: '3vw', paddingTop: '3vh', paddingBottom: '1vh' }}>{groupState.groupName}</Typography>
-                <Typography variant='body2' style={{ textIndent: '3vw', color: MainText }}> {groupState.description}</Typography>
-                <Typography variant='body2' style={{ textIndent: '3vw', color: SubText }}> {groupState.limit}</Typography>
+
+                <Grid container spacing={0} direction="column" justify="space-around" alignItems="flex-start" >
+                    <Grid item xs={12} style={{ padding: '15px', }}>
+                        <Typography variant='h6' color='primary' style={{ textAlign: 'left', paddingTop: '3vh', paddingBottom: '1vh' }}>{groupState.groupName}</Typography>
+                        <Typography variant='body2' style={{ color: MainText }}> {groupState.description}</Typography>
+                        <Typography variant='body2' style={{ color: SubText }}> {groupState.limit}</Typography>
+                    </Grid>
+                </Grid>
 
                 {itemState && itemState.map((item, index: number) => (
                     <Grid key={index} container spacing={0} direction="row" justify="space-around" alignItems="flex-end" >
