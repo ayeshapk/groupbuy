@@ -13,7 +13,7 @@ import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import { Drawer, Grid, Hidden } from '@material-ui/core';
 import { useRouter } from 'next/router';
-import { ICON_COLOR, LOGO_COLOR } from '../consts/const';
+import { DescriptionText, ICON_COLOR, ListText, LOGO_COLOR, MainText, SubText } from '../consts/const';
 import useWindowSize from '../HookServerData/Windowsize';
 
 
@@ -47,6 +47,11 @@ export default function MenuBar() {
         router.push('/')
     };
 
+    const goPage=(pagename)=>{
+        setOpenDrawer(false)
+        router.push('/'+pagename)
+    }
+
     const handleMobileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
         setMobileMoreAnchorEl(event.currentTarget);
     };
@@ -67,35 +72,35 @@ export default function MenuBar() {
                 style={{ margin: '10px' }}
             >
                 <img src='https://res.cloudinary.com/www-weddingpenguin-co/image/upload/v1601605405/lobang_ujaiwi.png' width='auto' height='30px' />
-                <Typography>Lobang App</Typography>
+                <Typography style={{color:MainText}}>Lobang App</Typography>
             </IconButton>
 
-            <MenuItem onClick={() => setOpenDrawer(false)}>
-                <Typography>Dashboard</Typography>
+            <MenuItem onClick={() => goPage('dashboard')}>
+                <Typography style={{color:DescriptionText}}>Dashboard</Typography>
             </MenuItem>
 
             <MenuItem onClick={() => setOpenDrawer(false)}>
-                <Typography>Cart</Typography>
+                <Typography style={{color:DescriptionText}}>List</Typography>
             </MenuItem>
 
             <MenuItem onClick={() => setOpenDrawer(false)}>
-                <Typography>Saved</Typography>
+                <Typography style={{color:DescriptionText}}>Saved</Typography>
             </MenuItem>
 
             <MenuItem onClick={() => setOpenDrawer(false)}>
-                <Typography>View</Typography>
+                <Typography style={{color:DescriptionText}}>View</Typography>
             </MenuItem>
 
             <MenuItem onClick={() => setOpenDrawer(false)}>
-                <Typography>Payment</Typography>
+                <Typography style={{color:DescriptionText}}>Payment</Typography>
             </MenuItem>
 
             <MenuItem onClick={() => setOpenDrawer(false)}>
-                <Typography>Account</Typography>
+                <Typography style={{color:DescriptionText}}>Account</Typography>
             </MenuItem>
 
             <MenuItem onClick={() => setOpenDrawer(false)}>
-                <Typography>Setting</Typography>
+                <Typography style={{color:DescriptionText}}>Setting</Typography>
             </MenuItem>
 
         </Drawer>
