@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
@@ -11,18 +11,26 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import { Grid, Hidden } from '@material-ui/core';
+import { Drawer, Grid, Hidden } from '@material-ui/core';
 import { useRouter } from 'next/router';
 import { ICON_COLOR, LOGO_COLOR } from '../consts/const';
+import useWindowSize from '../HookServerData/Windowsize';
 
 
 export default function MenuBar() {
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState<null | HTMLElement>(null);
-
+    const { width, } = useWindowSize()
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
     const router = useRouter()
+    const [openDrawer, setOpenDrawer] = useState(false);
+
+    console.log(openDrawer)
+
+    useEffect(() => {
+        setOpenDrawer(false)
+    }, [width]);// Only re-run the effect if width changes
 
     const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorEl(event.currentTarget);
@@ -49,6 +57,28 @@ export default function MenuBar() {
 
 
     const mobileMenuId = 'primary-search-account-menu-mobile';
+
+    const drawerMenu = (
+        <Drawer anchor={'left'}
+            open={openDrawer} >
+
+            <IconButton
+                edge="start"
+                color="inherit"
+                aria-label="open drawer"
+                onClick={() => setOpenDrawer(false)}
+                style={{margin:'10px'}}
+            >
+                <img src='https://res.cloudinary.com/www-weddingpenguin-co/image/upload/v1601605405/lobang_ujaiwi.png' width='auto' height='30px' />
+                <Typography>Lobang App</Typography>
+            </IconButton>
+
+        </Drawer>
+    );
+
+
+
+
     const renderMobileMenu = (
         <Menu
             anchorEl={mobileMoreAnchorEl}
@@ -85,18 +115,19 @@ export default function MenuBar() {
 
                                 color="inherit"
                                 aria-label="open drawer"
+                                onClick={() => setOpenDrawer(true)}
                             >
-                                <img src='https://res.cloudinary.com/www-weddingpenguin-co/image/upload/v1601605405/lobang_ujaiwi.png' width='auto' height='30px'/>
+                                <img src='https://res.cloudinary.com/www-weddingpenguin-co/image/upload/v1601605405/lobang_ujaiwi.png' width='auto' height='30px' />
                             </IconButton>
                         </Grid>
 
-                        
+
                         <Grid item lg={4} xl={4} md={4} sm={4} xs={false}>
                             <Typography onClick={goHome} variant="h6" noWrap style={{ verticalAlign: 'center', color: LOGO_COLOR }}>Lobang</Typography>
                         </Grid>
-                        
 
-                       
+
+
                         <Grid item lg={5} xl={5} md={5} sm={5} xs={false}>
                             <IconButton aria-label="show 17 new notifications" color="inherit">
                                 <Badge badgeContent={17} color="secondary">
@@ -117,7 +148,7 @@ export default function MenuBar() {
                                 </Badge>
                             </IconButton>
                         </Grid>
-                        
+
 
                         <Hidden xsDown>
                             <Grid item lg={1} xl={1} md={1} sm={1} xs={false}>
@@ -135,6 +166,7 @@ export default function MenuBar() {
                     </Grid>
                 </Toolbar>
             </AppBar>
+            {drawerMenu}
             {renderMobileMenu}
             <div style={{ paddingTop: '50px' }} />
         </div>
