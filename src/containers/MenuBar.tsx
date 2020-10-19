@@ -84,11 +84,30 @@ export default function MenuBar() {
 
     const userPanel = (
         <div>
-            <MenuItem onClick={() => setOpenDrawer(false)}>
-                <Typography style={{ color: DescriptionText }}>{userName}</Typography>
+            <MenuItem onClick={() => goPage('dashboard-buy')}>
+                <Typography style={{ color: MainText }}>Dashboard-Buy</Typography>
             </MenuItem>
+
+            <MenuItem onClick={() => goPage('dashboard-sell')}>
+                <Typography style={{ color: MainText }}>Dashboard-Sell</Typography>
+            </MenuItem>
+
+            <Divider />
+
+            <MenuItem onClick={() => setOpenDrawer(false)}>
+                <Typography style={{ color: MainText }}>{userName}</Typography>
+            </MenuItem>
+
+            <MenuItem onClick={() => setOpenDrawer(false)}>
+                <Typography style={{ color: MainText }}>Saved</Typography>
+            </MenuItem>
+
+            <MenuItem onClick={() => setOpenDrawer(false)}>
+                <Typography style={{ color: MainText }}>Payment</Typography>
+            </MenuItem>
+
             <MenuItem onClick={() => controlUser('',false)}>
-                <Typography style={{ color: DescriptionText }}>Sign out</Typography>
+                <Typography style={{ color: MainText }}>Sign out</Typography>
             </MenuItem>
         </div>
     )
@@ -96,10 +115,10 @@ export default function MenuBar() {
     const nonLoggedPanel = (
         <div>
             <MenuItem onClick={() => controlUser('Ayesha',true)}>
-                <Typography style={{ color: DescriptionText }}>Login</Typography>
+                <Typography style={{ color: MainText }}>Login</Typography>
             </MenuItem>
             <MenuItem onClick={() => setOpenDrawer(false)}>
-                <Typography style={{ color: DescriptionText }}>Join</Typography>
+                <Typography style={{ color: MainText }}>Join</Typography>
             </MenuItem>
         </div>
     )
@@ -118,41 +137,24 @@ export default function MenuBar() {
                 <Typography style={{ color: MainText }}>Lobang App</Typography>
             </IconButton>
 
-            <MenuItem onClick={() => goPage('dashboard-buy')}>
-                <Typography style={{ color: DescriptionText }}>Dashboard-Buy</Typography>
-            </MenuItem>
-
-            <MenuItem onClick={() => goPage('dashboard-sell')}>
-                <Typography style={{ color: DescriptionText }}>Dashboard-Sell</Typography>
-            </MenuItem>
-
-            <MenuItem onClick={() => setOpenDrawer(false)}>
+            <MenuItem onClick={() =>  goPage('/')}>
                 <Typography style={{ color: DescriptionText }}>List</Typography>
-            </MenuItem>
-
-            <MenuItem onClick={() => setOpenDrawer(false)}>
-                <Typography style={{ color: DescriptionText }}>Saved</Typography>
             </MenuItem>
 
             <MenuItem onClick={() => setOpenDrawer(false)}>
                 <Typography style={{ color: DescriptionText }}>View</Typography>
             </MenuItem>
 
-            <MenuItem onClick={() => setOpenDrawer(false)}>
-                <Typography style={{ color: DescriptionText }}>Payment</Typography>
-            </MenuItem>
-
-            <MenuItem onClick={() => setOpenDrawer(false)}>
-                <Typography style={{ color: DescriptionText }}>Account</Typography>
-            </MenuItem>
-
-            <MenuItem onClick={() => setOpenDrawer(false)}>
-                <Typography style={{ color: DescriptionText }}>Setting</Typography>
-            </MenuItem>
-
             <Divider />
+
             {loggedIn === true && userPanel}
             {loggedIn === false && nonLoggedPanel}
+
+            <Divider />
+
+            <MenuItem onClick={() => setOpenDrawer(false)}>
+                <Typography style={{ color: ListText }}>Setting</Typography>
+            </MenuItem>
         </Drawer>
     );
 
