@@ -75,8 +75,12 @@ export default function MenuBar() {
                 <Typography style={{color:MainText}}>Lobang App</Typography>
             </IconButton>
 
-            <MenuItem onClick={() => goPage('dashboard')}>
-                <Typography style={{color:DescriptionText}}>Dashboard</Typography>
+            <MenuItem onClick={() => goPage('dashboard-buy')}>
+                <Typography style={{color:DescriptionText}}>Dashboard-Buy</Typography>
+            </MenuItem>
+
+            <MenuItem onClick={() => goPage('dashboard-sell')}>
+                <Typography style={{color:DescriptionText}}>Dashboard-Sell</Typography>
             </MenuItem>
 
             <MenuItem onClick={() => setOpenDrawer(false)}>
