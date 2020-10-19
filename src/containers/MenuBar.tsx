@@ -11,7 +11,7 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import { Drawer, Grid, Hidden } from '@material-ui/core';
+import { Divider, Drawer, Grid, Hidden } from '@material-ui/core';
 import { useRouter } from 'next/router';
 import { DescriptionText, ICON_COLOR, ListText, LOGO_COLOR, MainText, SubText } from '../consts/const';
 import useWindowSize from '../HookServerData/Windowsize';
@@ -25,10 +25,25 @@ export default function MenuBar() {
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
     const router = useRouter()
     const [openDrawer, setOpenDrawer] = useState(false);
+    const [loggedIn, setLoggedIn] = useState(false);
+    const [userName, setUserName] = useState('');
+
+    useEffect(() => {
+        setLoggedIn(true)
+        setUserName('Ayesha')
+    }, []);// Only re-run the effect
 
     useEffect(() => {
         setOpenDrawer(false)
     }, [width]);// Only re-run the effect if width changes
+
+    useEffect(() => {
+        setOpenDrawer(false)
+    }, [loggedIn]);// Only re-run the effect if login changes
+
+    useEffect(() => {
+        setOpenDrawer(false)
+    }, [userName]);// Only re-run the effect if user changes
 
     const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorEl(event.currentTarget);
@@ -47,9 +62,15 @@ export default function MenuBar() {
         router.push('/')
     };
 
-    const goPage=(pagename)=>{
+    const goPage = (pagename) => {
         setOpenDrawer(false)
-        router.push('/'+pagename)
+        router.push('/' + pagename)
+    }
+
+    const controlUser = (name,condition,) => {
+        setLoggedIn(condition)
+        setUserName(name)
+        setOpenDrawer(false)
     }
 
     const handleMobileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
@@ -61,8 +82,30 @@ export default function MenuBar() {
 
     const mobileMenuId = 'primary-search-account-menu-mobile';
 
+    const userPanel = (
+        <div>
+            <MenuItem onClick={() => setOpenDrawer(false)}>
+                <Typography style={{ color: DescriptionText }}>{userName}</Typography>
+            </MenuItem>
+            <MenuItem onClick={() => controlUser('',false)}>
+                <Typography style={{ color: DescriptionText }}>Sign out</Typography>
+            </MenuItem>
+        </div>
+    )
+
+    const nonLoggedPanel = (
+        <div>
+            <MenuItem onClick={() => controlUser('Ayesha',true)}>
+                <Typography style={{ color: DescriptionText }}>Login</Typography>
+            </MenuItem>
+            <MenuItem onClick={() => setOpenDrawer(false)}>
+                <Typography style={{ color: DescriptionText }}>Join</Typography>
+            </MenuItem>
+        </div>
+    )
+
     const drawerMenu = (
-        <Drawer onClose={()=>setOpenDrawer(false)} anchor={'left'}
+        <Drawer onClose={() => setOpenDrawer(false)} anchor={'left'}
             open={openDrawer} >
             <IconButton
                 edge="start"
@@ -72,45 +115,48 @@ export default function MenuBar() {
                 style={{ margin: '10px' }}
             >
                 <img src='https://res.cloudinary.com/www-weddingpenguin-co/image/upload/v1601605405/lobang_ujaiwi.png' width='auto' height='30px' />
-                <Typography style={{color:MainText}}>Lobang App</Typography>
+                <Typography style={{ color: MainText }}>Lobang App</Typography>
             </IconButton>
 
             <MenuItem onClick={() => goPage('dashboard-buy')}>
-                <Typography style={{color:DescriptionText}}>Dashboard-Buy</Typography>
+                <Typography style={{ color: DescriptionText }}>Dashboard-Buy</Typography>
             </MenuItem>
 
             <MenuItem onClick={() => goPage('dashboard-sell')}>
-                <Typography style={{color:DescriptionText}}>Dashboard-Sell</Typography>
+                <Typography style={{ color: DescriptionText }}>Dashboard-Sell</Typography>
             </MenuItem>
 
             <MenuItem onClick={() => setOpenDrawer(false)}>
-                <Typography style={{color:DescriptionText}}>List</Typography>
+                <Typography style={{ color: DescriptionText }}>List</Typography>
             </MenuItem>
 
             <MenuItem onClick={() => setOpenDrawer(false)}>
-                <Typography style={{color:DescriptionText}}>Saved</Typography>
+                <Typography style={{ color: DescriptionText }}>Saved</Typography>
             </MenuItem>
 
             <MenuItem onClick={() => setOpenDrawer(false)}>
-                <Typography style={{color:DescriptionText}}>View</Typography>
+                <Typography style={{ color: DescriptionText }}>View</Typography>
             </MenuItem>
 
             <MenuItem onClick={() => setOpenDrawer(false)}>
-                <Typography style={{color:DescriptionText}}>Payment</Typography>
+                <Typography style={{ color: DescriptionText }}>Payment</Typography>
             </MenuItem>
 
             <MenuItem onClick={() => setOpenDrawer(false)}>
-                <Typography style={{color:DescriptionText}}>Account</Typography>
+                <Typography style={{ color: DescriptionText }}>Account</Typography>
             </MenuItem>
 
             <MenuItem onClick={() => setOpenDrawer(false)}>
-                <Typography style={{color:DescriptionText}}>Setting</Typography>
+                <Typography style={{ color: DescriptionText }}>Setting</Typography>
             </MenuItem>
 
+            <Divider />
+            {loggedIn === true && userPanel}
+            {loggedIn === false && nonLoggedPanel}
         </Drawer>
     );
 
-
+  
 
 
     const renderMobileMenu = (
