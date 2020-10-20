@@ -10,12 +10,13 @@ import MerchantName from '../component/MerchantName';
 import { DescriptionText, MainText, SubText } from '../consts/const';
 
 let myItems = [
-    { id: 0, shopName: 'Demo SHOP', paidDate: '12 Nov 2020', total: 105, groupname: 'Drink', isReady: false, list: [{ id: 0, name: 'coke', price: 15, amount: 3, }, { id: 1, name: 'pepsi', price: 22, amount: 2, }, { id: 2, name: '7up', price: 16, amount: 1, },] },
-    { id: 1, shopName: 'Jane Doe Shop', paidDate: '18 Nov 2020', total: 12, groupname: 'Vagetable', isReady: true, list: [{ id: 0, name: 'Chinese pomfret', price: 4, amount: 2, }, { id: 1, name: 'brown mushroom', price: 3, amount: 3, }, { id: 2, name: 'oyster mushroom', price: 3, amount: 1, },] },
+    { id: 0, clientName: 'Demo SHOP', paidDate: '12 Nov 2020', total: 105, groupname: 'Drink', isReady: false, list: [{ id: 0, name: 'coke', price: 15, amount: 3, }, { id: 1, name: 'pepsi', price: 22, amount: 2, }, { id: 2, name: '7up', price: 16, amount: 1, },] },
+    { id: 1, clientName: 'Demo SHOP', paidDate: '12 Nov 2020', total: 99, groupname: 'Drink', isReady: false, list: [{ id: 0, name: 'coke', price: 15, amount: 3, }, { id: 1, name: 'pepsi', price: 22, amount: 2, },] },
+    { id: 2, clientName: 'Jane Doe Shop', paidDate: '18 Nov 2020', total: 12, groupname: 'Vagetable', isReady: true, list: [{ id: 0, name: 'Chinese pomfret', price: 4, amount: 2, }, { id: 1, name: 'brown mushroom', price: 3, amount: 3, }, { id: 2, name: 'oyster mushroom', price: 3, amount: 1, },] },
 ];
 
 
-function DashboardBuy() {
+function SellListContainer() {
 
     const { width, height } = useWindowSize()
     const router = useRouter()
@@ -30,7 +31,7 @@ function DashboardBuy() {
 
     return (
         <div>
-            <Typography variant='h6' color='primary' style={{ textAlign: 'center', paddingTop: '3vh', paddingBottom: '1vh' }}>Dashboard</Typography>
+            <Typography variant='h6' color='primary' style={{ textAlign: 'center', paddingTop: '3vh', paddingBottom: '1vh' }}>Sell</Typography>
 
             {myItemState && myItemState.map((groupList, index: number) => (
                 <Paper key={index} variant="outlined" style={{ margin: '10px' }} >
@@ -51,7 +52,7 @@ function DashboardBuy() {
                             <Typography variant='subtitle2' color='inherit' style={{ textAlign: 'left', }}>Shop name: </Typography>
                         </Grid>
                         <Grid item lg={7} xl={7} md={7} sm={7} xs={7}>
-                            <Typography variant='subtitle2' color='inherit' style={{ textAlign: 'left', }}>{groupList.shopName}</Typography>
+                            <Typography variant='subtitle2' color='inherit' style={{ textAlign: 'left', }}>{groupList.clientName}</Typography>
                         </Grid>
                     </Grid>
 
@@ -91,19 +92,22 @@ function DashboardBuy() {
                         <Divider style={{ width: '80%', margin: '0 auto' }} />
 
                         <Grid container direction="row" justify="flex-end" alignItems="center" style={{ marginTop: '10px', marginBottom: '10px' }}>
-                            <Grid item lg={12} xl={12} md={12} sm={12} xs={12} style={{ textAlign: 'center', margin: '0 auto' }}>
-                                <Typography variant='caption' color='primary' style={{ textAlign: 'center', }}>- Avaliable on : {groupList.paidDate} -</Typography>
+                            <Grid item lg={8} xl={8} md={8} sm={8} xs={8} style={{ textAlign: 'center', margin: '0 auto' }}>
+                                <Typography variant='caption' color='primary' style={{ textAlign: 'center', }}>- Time limit on : {groupList.paidDate} -</Typography>
+                            </Grid>
+                            <Grid item lg={4} xl={4} md={4} sm={4} xs={4} style={{ textAlign: 'center', }}>
+                                <Typography variant='h6' color='primary' style={{ textAlign: 'center', }}>{groupList.total} $</Typography>
                             </Grid>
                         </Grid>
 
-                        <Grid container direction="row" justify="flex-end" alignItems="center" style={{ marginTop: '10px', marginBottom: '10px' }}>
-                            <Grid item lg={6} xl={6} md={6} sm={6} xs={6} style={{ textAlign: 'center', margin: '0 auto' }}>
-                                {groupList.isReady === true && <Button variant="contained" fullWidth color="primary" style={{ width:'95%',color:'white'}}>Paid</Button>}
-                                {groupList.isReady === false && <Button variant="contained" fullWidth disabled style={{ width:'95%',}}>Not Avaliable</Button>}
+                        <Grid container  direction="row"  justify="center"  alignItems="center" style={{ marginTop: '10px', marginBottom: '10px' }}>
+                            <Grid item lg={6} xl={6} md={6} sm={6} xs={6} style={{ textAlign: 'center', margin: '10px auto',}}>
+                                {<Button style={{width:'95%',color:'white'}} fullWidth variant="contained" color="primary">Contact</Button>}
                             </Grid>
-                            <Grid item lg={6} xl={6} md={6} sm={6} xs={6} style={{ textAlign: 'center', }}>
-                                <Typography variant='h6' color='primary' style={{ textAlign: 'center', }}>{groupList.total} $</Typography>
+                            <Grid item lg={6} xl={6} md={6} sm={6} xs={6} style={{ textAlign: 'center', margin: '10px auto' }}>
+                                {<Button style={{width:'95%'}}  fullWidth variant="outlined" color="primary" >Payment</Button>}
                             </Grid>
+                         
                         </Grid>
 
 
@@ -118,4 +122,4 @@ function DashboardBuy() {
 
 
 
-export default DashboardBuy;
+export default SellListContainer;

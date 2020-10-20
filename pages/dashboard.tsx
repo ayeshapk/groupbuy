@@ -1,20 +1,19 @@
 
 import React from "react";
 import Layout from "../src/component/Layout";
-
-import DashboardSell from "../src/containers/DashboardSell";
+import DashboardContainer from "../src/containers/DashboardContainer";
 
 import MenuBar from "../src/containers/MenuBar";
 import SearchBar from "../src/containers/SearchBar";
 
 
-const DashboardSellPage = () => {
+const DashboardPage = () => {
     return (
         <Layout>
               <MenuBar/>
             <SearchBar/>
-            <DashboardSell />
+            <DashboardContainer />
         </Layout>
     );
 }
-export default DashboardSellPage;
+export default DashboardPage;

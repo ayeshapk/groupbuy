@@ -67,7 +67,7 @@ export default function MenuBar() {
         router.push('/' + pagename)
     }
 
-    const controlUser = (name,condition,) => {
+    const controlUser = (name, condition,) => {
         setLoggedIn(condition)
         setUserName(name)
         setOpenDrawer(false)
@@ -84,12 +84,17 @@ export default function MenuBar() {
 
     const userPanel = (
         <div>
-            <MenuItem onClick={() => goPage('dashboard-buy')}>
-                <Typography style={{ color: MainText }}>Dashboard-Buy</Typography>
+
+            <MenuItem onClick={() => goPage('dashboard')}>
+                <Typography style={{ color: MainText }}>Dashboard</Typography>
             </MenuItem>
 
-            <MenuItem onClick={() => goPage('dashboard-sell')}>
-                <Typography style={{ color: MainText }}>Dashboard-Sell</Typography>
+            <MenuItem onClick={() => goPage('buylist')}>
+                <Typography style={{ color: MainText }}>Buy List</Typography>
+            </MenuItem>
+
+            <MenuItem onClick={() => goPage('selllist')}>
+                <Typography style={{ color: MainText }}>Sell List</Typography>
             </MenuItem>
 
             <Divider />
@@ -106,7 +111,7 @@ export default function MenuBar() {
                 <Typography style={{ color: MainText }}>Payment</Typography>
             </MenuItem>
 
-            <MenuItem onClick={() => controlUser('',false)}>
+            <MenuItem onClick={() => controlUser('', false)}>
                 <Typography style={{ color: MainText }}>Sign out</Typography>
             </MenuItem>
         </div>
@@ -114,7 +119,7 @@ export default function MenuBar() {
 
     const nonLoggedPanel = (
         <div>
-            <MenuItem onClick={() => controlUser('Ayesha',true)}>
+            <MenuItem onClick={() => controlUser('Ayesha', true)}>
                 <Typography style={{ color: MainText }}>Login</Typography>
             </MenuItem>
             <MenuItem onClick={() => setOpenDrawer(false)}>
@@ -137,7 +142,7 @@ export default function MenuBar() {
                 <Typography style={{ color: MainText }}>Lobang App</Typography>
             </IconButton>
 
-            <MenuItem onClick={() =>  goPage('/')}>
+            <MenuItem onClick={() => goPage('/')}>
                 <Typography style={{ color: DescriptionText }}>List</Typography>
             </MenuItem>
 
@@ -158,7 +163,7 @@ export default function MenuBar() {
         </Drawer>
     );
 
-  
+
 
 
     const renderMobileMenu = (
