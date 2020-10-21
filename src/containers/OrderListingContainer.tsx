@@ -39,14 +39,14 @@ function OrderListingContainer() {
         router.back()
     }
 
-    const updateTask = (id, isDone) => {
+    /*const updateTask = (id, isDone) => {
         for (var i in myItemState) {
             if (myItemState[i].id == id) {
                 myItemState[i].isDone = isDone;
                 break; //Stop this loop, we found it!
             }
         }
-    }
+    }*/
 
     const updateCurrentTask = (id: number, isDone: boolean) => {
         setMyItemState(
@@ -66,18 +66,22 @@ function OrderListingContainer() {
         setEditMyItemState(data)
     }
 
- 
-
-    /*const handleChangeTypingOrderName = (event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>,key: string) => {
-        console.log("EVENT >>>",event.target.value)
-        let clone = editMyItemState
-        clone[key] === key
-            ? Object.assign({ key: event.target.value })
-            : clone
-        console.log('FINAL CHECK', clone)
-        setEditMyItemState(clone)
-
-    };*/
+    const _updateEvent = (key:string, event) => {
+        console.log("key", key)
+        console.log("event", event.target.value)
+        let code = event.target.value
+        
+            let data = editMyItemState
+            console.log('DATA>>>',data)
+            data[key] = key 
+            let keyItem = data[key] 
+            
+            let final = {[keyItem]:code}
+            console.log('will set',final)
+            let editValue = Object.assign(data,final)
+            console.log('editValue>>>',editValue)
+            setEditMyItemState(editValue)
+    }
 
 
     return (
@@ -167,14 +171,15 @@ function OrderListingContainer() {
                 <TextField
                     label="orderName"
                     style={{ margin: 8 }}
-                    placeholder="Name"
-                    helperText="Name"
+                    placeholder="orderName"
+                    helperText="Your order name"
                     fullWidth
                     margin="normal"
                     InputLabelProps={{
                         shrink: true,
                     }}
                     value={editMyItemState.orderName}
+                    onChange={(e) => _updateEvent("orderName", e)}
                 />
 
 
