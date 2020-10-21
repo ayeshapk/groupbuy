@@ -28,7 +28,6 @@ function OrderListingContainer() {
     const [currentScreen, setCurrentScreen] = useState(CONTAINER_SCREEN)
 
     const [editMyItemState, setEditMyItemState] = useState({ id: myItemState.length + 1, orderClient: '', orderName: '', price: 0, amount: 0, isDone: false });
-    const [orderName, setOrderName] = useState('');
 
     useEffect(() => {
         if (myItemState) {
@@ -65,14 +64,9 @@ function OrderListingContainer() {
     const editTask = (data) => {
         setCurrentScreen(MODAL_SCREEN)
         setEditMyItemState(data)
-        if (data) {
-            console.log(editMyItemState)
-        }
     }
 
-    const handleOrderNameChange = (event) => {
-        setOrderName(event.target.value);
-    };
+ 
 
     /*const handleChangeTypingOrderName = (event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>,key: string) => {
         console.log("EVENT >>>",event.target.value)
@@ -84,6 +78,7 @@ function OrderListingContainer() {
         setEditMyItemState(clone)
 
     };*/
+
 
     return (
         <div>
@@ -179,8 +174,7 @@ function OrderListingContainer() {
                     InputLabelProps={{
                         shrink: true,
                     }}
-                    value={orderName}
-                    onChange={handleOrderNameChange}
+                    value={editMyItemState.orderName}
                 />
 
 
