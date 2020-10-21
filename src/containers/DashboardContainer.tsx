@@ -33,6 +33,11 @@ function DashboardContainer() {
         router.push('/' + pagename)
     }
 
+    
+    const addGroup = () =>{
+        setMyItemState(prevArray => [...prevArray, { id: myItemState.length+1, Merchant: 'NEW', Participants: 0, DeliveryDate: '1 Jan 2021', OrderAmount: 0 }])
+    }
+
     return (
         <div>
             <Typography variant='h6' color='primary' style={{ textAlign: 'center', paddingTop: '3vh', paddingBottom: '1vh' }}>My Dashboard</Typography>
@@ -79,7 +84,7 @@ function DashboardContainer() {
                 </Card>
             ))}
 
-        {<Button  variant='outlined' fullWidth color="primary" >Add</Button>}
+        {<Button  variant='outlined' fullWidth color="primary" onClick={()=>addGroup()} >Add</Button>}
 
         </div >
     );
