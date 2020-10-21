@@ -16,12 +16,16 @@ let myItems = [
     { id: 2, Merchant: 'Paragon', Participants: 3, DeliveryDate: '14 nov 2020', OrderAmount: 8 },
 ];
 
+const CONTAINER_SCREEN = 'CONTAINER_SCREEN'
+const MODAL_SCREEN = 'MODAL_SCREEN'
+
 
 function DashboardContainer() {
 
     const { width, height } = useWindowSize()
     const router = useRouter()
     const [myItemState, setMyItemState] = useState(myItems);
+    const [currentScreen,setCurrentScreen] =useState(CONTAINER_SCREEN)
 
     useEffect(() => {
         if (myItemState) {
