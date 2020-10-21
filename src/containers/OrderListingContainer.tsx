@@ -67,31 +67,19 @@ function OrderListingContainer() {
     }
 
     const _updateEvent = (key: string, event) => {
-        //console.log("key", key)
-        //console.log("event", event.target.value)
         let code = event.target.value
-
-        let data = editMyItemState
-        //console.log('DATA>>>',data)
+        let data = {...editMyItemState}
+        console.log('DATA>>>', data)
         data[key] = key
         let keyItem = data[key]
 
-        if (keyItem === 'price' || 'amount') {
-            let final = { [keyItem]: +code }
-            //console.log('will set',final)
-            let editValue = Object.assign(data, final)
-            //console.log('editValue>>>',editValue)
-            const new_obj = { ...data, editValue }
-            setEditMyItemState(new_obj)
-        } else {
-            let final = { [keyItem]: code }
-            //console.log('will set',final)
-            let editValue = Object.assign(data, final)
-            //console.log('editValue>>>',editValue)
-            const new_obj = { ...data, editValue }
-            setEditMyItemState(new_obj)
-        }
-
+        let final = { [keyItem]: code }
+        console.log('will set', final)
+        //const editValue = Object.assign({}, data[key] = final,);
+        //console.log('editValue>>>', editValue)
+        const new_obj = { ...data, /*editValue*/ }
+        console.log('CHECK new_obj',new_obj)
+        setEditMyItemState(new_obj)
     }
 
     const _updateTask = () => {
