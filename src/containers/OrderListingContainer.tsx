@@ -35,14 +35,25 @@ function OrderListingContainer() {
     }
 
     const updateTask = (id, isDone) => {
-        console.log(id, isDone)
         for (var i in myItemState) {
             if (myItemState[i].id == id) {
                 myItemState[i].isDone = isDone;
-                console.log(id, isDone)
                 break; //Stop this loop, we found it!
             }
         }
+    }
+
+    const updateTaskNEW = (id: number, isDone: boolean) => {
+        setMyItemState(
+            myItemState.map(item => 
+                item.id === id 
+                ? {...item, isDone : isDone} 
+                : item 
+        ))
+    }
+
+    const addTask = () =>{
+        setMyItemState(prevArray => [...prevArray, { id: myItemState.length+1, orderClient: 'add new', orderName: 'add new', price: 0, amount: 0, isDone: false }])
     }
 
     return (
@@ -111,7 +122,7 @@ function OrderListingContainer() {
                         <Grid item lg={3} xl={3} md={3} sm={3} xs={3} >
                             <Grid container direction="row" justify="center" alignItems="stretch">
                                 <Grid item lg={6} xl={6} md={6} sm={6} xs={6}>
-                                    {itemlist.isDone === false && <Fab onClick={() => updateTask(itemlist.id, true)} style={{ margin: '2px', color: 'white' }} size="small" color="secondary"><DoneIcon /></Fab>}
+                                    {itemlist.isDone === false && <Fab onClick={() => updateTaskNEW(itemlist.id, true)} style={{ margin: '2px', color: 'white' }} size="small" color="secondary"><DoneIcon /></Fab>}
                                     {itemlist.isDone === true && <Fab disabled style={{ margin: '2px', color: 'white' }} size="small" color="secondary"><DoneIcon /></Fab>}
                                 </Grid>
                                 <Grid item lg={6} xl={6} md={6} sm={6} xs={6}>
@@ -123,7 +134,7 @@ function OrderListingContainer() {
                     </Grid >))}
             </Card >
 
-            {<Button style={{ marginTop: '15px' }} variant='outlined' fullWidth color="primary" >Add</Button>}
+            {<Button style={{ marginTop: '15px' }} variant='outlined' fullWidth color="primary" onClick={()=>addTask()}>Add</Button>}
 
         </div >
     );
