@@ -30,3 +30,4 @@ export const ListText = '#D2D2D2';
 export const DescriptionText = '#F26E22';
 export const ICON_COLOR = '#2678BF';
 export const LOGO_COLOR = '#A60321';
+
