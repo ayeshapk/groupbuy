@@ -15,7 +15,9 @@ const Layout = ({ children }) => {
                 <MuiThemeProvider theme={muiTheme}>
                     <div>
                         <NoSsr>
+                            <div style={{margin:'5px'}}>
                             {children}
+                            </div>
                         </NoSsr>
                     </div>
                 </MuiThemeProvider>

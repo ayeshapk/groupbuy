@@ -33,7 +33,7 @@ function BuyListContainer() {
             <Typography variant='h6' color='primary' style={{ textAlign: 'center', paddingTop: '3vh', paddingBottom: '1vh' }}>Buy</Typography>
 
             {myItemState && myItemState.map((groupList, index: number) => (
-                <Paper key={index} variant="outlined" style={{ margin: '10px' }} >
+                <Paper key={index} variant="outlined" >
 
                     <Fab
                         style={{ float: 'right', backgroundColor: '#F26D85', color: 'white', margin: '2%' }}
@@ -55,7 +55,7 @@ function BuyListContainer() {
                         </Grid>
                     </Grid>
 
-                    <div style={{ margin: '10px' }}>
+                    <div>
 
                         <Grid container direction="row" justify="space-evenly" alignItems="flex-start" style={{ marginTop: '10px', marginBottom: '10px' }}>
                             <Grid item lg={5} xl={5} md={5} sm={5} xs={5}>

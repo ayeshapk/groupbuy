@@ -38,7 +38,7 @@ function DashboardContainer() {
             <Typography variant='h6' color='primary' style={{ textAlign: 'center', paddingTop: '3vh', paddingBottom: '1vh' }}>My Dashboard</Typography>
 
             {myItemState && myItemState.map((MerchantList, index: number) => (
-                <Card key={index} variant="outlined" style={{ margin: '10px' }}>
+                <Card key={index} variant="outlined" style={{ marginBottom: '10px' }}>
                     <Grid container direction="row" justify="center" alignItems="center" style={{ paddingTop: '10px' }}>
                         <Grid item lg={12} xl={12} md={12} sm={12} xs={12}>
                             <Typography variant='h6' color='secondary' style={{ textAlign: 'center', }}>{MerchantList.Merchant}</Typography>
@@ -78,6 +78,8 @@ function DashboardContainer() {
 
                 </Card>
             ))}
+
+        {<Button  variant='outlined' fullWidth color="primary" >Add</Button>}
 
         </div >
     );

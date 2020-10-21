@@ -26,7 +26,7 @@ function OrderListingContainer() {
 
     useEffect(() => {
         if (myItemState) {
-
+            console.log(myItemState)
         }
     }, [myItemState]);
 
@@ -34,23 +34,34 @@ function OrderListingContainer() {
         router.back()
     }
 
+    const updateTask = (id, isDone) => {
+        console.log(id, isDone)
+        for (var i in myItemState) {
+            if (myItemState[i].id == id) {
+                myItemState[i].isDone = isDone;
+                console.log(id, isDone)
+                break; //Stop this loop, we found it!
+            }
+        }
+    }
+
     return (
         <div>
 
             <Grid container direction="row" justify="space-around"
                 alignItems="center" style={{ marginTop: '10px', marginBottom: '10px' }}>
-                <Grid item lg={3} xl={3} md={3} sm={3} xs={3} style={{textAlign: 'center'}}>
+                <Grid item lg={3} xl={3} md={3} sm={3} xs={3} style={{ textAlign: 'center' }}>
                     <Fab onClick={_goBack} style={{ margin: 'auto 12%', color: 'white', textAlign: 'center', }} size="small" color="primary"><ArrowBackIcon /></Fab>
                 </Grid>
                 <Grid item lg={6} xl={6} md={6} sm={6} xs={6} >
                     <Typography variant='h6' color='primary' style={{ textAlign: 'center', paddingTop: '3vh', paddingBottom: '1vh' }}>Order Listing</Typography>
                 </Grid>
-                <Grid item lg={3} xl={3} md={3} sm={3} xs={3} style={{textAlign: 'center'}}>
+                <Grid item lg={3} xl={3} md={3} sm={3} xs={3} style={{ textAlign: 'center' }}>
                     <Fab style={{ margin: 'auto 12%', color: 'white', textAlign: 'center', }} size="small" color="secondary"><MenuIcon /></Fab>
                 </Grid>
             </Grid>
 
-            <Card variant="outlined" style={{ margin: '10px' }}>
+            <Card variant="outlined" >
                 <Grid container direction="row" justify="space-evenly" alignItems="center" style={{ marginTop: '10px', marginBottom: '10px' }}>
                     <Grid item lg={3} xl={3} md={3} sm={3} xs={3} >
                         <Typography variant='caption' color='primary' style={{ textAlign: 'left', marginLeft: '5px', paddingTop: '3vh', paddingBottom: '1vh' }}>Order Name</Typography>
@@ -100,7 +111,7 @@ function OrderListingContainer() {
                         <Grid item lg={3} xl={3} md={3} sm={3} xs={3} >
                             <Grid container direction="row" justify="center" alignItems="stretch">
                                 <Grid item lg={6} xl={6} md={6} sm={6} xs={6}>
-                                    {itemlist.isDone === false && <Fab style={{ margin: '2px', color: 'white' }} size="small" color="secondary"><DoneIcon /></Fab>}
+                                    {itemlist.isDone === false && <Fab onClick={() => updateTask(itemlist.id, true)} style={{ margin: '2px', color: 'white' }} size="small" color="secondary"><DoneIcon /></Fab>}
                                     {itemlist.isDone === true && <Fab disabled style={{ margin: '2px', color: 'white' }} size="small" color="secondary"><DoneIcon /></Fab>}
                                 </Grid>
                                 <Grid item lg={6} xl={6} md={6} sm={6} xs={6}>
@@ -112,7 +123,7 @@ function OrderListingContainer() {
                     </Grid >))}
             </Card >
 
-            {<Button style={{width:'95%',textAlign:'center',margin:'10px'}}  fullWidth variant="outlined" color="primary" >Add</Button>}
+            {<Button style={{ marginTop: '15px' }} variant='outlined' fullWidth color="primary" >Add</Button>}
 
         </div >
     );
