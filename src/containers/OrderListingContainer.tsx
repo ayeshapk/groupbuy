@@ -80,7 +80,10 @@ function OrderListingContainer() {
             console.log('will set',final)
             let editValue = Object.assign(data,final)
             console.log('editValue>>>',editValue)
-            setEditMyItemState(editValue)
+
+            const new_obj = { ...data, editValue}
+            setEditMyItemState(new_obj)
+           
     }
 
 
