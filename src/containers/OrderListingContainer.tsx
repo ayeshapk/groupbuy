@@ -31,7 +31,7 @@ function OrderListingContainer() {
 
     useEffect(() => {
         if (myItemState) {
-            console.log(myItemState)
+            setCurrentScreen(CONTAINER_SCREEN)
         }
     }, [myItemState]);
 
@@ -66,24 +66,43 @@ function OrderListingContainer() {
         setEditMyItemState(data)
     }
 
-    const _updateEvent = (key:string, event) => {
-        console.log("key", key)
-        console.log("event", event.target.value)
+    const _updateEvent = (key: string, event) => {
+        //console.log("key", key)
+        //console.log("event", event.target.value)
         let code = event.target.value
-        
-            let data = editMyItemState
-            console.log('DATA>>>',data)
-            data[key] = key 
-            let keyItem = data[key] 
-            
-            let final = {[keyItem]:code}
-            console.log('will set',final)
-            let editValue = Object.assign(data,final)
-            console.log('editValue>>>',editValue)
 
-            const new_obj = { ...data, editValue}
+        let data = editMyItemState
+        //console.log('DATA>>>',data)
+        data[key] = key
+        let keyItem = data[key]
+
+        if (keyItem === 'price' || 'amount') {
+            let final = { [keyItem]: +code }
+            //console.log('will set',final)
+            let editValue = Object.assign(data, final)
+            //console.log('editValue>>>',editValue)
+            const new_obj = { ...data, editValue }
             setEditMyItemState(new_obj)
-           
+        } else {
+            let final = { [keyItem]: code }
+            //console.log('will set',final)
+            let editValue = Object.assign(data, final)
+            //console.log('editValue>>>',editValue)
+            const new_obj = { ...data, editValue }
+            setEditMyItemState(new_obj)
+        }
+
+    }
+
+    const _updateTask = () => {
+        console.log('this will update', editMyItemState)
+        setMyItemState(
+            myItemState.map(item =>
+                item.id === editMyItemState.id
+                    ? { ...item, editMyItemState }
+                    : item
+            ))
+        setCurrentScreen(CONTAINER_SCREEN)
     }
 
 
@@ -171,6 +190,7 @@ function OrderListingContainer() {
             </div>}
 
             {currentScreen === MODAL_SCREEN && <div>
+
                 <TextField
                     label="orderName"
                     style={{ margin: 8 }}
@@ -178,6 +198,7 @@ function OrderListingContainer() {
                     helperText="Your order name"
                     fullWidth
                     margin="normal"
+                    type='text'
                     InputLabelProps={{
                         shrink: true,
                     }}
@@ -185,6 +206,52 @@ function OrderListingContainer() {
                     onChange={(e) => _updateEvent("orderName", e)}
                 />
 
+                <TextField
+                    label="orderClient"
+                    style={{ margin: 8 }}
+                    placeholder="orderClient"
+                    helperText="Your client name"
+                    fullWidth
+                    margin="normal"
+                    type='text'
+                    InputLabelProps={{
+                        shrink: true,
+                    }}
+                    value={editMyItemState.orderClient}
+                    onChange={(e) => _updateEvent("orderClient", e)}
+                />
+
+                <TextField
+                    label="price"
+                    style={{ margin: 8 }}
+                    placeholder="price"
+                    helperText="price"
+                    fullWidth
+                    margin="normal"
+                    InputLabelProps={{
+                        shrink: true,
+                    }}
+                    type='number'
+                    value={editMyItemState.price}
+                    onChange={(e) => _updateEvent("price", e)}
+                />
+
+                <TextField
+                    label="amount"
+                    style={{ margin: 8 }}
+                    placeholder="amount"
+                    helperText="amount"
+                    fullWidth
+                    type='number'
+                    margin="normal"
+                    InputLabelProps={{
+                        shrink: true,
+                    }}
+                    value={editMyItemState.amount}
+                    onChange={(e) => _updateEvent("amount", e)}
+                />
+
+                {<Button style={{ marginTop: '15px' }} variant='outlined' fullWidth color="primary" onClick={() => _updateTask()}>Edit</Button>}
 
             </div>}
 
