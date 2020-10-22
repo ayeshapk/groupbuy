@@ -71,9 +71,8 @@ function OrderListingContainer() {
         let data = {...editMyItemState}
         //console.log('DATA>>>', data)
         data[key] = key
-        let keyItem = data[key]
-
-        let final = {[keyItem]: code }
+        //let keyItem = data[key]
+        //let final = {[keyItem]: code }
         //console.log('will set', final)
         const editValue = { ...data, [key]: code }
         //console.log('editValue>>>', editValue)
@@ -81,8 +80,8 @@ function OrderListingContainer() {
 
         setMyItemState(
             myItemState.map(item =>
-                item.id === editMyItemState.id
-                    ? { ...editMyItemState }
+                item.id === editValue.id
+                    ? { ...editValue }
                     : item
             ))
 
