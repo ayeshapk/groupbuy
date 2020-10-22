@@ -11,9 +11,9 @@ import VisibilityIcon from '@material-ui/icons/Visibility';
 import ArchiveIcon from '@material-ui/icons/Archive';
 import MenuIcon from '@material-ui/icons/Menu';
 let myItems = [
-    { id: 0, Merchant: 'TESCO LOTUS', Participants: 6, DeliveryDate: '12 nov 2020', OrderAmount: 9 },
-    { id: 1, Merchant: 'BIG C', Participants: 7, DeliveryDate: '13 nov 2020', OrderAmount: 8 },
-    { id: 2, Merchant: 'Paragon', Participants: 3, DeliveryDate: '14 nov 2020', OrderAmount: 8 },
+    { id: 0, Merchant: 'TESCO LOTUS', Participants: 6, DeliveryDate: '2020-10-17', OrderAmount: 9 },
+    { id: 1, Merchant: 'BIG C', Participants: 7, DeliveryDate: '2020-10-18', OrderAmount: 8 },
+    { id: 2, Merchant: 'Paragon', Participants: 3, DeliveryDate: '2020-10-19', OrderAmount: 8 },
 ];
 
 const CONTAINER_SCREEN = 'CONTAINER_SCREEN'
