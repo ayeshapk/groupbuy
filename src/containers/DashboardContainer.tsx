@@ -1,5 +1,5 @@
 
-import { Box, Button, Card, CardMedia, Divider, Fab, Grid, Paper, Typography } from '@material-ui/core';
+import { Box, Button, Card, CardMedia, Divider, Fab, Grid, Paper, TextField, Typography } from '@material-ui/core';
 import React from 'react'
 import { useState, useEffect } from 'react';
 import useWindowSize from '../HookServerData/Windowsize';
@@ -25,7 +25,8 @@ function DashboardContainer() {
     const { width, height } = useWindowSize()
     const router = useRouter()
     const [myItemState, setMyItemState] = useState(myItems);
-    const [currentScreen,setCurrentScreen] =useState(CONTAINER_SCREEN)
+    const [currentScreen, setCurrentScreen] = useState(CONTAINER_SCREEN)
+    const [editMyItemState, setEditMyItemState] = useState({ id: myItemState.length + 1, Merchant: '', Participants: 0, DeliveryDate: '', OrderAmount: 0 });
 
     useEffect(() => {
         if (myItemState) {
@@ -37,58 +38,130 @@ function DashboardContainer() {
         router.push('/' + pagename)
     }
 
-    
-    const addGroup = () =>{
-        setMyItemState(prevArray => [...prevArray, { id: myItemState.length+1, Merchant: 'NEW', Participants: 0, DeliveryDate: '1 Jan 2021', OrderAmount: 0 }])
+
+    const addGroup = () => {
+        setMyItemState(prevArray => [...prevArray, { id: myItemState.length + 1, Merchant: 'NEW', Participants: 0, DeliveryDate: '1 Jan 2021', OrderAmount: 0 }])
+    }
+
+    const editGroup = (data) => {
+        setCurrentScreen(MODAL_SCREEN)
+        setEditMyItemState(data)
+    }
+
+    const _handleGroupChange = (key: string, event) => {
+        let code = event.target.value
+        let data = { ...editMyItemState }
+        //console.log('DATA>>>', data)
+        data[key] = key
+        //let keyItem = data[key]
+        //let final = {[keyItem]: code }
+        //console.log('will set', final)
+        const editValue = { ...data, [key]: code }
+        //console.log('editValue>>>', editValue)
+        setEditMyItemState(editValue)
+
+        setMyItemState(
+            myItemState.map(item =>
+                item.id === editValue.id
+                    ? { ...editValue }
+                    : item
+            ))
+    }
+
+    const _updateEditGroup = () => {
+        //console.log('this will update', editMyItemState)
+        setMyItemState(
+            myItemState.map(item =>
+                item.id === editMyItemState.id
+                    ? { ...item, editMyItemState }
+                    : item
+            ))
+        setCurrentScreen(CONTAINER_SCREEN)
     }
 
     return (
         <div>
-            <Typography variant='h6' color='primary' style={{ textAlign: 'center', paddingTop: '3vh', paddingBottom: '1vh' }}>My Dashboard</Typography>
 
-            {myItemState && myItemState.map((MerchantList, index: number) => (
-                <Card key={index} variant="outlined" style={{ marginBottom: '10px' }}>
-                    <Grid container direction="row" justify="center" alignItems="center" style={{ paddingTop: '10px' }}>
-                        <Grid item lg={12} xl={12} md={12} sm={12} xs={12}>
-                            <Typography variant='h6' color='secondary' style={{ textAlign: 'center', }}>{MerchantList.Merchant}</Typography>
+            {currentScreen === CONTAINER_SCREEN && <div>
+                <Typography variant='h6' color='primary' style={{ textAlign: 'center', paddingTop: '3vh', paddingBottom: '1vh' }}>My Dashboard</Typography>
+                {myItemState && myItemState.map((MerchantList, index: number) => (
+                    <Card key={index} variant="outlined" style={{ marginBottom: '10px' }}>
+                        <Grid container direction="row" justify="center" alignItems="center" style={{ paddingTop: '10px' }}>
+                            <Grid item lg={12} xl={12} md={12} sm={12} xs={12}>
+                                <Typography onClick={() => editGroup(MerchantList)} variant='h6' color='secondary' style={{ textAlign: 'center', }}>{MerchantList.Merchant}</Typography>
+                            </Grid>
                         </Grid>
-                    </Grid>
 
-                    <Grid container direction="row" justify="center" alignItems="flex-start" style={{ margin: '10px' }}>
-                        <Grid item lg={6} xl={6} md={6} sm={6} xs={6}>
-                            <Typography variant='caption' color='inherit' style={{ textAlign: 'left', }}>DeliveryDate</Typography>
-                            <Typography variant='subtitle1' color='primary' style={{ textAlign: 'left', }}>{MerchantList.DeliveryDate}</Typography>
+                        <Grid container direction="row" justify="center" alignItems="flex-start" style={{ margin: '10px' }}>
+                            <Grid item lg={6} xl={6} md={6} sm={6} xs={6}>
+                                <Typography variant='caption' color='inherit' style={{ textAlign: 'left', }}>DeliveryDate</Typography>
+                                <Typography variant='subtitle1' color='primary' style={{ textAlign: 'left', }}>{MerchantList.DeliveryDate}</Typography>
+                            </Grid>
+                            <Grid item lg={6} xl={6} md={6} sm={6} xs={6}>
+                                <Typography variant='caption' color='inherit' style={{ textAlign: 'left', }}>Participants</Typography>
+                                <Typography variant='subtitle1' color='primary' style={{ textAlign: 'left', }}>{MerchantList.Participants}</Typography>
+                            </Grid>
                         </Grid>
-                        <Grid item lg={6} xl={6} md={6} sm={6} xs={6}>
-                            <Typography variant='caption' color='inherit' style={{ textAlign: 'left', }}>Participants</Typography>
-                            <Typography variant='subtitle1' color='primary' style={{ textAlign: 'left', }}>{MerchantList.Participants}</Typography>
-                        </Grid>
-                    </Grid>
 
-                    <Grid container direction="row" justify="center" alignItems="flex-start" style={{ margin: '10px' }}>
-                        <Grid item lg={6} xl={6} md={6} sm={6} xs={6}>
-                            <Typography variant='caption' color='inherit' style={{ textAlign: 'left', }}>OrderAmount</Typography>
-                            <Typography variant='subtitle1' color='primary' style={{ textAlign: 'left', }}>{MerchantList.OrderAmount}</Typography>
-                        </Grid>
-                        <Grid item lg={6} xl={6} md={6} sm={6} xs={6}>
-                            <Grid container direction="row" justify="center" alignItems="stretch">
-                                <Grid item lg={4} xl={4} md={4} sm={4} xs={4}>
-                                    <Fab onClick={()=>_clickView('orderlisting')} style={{ margin: '2px', color: 'white' }} size="small" color="secondary"><VisibilityIcon /></Fab>
-                                </Grid>
-                                <Grid item lg={4} xl={4} md={4} sm={4} xs={4}>
-                                    <Fab style={{ margin: '2px', color: 'white' }} size="small" color="primary"><ArchiveIcon /></Fab>
-                                </Grid>
-                                <Grid item lg={4} xl={4} md={4} sm={4} xs={4}>
-                                    <Fab style={{ margin: '2px', color: 'white' }} size="small" color="primary"><MenuIcon /></Fab>
+                        <Grid container direction="row" justify="center" alignItems="flex-start" style={{ margin: '10px' }}>
+                            <Grid item lg={6} xl={6} md={6} sm={6} xs={6}>
+                                <Typography variant='caption' color='inherit' style={{ textAlign: 'left', }}>OrderAmount</Typography>
+                                <Typography variant='subtitle1' color='primary' style={{ textAlign: 'left', }}>{MerchantList.OrderAmount}</Typography>
+                            </Grid>
+                            <Grid item lg={6} xl={6} md={6} sm={6} xs={6}>
+                                <Grid container direction="row" justify="center" alignItems="stretch">
+                                    <Grid item lg={4} xl={4} md={4} sm={4} xs={4}>
+                                        <Fab onClick={() => _clickView('orderlisting')} style={{ margin: '2px', color: 'white' }} size="small" color="secondary"><VisibilityIcon /></Fab>
+                                    </Grid>
+                                    <Grid item lg={4} xl={4} md={4} sm={4} xs={4}>
+                                        <Fab style={{ margin: '2px', color: 'white' }} size="small" color="primary"><ArchiveIcon /></Fab>
+                                    </Grid>
+                                    <Grid item lg={4} xl={4} md={4} sm={4} xs={4}>
+                                        <Fab style={{ margin: '2px', color: 'white' }} size="small" color="primary"><MenuIcon /></Fab>
+                                    </Grid>
                                 </Grid>
                             </Grid>
                         </Grid>
-                    </Grid>
 
-                </Card>
-            ))}
+                    </Card>
+                ))}
 
-        {<Button  variant='outlined' fullWidth color="primary" onClick={()=>addGroup()} >Add</Button>}
+                {<Button variant='outlined' fullWidth color="primary" onClick={() => addGroup()} >Add</Button>}
+            </div>}
+
+            {currentScreen === MODAL_SCREEN && <div>
+                <TextField
+                    label="Merchant"
+                    style={{ margin: 8 }}
+                    placeholder="Merchant"
+                    helperText="Your Merchant name"
+                    fullWidth
+                    margin="normal"
+                    type='text'
+                    InputLabelProps={{
+                        shrink: true,
+                    }}
+                    value={editMyItemState.Merchant}
+                    onChange={(e) => _handleGroupChange("Merchant", e)}
+                />
+
+                <TextField
+                    label="DeliveryDate"
+                    style={{ margin: 8 }}
+                    placeholder="DeliveryDate"
+                    helperText="Your Delivery Date"
+                    fullWidth
+                    margin="normal"
+                    type='date'
+                    InputLabelProps={{
+                        shrink: true,
+                    }}
+                    value={editMyItemState.DeliveryDate}
+                    onChange={(e) => _handleGroupChange("DeliveryDate", e)}
+                />
+
+                {<Button style={{ marginTop: '15px' }} variant='outlined' fullWidth color="primary" onClick={() => _updateEditGroup()}>Edit</Button>}
+            </div>}
 
         </div >
     );

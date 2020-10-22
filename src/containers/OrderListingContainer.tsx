@@ -5,10 +5,7 @@ import { useState, useEffect } from 'react';
 import useWindowSize from '../HookServerData/Windowsize';
 import DoneIcon from '@material-ui/icons/Done';
 import { useRouter } from 'next/router';
-import MerchantName from '../component/MerchantName';
 import { DescriptionText, ListText, MainText, SubText } from '../consts/const';
-import VisibilityIcon from '@material-ui/icons/Visibility';
-import ArchiveIcon from '@material-ui/icons/Archive';
 import MenuIcon from '@material-ui/icons/Menu';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
@@ -66,7 +63,7 @@ function OrderListingContainer() {
         setEditMyItemState(data)
     }
 
-    const _updateEvent = (key: string, event) => {
+    const _handleTaskChange = (key: string, event) => {
         let code = event.target.value
         let data = {...editMyItemState}
         //console.log('DATA>>>', data)
@@ -84,11 +81,10 @@ function OrderListingContainer() {
                     ? { ...editValue }
                     : item
             ))
-
     }
 
-    const _updateTask = () => {
-        console.log('this will update', editMyItemState)
+    const _updateEditTask = () => {
+        //console.log('this will update', editMyItemState)
         setMyItemState(
             myItemState.map(item =>
                 item.id === editMyItemState.id
@@ -196,7 +192,7 @@ function OrderListingContainer() {
                         shrink: true,
                     }}
                     value={editMyItemState.orderName}
-                    onChange={(e) => _updateEvent("orderName", e)}
+                    onChange={(e) => _handleTaskChange("orderName", e)}
                 />
 
                 <TextField
@@ -211,7 +207,7 @@ function OrderListingContainer() {
                         shrink: true,
                     }}
                     value={editMyItemState.orderClient}
-                    onChange={(e) => _updateEvent("orderClient", e)}
+                    onChange={(e) => _handleTaskChange("orderClient", e)}
                 />
 
                 <TextField
@@ -226,7 +222,7 @@ function OrderListingContainer() {
                     }}
                     type='number'
                     value={editMyItemState.price}
-                    onChange={(e) => _updateEvent("price", e)}
+                    onChange={(e) => _handleTaskChange("price", e)}
                 />
 
                 <TextField
@@ -241,10 +237,10 @@ function OrderListingContainer() {
                         shrink: true,
                     }}
                     value={editMyItemState.amount}
-                    onChange={(e) => _updateEvent("amount", e)}
+                    onChange={(e) => _handleTaskChange("amount", e)}
                 />
 
-                {<Button style={{ marginTop: '15px' }} variant='outlined' fullWidth color="primary" onClick={() => _updateTask()}>Edit</Button>}
+                {<Button style={{ marginTop: '15px' }} variant='outlined' fullWidth color="primary" onClick={() => _updateEditTask()}>Edit</Button>}
 
             </div>}
 
