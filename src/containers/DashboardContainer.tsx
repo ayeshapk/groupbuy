@@ -40,7 +40,7 @@ function DashboardContainer() {
 
 
     const addGroup = () => {
-        setMyItemState(prevArray => [...prevArray, { id: myItemState.length + 1, Merchant: 'NEW', Participants: 0, DeliveryDate: '1 Jan 2021', OrderAmount: 0 }])
+        setMyItemState(prevArray => [...prevArray, { id: myItemState.length + 1, Merchant: 'NEW', Participants: 0, DeliveryDate: '2021-01-28', OrderAmount: 0 }])
     }
 
     const editGroup = (data) => {
