@@ -1,5 +1,5 @@
 
-import { Box, Button, Card, CardMedia, Divider, Fab, Grid, Paper, TextField, Typography } from '@material-ui/core';
+import { Avatar, Box, Button, Card, CardMedia, Chip, Divider, Fab, Grid, Paper, TextField, Typography } from '@material-ui/core';
 import React from 'react'
 import { useState, useEffect } from 'react';
 import useWindowSize from '../HookServerData/Windowsize';
@@ -38,6 +38,9 @@ function DashboardContainer() {
         router.push('/' + pagename)
     }
 
+    const _pushPage = (pagename) => {
+        router.push('/' + pagename)
+    }
 
     const addGroup = () => {
         setMyItemState(prevArray => [...prevArray, { id: myItemState.length + 1, Merchant: 'NEW', Participants: 0, DeliveryDate: '2021-01-28', OrderAmount: 0 }])
@@ -83,7 +86,24 @@ function DashboardContainer() {
         <div>
 
             {currentScreen === CONTAINER_SCREEN && <div>
-                <Typography variant='h6' color='primary' style={{ textAlign: 'center', paddingTop: '3vh', paddingBottom: '1vh' }}>My Dashboard</Typography>
+                <Grid container direction="row" justify="space-around"
+                    alignItems="center" style={{ marginTop: '10px', marginBottom: '10px' }}>
+                  
+                    <Grid item lg={6} xl={6} md={6} sm={6} xs={6} >
+                        <Typography variant='h6' color='primary' style={{ textAlign: 'center', }}>My Dashboard</Typography>
+                    </Grid>
+                    <Grid item lg={6} xl={6} md={6} sm={6} xs={6} >
+                        <Chip
+                            avatar={<Avatar><ArchiveIcon/></Avatar>}
+                            label="View Archive"
+                            onClick={()=>_pushPage('dashboardarchive')}
+                            variant="outlined"
+                            style={{ textAlign: 'center', }}
+                        />
+                    </Grid>
+                </Grid>
+
+
                 {myItemState && myItemState.map((MerchantList, index: number) => (
                     <Card key={index} variant="outlined" style={{ marginBottom: '10px' }}>
                         <Grid container direction="row" justify="center" alignItems="center" style={{ paddingTop: '10px' }}>
