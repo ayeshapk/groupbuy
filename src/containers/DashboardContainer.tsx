@@ -91,7 +91,7 @@ function DashboardContainer() {
         setCurrentScreen(CONTAINER_SCREEN)
     }
 
-        const _handleDateChange = (key: string, date) => {
+    const _handleDateChange = (key: string, date) => {
         let code = date
         let data = { ...editMyItemState }
         //console.log('DATA>>>', data)
@@ -135,23 +135,26 @@ function DashboardContainer() {
 
                 {myItemState && myItemState.map((MerchantList, index: number) => (
                     <Card key={index} variant="outlined" style={{ marginBottom: '10px' }}>
-                          <CardActionArea>
-                        <Grid container direction="row" justify="center" alignItems="center" style={{ paddingTop: '10px' }}>
-                            <Grid item lg={12} xl={12} md={12} sm={12} xs={12}>
-                                <Typography onClick={() => editGroup(MerchantList)} variant='h6' color='secondary' style={{ textAlign: 'center', }}>{MerchantList.Merchant}</Typography>
+                        <CardActionArea onClick={() => editGroup(MerchantList)}>
+                            <Grid container direction="row" justify="center" alignItems="center" style={{ paddingTop: '10px' }}>
+                                <Grid item lg={12} xl={12} md={12} sm={12} xs={12}>
+                                    <Typography variant='h6' color='secondary' style={{ textAlign: 'center', }}>{MerchantList.Merchant}</Typography>
+                                </Grid>
                             </Grid>
-                        </Grid>
+                        </CardActionArea>
 
-                        <Grid container direction="row" justify="center" alignItems="flex-start" style={{ margin: '10px' }} onClick={() => editGroup(MerchantList)}>
-                            <Grid item lg={6} xl={6} md={6} sm={6} xs={6}>
-                                <Typography variant='caption' color='inherit' style={{ textAlign: 'left', }}>DeliveryDate</Typography>
-                                <Typography variant='subtitle1' color='primary' style={{ textAlign: 'left', }}>{moment(MerchantList.DeliveryDate).format("Do-MMM-YY")}</Typography>
+                        <CardActionArea onClick={() => editGroup(MerchantList)}>
+                            <Grid container direction="row" justify="center" alignItems="flex-start" style={{ margin: '10px' }}>
+                                <Grid item lg={6} xl={6} md={6} sm={6} xs={6}>
+                                    <Typography variant='caption' color='inherit' style={{ textAlign: 'left', }}>DeliveryDate</Typography>
+                                    <Typography variant='subtitle1' color='primary' style={{ textAlign: 'left', }}>{moment(MerchantList.DeliveryDate).format("Do-MMM-YY")}</Typography>
+                                </Grid>
+                                <Grid item lg={6} xl={6} md={6} sm={6} xs={6}>
+                                    <Typography variant='caption' color='inherit' style={{ textAlign: 'left', }}>Participants</Typography>
+                                    <Typography variant='subtitle1' color='primary' style={{ textAlign: 'left', }}>{MerchantList.Participants}</Typography>
+                                </Grid>
                             </Grid>
-                            <Grid item lg={6} xl={6} md={6} sm={6} xs={6}>
-                                <Typography variant='caption' color='inherit' style={{ textAlign: 'left', }}>Participants</Typography>
-                                <Typography variant='subtitle1' color='primary' style={{ textAlign: 'left', }}>{MerchantList.Participants}</Typography>
-                            </Grid>
-                        </Grid>
+                        </CardActionArea>
 
                         <Grid container direction="row" justify="center" alignItems="flex-start" style={{ margin: '10px' }}>
                             <Grid item lg={6} xl={6} md={6} sm={6} xs={6} onClick={() => editGroup(MerchantList)}>
@@ -172,7 +175,7 @@ function DashboardContainer() {
                                 </Grid>
                             </Grid>
                         </Grid>
-                        </CardActionArea>
+
                     </Card>
                 ))}
 
@@ -211,11 +214,11 @@ function DashboardContainer() {
                     onChange={(e) => _handleGroupChange("DeliveryDate", e)}
                 />*/}
 
-              
+
                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
                     <KeyboardDatePicker
-                    style={{ margin: 8 }}
-                    fullWidth
+                        style={{ margin: 8 }}
+                        fullWidth
                         margin="normal"
                         id="date-picker-dialog"
                         label="Delivery Date"
