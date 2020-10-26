@@ -3,7 +3,7 @@ import { Avatar, Box, Button, Card, CardMedia, Chip, Divider, Fab, Grid, Paper, 
 import React from 'react'
 import { useState, useEffect } from 'react';
 import useWindowSize from '../HookServerData/Windowsize';
-
+import moment from 'moment';
 import { useRouter } from 'next/router';
 import MerchantName from '../component/MerchantName';
 import { DescriptionText, MainText, SubText } from '../consts/const';
@@ -11,10 +11,17 @@ import VisibilityIcon from '@material-ui/icons/Visibility';
 import ArchiveIcon from '@material-ui/icons/Archive';
 import MenuIcon from '@material-ui/icons/Menu';
 let myItems = [
-    { id: 0, Merchant: 'TESCO LOTUS', Participants: 6, DeliveryDate: '2020-10-17', OrderAmount: 9 },
-    { id: 1, Merchant: 'BIG C', Participants: 7, DeliveryDate: '2020-10-18', OrderAmount: 8 },
-    { id: 2, Merchant: 'Paragon', Participants: 3, DeliveryDate: '2020-10-19', OrderAmount: 8 },
+    { id: 0, Merchant: 'TESCO LOTUS', Participants: 6, DeliveryDate: new Date('2014-08-18T21:11:54'), OrderAmount: 9 },
+    { id: 1, Merchant: 'BIG C', Participants: 7, DeliveryDate: new Date('2014-08-18T21:11:54'), OrderAmount: 8 },
+    { id: 2, Merchant: 'Paragon', Participants: 3, DeliveryDate: new Date('2014-08-18T21:11:54'), OrderAmount: 8 },
 ];
+import DateFnsUtils from '@date-io/date-fns';
+import {
+    MuiPickersUtilsProvider,
+    KeyboardTimePicker,
+    KeyboardDatePicker,
+} from '@material-ui/pickers';
+
 
 const CONTAINER_SCREEN = 'CONTAINER_SCREEN'
 const MODAL_SCREEN = 'MODAL_SCREEN'
@@ -26,7 +33,9 @@ function DashboardContainer() {
     const router = useRouter()
     const [myItemState, setMyItemState] = useState(myItems);
     const [currentScreen, setCurrentScreen] = useState(CONTAINER_SCREEN)
-    const [editMyItemState, setEditMyItemState] = useState({ id: myItemState.length + 1, Merchant: '', Participants: 0, DeliveryDate: '', OrderAmount: 0 });
+    const [editMyItemState, setEditMyItemState] = useState({ id: myItemState.length + 1, Merchant: '', Participants: 0, DeliveryDate: new Date('2014-08-18T21:11:54'), OrderAmount: 0 });
+
+    const [selectedDate, setSelectedDate] = React.useState(new Date('2014-08-18T21:11:54'));
 
     useEffect(() => {
         if (myItemState) {
@@ -43,7 +52,7 @@ function DashboardContainer() {
     }
 
     const addGroup = () => {
-        setMyItemState(prevArray => [...prevArray, { id: myItemState.length + 1, Merchant: 'NEW', Participants: 0, DeliveryDate: '2021-01-28', OrderAmount: 0 }])
+        setMyItemState(prevArray => [...prevArray, { id: myItemState.length + 1, Merchant: 'NEW', Participants: 0, DeliveryDate: new Date('2014-08-18T21:11:54'), OrderAmount: 0 }])
     }
 
     const editGroup = (data) => {
@@ -82,21 +91,41 @@ function DashboardContainer() {
         setCurrentScreen(CONTAINER_SCREEN)
     }
 
+        const _handleDateChange = (key: string, date) => {
+        let code = date
+        let data = { ...editMyItemState }
+        //console.log('DATA>>>', data)
+        data[key] = key
+        //let keyItem = data[key]
+        //let final = {[keyItem]: code }
+        //console.log('will set', final)
+        const editValue = { ...data, [key]: code }
+        //console.log('editValue>>>', editValue)
+        setEditMyItemState(editValue)
+
+        setMyItemState(
+            myItemState.map(item =>
+                item.id === editValue.id
+                    ? { ...editValue }
+                    : item
+            ))
+    }
+
     return (
         <div>
 
             {currentScreen === CONTAINER_SCREEN && <div>
                 <Grid container direction="row" justify="space-around"
                     alignItems="center" style={{ marginTop: '10px', marginBottom: '10px' }}>
-                  
+
                     <Grid item lg={6} xl={6} md={6} sm={6} xs={6} >
                         <Typography variant='h6' color='primary' style={{ textAlign: 'center', }}>My Dashboard</Typography>
                     </Grid>
                     <Grid item lg={6} xl={6} md={6} sm={6} xs={6} >
                         <Chip
-                            avatar={<Avatar><ArchiveIcon/></Avatar>}
+                            avatar={<Avatar><ArchiveIcon /></Avatar>}
                             label="View Archive"
-                            onClick={()=>_pushPage('dashboardarchive')}
+                            onClick={() => _pushPage('dashboardarchive')}
                             variant="outlined"
                             style={{ textAlign: 'center', }}
                         />
@@ -115,7 +144,7 @@ function DashboardContainer() {
                         <Grid container direction="row" justify="center" alignItems="flex-start" style={{ margin: '10px' }}>
                             <Grid item lg={6} xl={6} md={6} sm={6} xs={6}>
                                 <Typography variant='caption' color='inherit' style={{ textAlign: 'left', }}>DeliveryDate</Typography>
-                                <Typography variant='subtitle1' color='primary' style={{ textAlign: 'left', }}>{MerchantList.DeliveryDate}</Typography>
+                                <Typography variant='subtitle1' color='primary' style={{ textAlign: 'left', }}>{moment(MerchantList.DeliveryDate).format("Do-MMM-YY")}</Typography>
                             </Grid>
                             <Grid item lg={6} xl={6} md={6} sm={6} xs={6}>
                                 <Typography variant='caption' color='inherit' style={{ textAlign: 'left', }}>Participants</Typography>
@@ -165,12 +194,13 @@ function DashboardContainer() {
                     onChange={(e) => _handleGroupChange("Merchant", e)}
                 />
 
-                <TextField
+                {/*<TextField
                     label="DeliveryDate"
                     style={{ margin: 8 }}
                     placeholder="DeliveryDate"
                     helperText="Your Delivery Date"
                     fullWidth
+
                     margin="normal"
                     type='date'
                     InputLabelProps={{
@@ -178,7 +208,25 @@ function DashboardContainer() {
                     }}
                     value={editMyItemState.DeliveryDate}
                     onChange={(e) => _handleGroupChange("DeliveryDate", e)}
-                />
+                />*/}
+
+              
+                <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                    <KeyboardDatePicker
+                    style={{ margin: 8 }}
+                    fullWidth
+                        margin="normal"
+                        id="date-picker-dialog"
+                        label="Delivery Date"
+                        format="MM/dd/yyyy"
+                        helperText="Your Delivery Date"
+                        value={editMyItemState.DeliveryDate}
+                        onChange={(e) => _handleDateChange("DeliveryDate", e)}
+                        KeyboardButtonProps={{
+                            'aria-label': 'change date',
+                        }}
+                    />
+                </MuiPickersUtilsProvider>
 
                 {<Button style={{ marginTop: '15px' }} variant='outlined' fullWidth color="primary" onClick={() => _updateEditGroup()}>Edit</Button>}
             </div>}
