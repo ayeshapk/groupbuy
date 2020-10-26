@@ -28,7 +28,7 @@ function OrderListingContainer() {
 
     useEffect(() => {
         if (myItemState) {
-          
+
         }
     }, [myItemState]);
 
@@ -65,7 +65,7 @@ function OrderListingContainer() {
 
     const _handleTaskChange = (key: string, event) => {
         let code = event.target.value
-        let data = {...editMyItemState}
+        let data = { ...editMyItemState }
         //console.log('DATA>>>', data)
         data[key] = key
         //let keyItem = data[key]
@@ -143,20 +143,23 @@ function OrderListingContainer() {
 
                     {myItemState && myItemState.map((itemlist, index: number) => (
                         <Grid key={index} container direction="row" justify="space-evenly" alignItems="center" style={{ marginTop: '10px', marginBottom: '10px' }}>
-                            <Grid item lg={3} xl={3} md={3} sm={3} xs={3} onClick={() => editTask(itemlist)}>
-                                {itemlist.isDone === false && <Typography variant='caption' color='primary' style={{ textAlign: 'left', marginLeft: '12px', paddingTop: '3vh', paddingBottom: '1vh' }}>{itemlist.orderName}</Typography>}
+
+                            <Grid item lg={3} xl={3} md={3} sm={3} xs={3} >
+                                {itemlist.isDone === false && <Typography onClick={() => editTask(itemlist)} variant='caption' color='primary' style={{ textAlign: 'left', marginLeft: '12px', paddingTop: '3vh', paddingBottom: '1vh' }}>{itemlist.orderName}</Typography>}
                                 {itemlist.isDone === true && <Typography variant='caption' color='inherit' style={{ textAlign: 'left', marginLeft: '12px', paddingTop: '3vh', paddingBottom: '1vh', color: ListText }}>{itemlist.orderName}</Typography>}
                             </Grid>
-                            <Grid item lg={2} xl={2} md={2} sm={2} xs={2} onClick={() => editTask(itemlist)} style={{ textAlign: 'center', }}>
-                                {itemlist.isDone === false && <Typography variant='caption' color='inherit' style={{ textAlign: 'center', paddingTop: '3vh', paddingBottom: '1vh' }}>{itemlist.price}</Typography>}
+
+
+                            <Grid item lg={2} xl={2} md={2} sm={2} xs={2} style={{ textAlign: 'center', }}>
+                                {itemlist.isDone === false && <Typography onClick={() => editTask(itemlist)} variant='caption' color='inherit' style={{ textAlign: 'center', paddingTop: '3vh', paddingBottom: '1vh' }}>{itemlist.price}</Typography>}
                                 {itemlist.isDone === true && <Typography variant='caption' color='inherit' style={{ textAlign: 'center', paddingTop: '3vh', paddingBottom: '1vh', color: ListText }}>{itemlist.price}</Typography>}
                             </Grid>
-                            <Grid item lg={2} xl={2} md={2} sm={2} xs={2} onClick={() => editTask(itemlist)} style={{ textAlign: 'center', }}>
-                                {itemlist.isDone === false && <Typography variant='caption' color='inherit' style={{ textAlign: 'center', paddingTop: '3vh', paddingBottom: '1vh' }}>{itemlist.amount}</Typography>}
+                            <Grid item lg={2} xl={2} md={2} sm={2} xs={2} style={{ textAlign: 'center', }}>
+                                {itemlist.isDone === false && <Typography onClick={() => editTask(itemlist)} variant='caption' color='inherit' style={{ textAlign: 'center', paddingTop: '3vh', paddingBottom: '1vh' }}>{itemlist.amount}</Typography>}
                                 {itemlist.isDone === true && <Typography variant='caption' color='inherit' style={{ textAlign: 'center', paddingTop: '3vh', paddingBottom: '1vh', color: ListText }}>{itemlist.amount}</Typography>}
                             </Grid>
-                            <Grid item lg={2} xl={2} md={2} sm={2} xs={2} onClick={() => editTask(itemlist)} style={{ textAlign: 'center', }}>
-                                {itemlist.isDone === false && <Typography variant='caption' color='inherit' style={{ textAlign: 'center', paddingTop: '3vh', paddingBottom: '1vh' }}>{itemlist.orderClient}</Typography>}
+                            <Grid item lg={2} xl={2} md={2} sm={2} xs={2} style={{ textAlign: 'center', }}>
+                                {itemlist.isDone === false && <Typography onClick={() => editTask(itemlist)} variant='caption' color='inherit' style={{ textAlign: 'center', paddingTop: '3vh', paddingBottom: '1vh' }}>{itemlist.orderClient}</Typography>}
                                 {itemlist.isDone === true && <Typography variant='caption' color='inherit' style={{ textAlign: 'center', paddingTop: '3vh', paddingBottom: '1vh', color: ListText }}>{itemlist.orderClient}</Typography>}
                             </Grid >
                             <Grid item lg={3} xl={3} md={3} sm={3} xs={3} >
