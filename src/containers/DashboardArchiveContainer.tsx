@@ -12,11 +12,12 @@ import ArchiveIcon from '@material-ui/icons/Archive';
 import MenuIcon from '@material-ui/icons/Menu';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import moment from 'moment';
 
 let myItems = [
-    { id: 0, Merchant: 'Terminal 21', Participants: 6, DeliveryDate: '2020-10-12', OrderAmount: 2 },
-    { id: 1, Merchant: 'Tesco Lotus', Participants: 7, DeliveryDate: '2020-10-09', OrderAmount: 3 },
-    { id: 2, Merchant: 'The Mall', Participants: 3, DeliveryDate: '2020-10-02', OrderAmount: 4 },
+    { id: 0, Merchant: 'Terminal 21', Participants: 6, DeliveryDate: new Date('2020-10-18T21:12:54'), OrderAmount: 2 },
+    { id: 1, Merchant: 'Tesco Lotus', Participants: 7, DeliveryDate: new Date('2020-11-18T21:12:54'), OrderAmount: 3 },
+    { id: 2, Merchant: 'The Mall', Participants: 3, DeliveryDate: new Date('2020-12-18T21:11:59'), OrderAmount: 4 },
 ];
 
 
@@ -70,7 +71,7 @@ function DashboardArchiveContainer() {
                             </Grid>
                             <Grid item xs={6} style={{ margin: '0 auto' }}>
                                 <Typography >Date:</Typography>
-                                <Typography >{groupList.DeliveryDate}</Typography>
+                                <Typography >{moment(groupList.DeliveryDate).format("Do/MMM/YY")}</Typography>
                             </Grid>
                         </Grid>
                     </AccordionSummary>

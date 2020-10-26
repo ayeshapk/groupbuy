@@ -8,10 +8,11 @@ import MenuIcon from '@material-ui/icons/Menu';
 import { useRouter } from 'next/router';
 import MerchantName from '../component/MerchantName';
 import { DescriptionText, MainText, SubText } from '../consts/const';
+import moment from 'moment';
 
 let myItems = [
-    { id: 0, shopName: 'Demo SHOP', paidDate: '12 Nov 2020', total: 105, groupname: 'Drink', isReady: false, list: [{ id: 0, name: 'coke', price: 15, amount: 3, }, { id: 1, name: 'pepsi', price: 22, amount: 2, }, { id: 2, name: '7up', price: 16, amount: 1, },] },
-    { id: 1, shopName: 'Jane Doe Shop', paidDate: '18 Nov 2020', total: 12, groupname: 'Vagetable', isReady: true, list: [{ id: 0, name: 'Chinese pomfret', price: 4, amount: 2, }, { id: 1, name: 'brown mushroom', price: 3, amount: 3, }, { id: 2, name: 'oyster mushroom', price: 3, amount: 1, },] },
+    { id: 0, shopName: 'Demo SHOP', paidDate: new Date('2020-11-18T21:11:54'), total: 105, groupname: 'Drink', isReady: false, list: [{ id: 0, name: 'coke', price: 15, amount: 3, }, { id: 1, name: 'pepsi', price: 22, amount: 2, }, { id: 2, name: '7up', price: 16, amount: 1, },] },
+    { id: 1, shopName: 'Jane Doe Shop', paidDate: new Date('2020-12-18T21:11:54'), total: 12, groupname: 'Vagetable', isReady: true, list: [{ id: 0, name: 'Chinese pomfret', price: 4, amount: 2, }, { id: 1, name: 'brown mushroom', price: 3, amount: 3, }, { id: 2, name: 'oyster mushroom', price: 3, amount: 1, },] },
 ];
 
 
@@ -46,7 +47,7 @@ function BuyListContainer() {
                     </Fab>
                     <Typography variant='h6' color='primary' style={{ textAlign: 'center', paddingTop: '3vh', paddingBottom: '1vh' }}>{groupList.groupname}</Typography>
 
-                    <Grid container direction="row" justify="center" alignItems="flex-start" style={{margin: '10px'}}>
+                    <Grid container direction="row" justify="center" alignItems="center" style={{margin: '10px'}}>
                         <Grid item lg={5} xl={5} md={5} sm={5} xs={5}>
                             <Typography variant='subtitle2' color='inherit' style={{ textAlign: 'left', }}>Shop name: </Typography>
                         </Grid>
@@ -57,9 +58,9 @@ function BuyListContainer() {
 
                     <div>
 
-                        <Grid container direction="row" justify="space-evenly" alignItems="flex-start" style={{ marginTop: '10px', marginBottom: '10px' }}>
+                        <Grid container direction="row" justify="center" alignItems="center" style={{ marginTop: '10px', marginBottom: '10px' }}>
                             <Grid item lg={5} xl={5} md={5} sm={5} xs={5}>
-                                <Typography variant='caption' color='secondary' style={{ textAlign: 'left', paddingTop: '3vh', paddingBottom: '1vh' }}>name</Typography>
+                                <Typography variant='caption' color='secondary' style={{ textAlign: 'left',paddingLeft:'10px', paddingTop: '3vh', paddingBottom: '1vh' }}>name</Typography>
                             </Grid>
                             <Grid item lg={2} xl={2} md={2} sm={2} xs={2} style={{ textAlign: 'center', }}>
                                 <Typography variant='caption' color='secondary' style={{ textAlign: 'left', paddingTop: '3vh', paddingBottom: '1vh' }}>price</Typography>
@@ -75,7 +76,7 @@ function BuyListContainer() {
                         {groupList.list && groupList.list.map((list, index: number) => (
                             <Grid key={index} container direction="row" justify="space-evenly" alignItems="center" style={{ marginTop: '10px', marginBottom: '10px' }}>
                                 <Grid item lg={5} xl={5} md={5} sm={5} xs={5} >
-                                    <Typography variant='caption' color='primary' style={{ textAlign: 'left', paddingTop: '3vh', paddingBottom: '1vh' }}>{list.name}</Typography>
+                                    <Typography variant='caption' color='primary' style={{ textAlign: 'left',paddingLeft:'10px', paddingTop: '3vh', paddingBottom: '1vh' }}>{list.name}</Typography>
                                 </Grid>
                                 <Grid item lg={2} xl={2} md={2} sm={2} xs={2} style={{ textAlign: 'center', }}>
                                     <Typography variant='caption' color='inherit' style={{ textAlign: 'center', paddingTop: '3vh', paddingBottom: '1vh' }}>{list.price}</Typography>
@@ -92,7 +93,7 @@ function BuyListContainer() {
 
                         <Grid container direction="row" justify="flex-end" alignItems="center" style={{ marginTop: '10px', marginBottom: '10px' }}>
                             <Grid item lg={12} xl={12} md={12} sm={12} xs={12} style={{ textAlign: 'center', margin: '0 auto' }}>
-                                <Typography variant='caption' color='primary' style={{ textAlign: 'center', }}>- Avaliable on : {groupList.paidDate} -</Typography>
+                                <Typography variant='caption' color='primary' style={{ textAlign: 'center', }}>- Avaliable on : {moment(groupList.paidDate).format("Do/MMM/YY")} -</Typography>
                             </Grid>
                         </Grid>
 
@@ -109,6 +110,7 @@ function BuyListContainer() {
 
                     </div>
                 </Paper>
+              
             ))}
 
         </div >
