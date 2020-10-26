@@ -57,20 +57,21 @@ function GroupList() {
             </div>
             <Paper variant="outlined" style={{ margin: '10px' }} >
                 <div style={{ margin: '10px' }}>
-                    <Grid container direction="row" justify="space-evenly" alignItems="flex-start" style={{ marginTop: '10px', marginBottom: '10px' }}>
-                        <Grid item lg={2} xl={2} md={2} sm={2} xs={false}>
+                    <Grid container direction="row" justify="flex-start" alignItems="flex-start" style={{ marginTop: '10px', marginBottom: '10px' }}>
+                        <Grid item lg={3} xl={3} md={3} sm={3} xs={3}>
                             <Typography variant='caption' color='inherit' style={{ textAlign: 'left', paddingTop: '3vh', paddingBottom: '1vh' }}>Location :</Typography>
                         </Grid>
-                        <Grid item lg={9} xl={9} md={9} sm={9} xs={10}>
+                        <Grid item lg={9} xl={9} md={9} sm={9} xs={9}>
                             <Typography variant='caption' color='primary' style={{ textAlign: 'left', paddingTop: '3vh', paddingBottom: '1vh' }}>{LOCATION}</Typography>
                         </Grid>
                     </Grid>
                     <Divider style={{ width: '80%' }} />
-                    <Grid container direction="row" justify="space-evenly" alignItems="flex-start" style={{ marginTop: '10px', marginBottom: '10px' }} >
-                        <Grid item lg={2} xl={2} md={2} sm={2} xs={false}>
+                    
+                    <Grid container direction="row" justify="flex-start" alignItems="flex-start" style={{ marginTop: '10px', marginBottom: '10px' }}>
+                    <Grid item lg={3} xl={3} md={3} sm={3} xs={3}>
                             <Typography variant='caption' color='inherit' style={{ textAlign: 'left', paddingTop: '3vh', paddingBottom: '1vh' }}>Distance :</Typography>
                         </Grid>
-                        <Grid item lg={9} xl={9} md={9} sm={9} xs={10}>
+                        <Grid item lg={9} xl={9} md={9} sm={9} xs={9}>
                             <Typography variant='caption' color='primary' style={{ textAlign: 'left', paddingTop: '3vh', paddingBottom: '1vh' }}>{DISTANCE}</Typography>
                         </Grid>
                     </Grid>
