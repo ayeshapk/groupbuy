@@ -1,5 +1,5 @@
 
-import { Avatar, Box, Button, Card, CardMedia, Chip, Divider, Fab, Grid, Paper, TextField, Typography } from '@material-ui/core';
+import { Avatar, Box, Button, Card, CardActionArea, CardMedia, Chip, Divider, Fab, Grid, Paper, TextField, Typography } from '@material-ui/core';
 import React from 'react'
 import { useState, useEffect } from 'react';
 import useWindowSize from '../HookServerData/Windowsize';
@@ -38,10 +38,10 @@ function DashboardContainer() {
     const [selectedDate, setSelectedDate] = React.useState(new Date('2014-08-18T21:11:54'));
 
     useEffect(() => {
-        if (myItemState) {
-
+        if (myItemState.length) {
+            setCurrentScreen(CONTAINER_SCREEN)
         }
-    }, [myItemState]);
+    }, [myItemState.length]);
 
     const _clickView = (pagename) => {
         router.push('/' + pagename)
@@ -135,13 +135,14 @@ function DashboardContainer() {
 
                 {myItemState && myItemState.map((MerchantList, index: number) => (
                     <Card key={index} variant="outlined" style={{ marginBottom: '10px' }}>
+                          <CardActionArea>
                         <Grid container direction="row" justify="center" alignItems="center" style={{ paddingTop: '10px' }}>
                             <Grid item lg={12} xl={12} md={12} sm={12} xs={12}>
                                 <Typography onClick={() => editGroup(MerchantList)} variant='h6' color='secondary' style={{ textAlign: 'center', }}>{MerchantList.Merchant}</Typography>
                             </Grid>
                         </Grid>
 
-                        <Grid container direction="row" justify="center" alignItems="flex-start" style={{ margin: '10px' }}>
+                        <Grid container direction="row" justify="center" alignItems="flex-start" style={{ margin: '10px' }} onClick={() => editGroup(MerchantList)}>
                             <Grid item lg={6} xl={6} md={6} sm={6} xs={6}>
                                 <Typography variant='caption' color='inherit' style={{ textAlign: 'left', }}>DeliveryDate</Typography>
                                 <Typography variant='subtitle1' color='primary' style={{ textAlign: 'left', }}>{moment(MerchantList.DeliveryDate).format("Do-MMM-YY")}</Typography>
@@ -153,7 +154,7 @@ function DashboardContainer() {
                         </Grid>
 
                         <Grid container direction="row" justify="center" alignItems="flex-start" style={{ margin: '10px' }}>
-                            <Grid item lg={6} xl={6} md={6} sm={6} xs={6}>
+                            <Grid item lg={6} xl={6} md={6} sm={6} xs={6} onClick={() => editGroup(MerchantList)}>
                                 <Typography variant='caption' color='inherit' style={{ textAlign: 'left', }}>OrderAmount</Typography>
                                 <Typography variant='subtitle1' color='primary' style={{ textAlign: 'left', }}>{MerchantList.OrderAmount}</Typography>
                             </Grid>
@@ -171,7 +172,7 @@ function DashboardContainer() {
                                 </Grid>
                             </Grid>
                         </Grid>
-
+                        </CardActionArea>
                     </Card>
                 ))}
 
