@@ -13,6 +13,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import moment from 'moment';
+import FileCopyIcon from '@material-ui/icons/FileCopy';
 
 let myItems = [
     { id: 0, Merchant: 'Terminal 21', Participants: 6, DeliveryDate: new Date('2020-10-18T21:12:54'), OrderAmount: 2 },
@@ -49,7 +50,7 @@ function DashboardArchiveContainer() {
             <Grid container direction="row" justify="space-around"
                 alignItems="center" style={{ marginTop: '10px', marginBottom: '10px' }}>
                 <Grid item lg={3} xl={3} md={3} sm={3} xs={3} style={{ textAlign: 'center' }}>
-                    <Fab onClick={()=>_pushPage('dashboard')} style={{ margin: 'auto 12%', color: 'white', textAlign: 'center', }} size="small" color="primary"><ArrowBackIcon /></Fab>
+                    <Fab onClick={() => _pushPage('dashboard')} style={{ margin: 'auto 12%', color: 'white', textAlign: 'center', }} size="small" color="primary"><ArrowBackIcon /></Fab>
                 </Grid>
                 <Grid item lg={6} xl={6} md={6} sm={6} xs={6} >
                     <Typography variant='h6' color='primary' style={{ textAlign: 'center', paddingTop: '3vh', paddingBottom: '1vh' }}>Archive</Typography>
@@ -58,7 +59,7 @@ function DashboardArchiveContainer() {
             </Grid>
 
             {myItemState && myItemState.map((groupList, index: number) => (
-                <Accordion key={index} onChange={handleChange(groupList.id)}>
+                <Accordion key={index} onChange={handleChange(groupList.id)} style={{margin:0}}>
                     <AccordionSummary
                         expandIcon={<ExpandMoreIcon />}
                         aria-controls="panel1bh-content"
@@ -66,25 +67,29 @@ function DashboardArchiveContainer() {
                     >
                         <Grid container spacing={0} direction="row" justify="space-around" alignItems="center" >
                             <Grid item xs={6} style={{ margin: '0 auto' }}>
-                                <Typography >Merchant:</Typography>
-                                <Typography >{groupList.Merchant}</Typography>
+                                <Typography variant='caption' color='inherit'>Merchant:</Typography>
+                                <Typography variant='subtitle1' color='primary' >{groupList.Merchant}</Typography>
                             </Grid>
                             <Grid item xs={6} style={{ margin: '0 auto' }}>
-                                <Typography >Date:</Typography>
-                                <Typography >{moment(groupList.DeliveryDate).format("Do/MMM/YY")}</Typography>
+                                <Typography variant='caption' color='inherit'>Date:</Typography>
+                                <Typography variant='subtitle1' color='primary' >{moment(groupList.DeliveryDate).format("Do/MMM/YY")}</Typography>
                             </Grid>
                         </Grid>
                     </AccordionSummary>
                     <AccordionDetails>
                         <Grid container spacing={0} direction="row" justify="space-around" alignItems="center" >
-                            <Grid item xs={4} style={{ margin: '0 auto' }}>
-                                <Typography >Order Amount:{groupList.OrderAmount}</Typography>
+                            <Grid item xs={5} style={{ margin: '0 auto' }}>
+                                <Typography variant='caption'>Order Amount:</Typography>
+                                <Typography variant='subtitle1' color='secondary'>{groupList.OrderAmount}</Typography>
+                            </Grid>
+                            <Grid item xs={5} style={{ margin: '0 auto' }}>
+                                <Typography variant='caption'>Participants:</Typography>
+                                <Typography variant='subtitle1' color='secondary'>{groupList.Participants}</Typography>
+                            </Grid>
+                            <Grid item xs={2} style={{ margin: '0 auto',textAlign:'right'}}>
+                                <Fab color="primary" variant='extended'><FileCopyIcon style={{color:'white'}}/></Fab>
+                            </Grid>
 
-                            </Grid>
-                            <Grid item xs={4} style={{ margin: '0 auto' }}>
-                                <Typography >Participants:{groupList.Participants}</Typography>
-                            </Grid>
-                            <Fab color="primary" variant='extended'>COPY</Fab>
                         </Grid>
 
                     </AccordionDetails>
