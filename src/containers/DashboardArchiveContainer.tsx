@@ -87,7 +87,7 @@ function DashboardArchiveContainer() {
                                 <Typography variant='subtitle1' color='secondary'>{groupList.Participants}</Typography>
                             </Grid>
                             <Grid item xs={2} style={{ margin: '0 auto',textAlign:'right'}}>
-                                <Fab color="primary" variant='extended'><FileCopyIcon style={{color:'white'}}/></Fab>
+                                <Fab color="primary" size='small' ><FileCopyIcon style={{color:'white'}}/></Fab>
                             </Grid>
 
                         </Grid>
