@@ -21,6 +21,7 @@ import {
     KeyboardTimePicker,
     KeyboardDatePicker,
 } from '@material-ui/pickers';
+import SnackBarData from '../component/SnackBarData';
 
 
 const CONTAINER_SCREEN = 'CONTAINER_SCREEN'
@@ -36,6 +37,8 @@ function DashboardContainer() {
     const [editMyItemState, setEditMyItemState] = useState({ id: myItemState.length + 1, Merchant: '', Participants: 0, DeliveryDate: new Date('2014-08-18T21:11:54'), OrderAmount: 0 });
 
     const [selectedDate, setSelectedDate] = React.useState(new Date('2014-08-18T21:11:54'));
+
+    const [openSnackbarMui, setOpenSnackbarMui] = React.useState(false);
 
     useEffect(() => {
         if (myItemState.length) {
@@ -59,6 +62,18 @@ function DashboardContainer() {
         setCurrentScreen(MODAL_SCREEN)
         setEditMyItemState(data)
     }
+
+    const handleClick = () => {
+        setOpenSnackbarMui(true);
+      };
+    
+      const handleClose = (event: React.SyntheticEvent | React.MouseEvent, reason?: string) => {
+        if (reason === 'clickaway') {
+          return;
+        }
+    
+        setOpenSnackbarMui(false);
+      };
 
     const _handleGroupChange = (key: string, event) => {
         let code = event.target.value
@@ -88,7 +103,9 @@ function DashboardContainer() {
                     ? { ...item, editMyItemState }
                     : item
             ))
+
         setCurrentScreen(CONTAINER_SCREEN)
+        setOpenSnackbarMui(true)
     }
 
     const _handleDateChange = (key: string, date) => {
@@ -234,6 +251,12 @@ function DashboardContainer() {
 
                 {<Button style={{ marginTop: '15px' }} variant='outlined' fullWidth color="primary" onClick={() => _updateEditGroup()}>Edit</Button>}
             </div>}
+
+                <SnackBarData 
+                  message={'Success'}
+                  openSnackbarMui={openSnackbarMui}
+                  handleClose={handleClose}
+                />
 
         </div >
     );
