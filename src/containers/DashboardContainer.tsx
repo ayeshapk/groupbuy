@@ -63,10 +63,6 @@ function DashboardContainer() {
         setEditMyItemState(data)
     }
 
-    const handleClick = () => {
-        setOpenSnackbarMui(true);
-      };
-    
       const handleClose = (event: React.SyntheticEvent | React.MouseEvent, reason?: string) => {
         if (reason === 'clickaway') {
           return;
@@ -253,7 +249,7 @@ function DashboardContainer() {
             </div>}
 
                 <SnackBarData 
-                  message={'Success'}
+                  message={'Edit Success'}
                   openSnackbarMui={openSnackbarMui}
                   handleClose={handleClose}
                 />
