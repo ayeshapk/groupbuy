@@ -9,6 +9,7 @@ import { DescriptionText, ListText, MainText, SubText } from '../consts/const';
 import MenuIcon from '@material-ui/icons/Menu';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import SnackBarData from '../component/SnackBarData';
 let myItems = [
     { id: 1, orderClient: 'ayesha', orderName: 'coke', price: 7, amount: 3, isDone: false }, { id: 2, orderClient: 'escha', orderName: 'fanta', price: 7, amount: 4, isDone: false }, { id: 3, orderClient: 'ayesha', orderName: 'fanta', price: 7, amount: 4, isDone: true },
     { id: 4, orderClient: 'emma', orderName: 'coke', price: 7, amount: 3, isDone: true }, { id: 5, orderClient: 'escha', orderName: 'lays', price: 1, amount: 4, isDone: false }, { id: 6, orderClient: 'marie', orderName: 'icecube', price: 1, amount: 4, isDone: true }
@@ -25,6 +26,7 @@ function OrderListingContainer() {
     const [currentScreen, setCurrentScreen] = useState(CONTAINER_SCREEN)
 
     const [editMyItemState, setEditMyItemState] = useState({ id: myItemState.length + 1, orderClient: '', orderName: '', price: 0, amount: 0, isDone: false });
+    const [openSnackbarMui, setOpenSnackbarMui] = React.useState(false);
 
     useEffect(() => {
         if (myItemState) {
@@ -45,6 +47,14 @@ function OrderListingContainer() {
         }
     }*/
 
+    const handleClose = (event: React.SyntheticEvent | React.MouseEvent, reason?: string) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpenSnackbarMui(false);
+    };
+
     const updateCurrentTask = (id: number, isDone: boolean) => {
         setMyItemState(
             myItemState.map(item =>
@@ -52,6 +62,7 @@ function OrderListingContainer() {
                     ? { ...item, isDone: isDone }
                     : item
             ))
+        setOpenSnackbarMui(true)
     }
 
     const addTask = () => {
@@ -64,7 +75,7 @@ function OrderListingContainer() {
     }
 
     const _handleTaskChange = (key: string, event) => {
-        let code = event.target.value
+        let code:string = event.target.value
         let data = { ...editMyItemState }
         //console.log('DATA>>>', data)
         data[key] = key
@@ -83,6 +94,40 @@ function OrderListingContainer() {
             ))
     }
 
+    const _handleNumberChange = (key: string, event) => {
+        let code:number = event.target.value
+        let data = { ...editMyItemState }
+        //console.log('DATA>>>', data)
+        data[key] = key
+        //let keyItem = data[key]
+        //let final = {[keyItem]: code }
+        //console.log('will set', final)
+        if (code <= 0) {
+            const editValue = { ...data, [key]: 0 }
+            //console.log('editValue>>>', editValue)
+            setEditMyItemState(editValue)
+
+            setMyItemState(
+                myItemState.map(item =>
+                    item.id === editValue.id
+                        ? { ...editValue }
+                        : item
+                ))
+        } else {
+            const editValue = { ...data, [key]: code }
+            //console.log('editValue>>>', editValue)
+            setEditMyItemState(editValue)
+
+            setMyItemState(
+                myItemState.map(item =>
+                    item.id === editValue.id
+                        ? { ...editValue }
+                        : item
+                ))
+        }
+    }
+
+
     const _updateEditTask = () => {
         //console.log('this will update', editMyItemState)
         setMyItemState(
@@ -91,7 +136,9 @@ function OrderListingContainer() {
                     ? { ...item, editMyItemState }
                     : item
             ))
+
         setCurrentScreen(CONTAINER_SCREEN)
+        setOpenSnackbarMui(true)
     }
 
 
@@ -225,7 +272,7 @@ function OrderListingContainer() {
                     }}
                     type='number'
                     value={editMyItemState.price}
-                    onChange={(e) => _handleTaskChange("price", e)}
+                    onChange={(e) => _handleNumberChange("price", e)}
                 />
 
                 <TextField
@@ -240,12 +287,19 @@ function OrderListingContainer() {
                         shrink: true,
                     }}
                     value={editMyItemState.amount}
-                    onChange={(e) => _handleTaskChange("amount", e)}
+                    onChange={(e) => _handleNumberChange("amount", e)}
                 />
 
                 {<Button style={{ marginTop: '15px' }} variant='outlined' fullWidth color="primary" onClick={() => _updateEditTask()}>Edit</Button>}
 
             </div>}
+
+            <SnackBarData
+                message={'Success'}
+                openSnackbarMui={openSnackbarMui}
+                handleClose={handleClose}
+            />
+
 
         </div >
     );

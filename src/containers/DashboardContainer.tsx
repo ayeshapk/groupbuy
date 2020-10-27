@@ -43,6 +43,7 @@ function DashboardContainer() {
     useEffect(() => {
         if (myItemState.length) {
             setCurrentScreen(CONTAINER_SCREEN)
+            setOpenSnackbarMui(false);
         }
     }, [myItemState.length]);
 
