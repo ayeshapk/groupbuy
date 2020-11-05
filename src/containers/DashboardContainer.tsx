@@ -125,6 +125,19 @@ function DashboardContainer() {
             ))
     }
 
+    const _setArchive =( id: number )=>{
+        //console.log(id)
+        for(var i = 0; i < myItemState.length; i++) {
+            let data = [...myItemState]
+            if(data[i].id == id) {
+                data.splice(i, 1);
+                //console.log(data)
+                setMyItemState(data)
+                break;
+            }
+        }
+    }
+
     return (
         <div>
 
@@ -180,8 +193,8 @@ function DashboardContainer() {
                                     <Grid item lg={4} xl={4} md={4} sm={4} xs={4}>
                                         <Fab onClick={() => _clickView('orderlisting')} style={{ margin: '2px', color: 'white' }} size="small" color="secondary"><VisibilityIcon /></Fab>
                                     </Grid>
-                                    <Grid item lg={4} xl={4} md={4} sm={4} xs={4}>
-                                        <Fab style={{ margin: '2px', color: 'white' }} size="small" color="primary"><ArchiveIcon /></Fab>
+                                    <Grid  item lg={4} xl={4} md={4} sm={4} xs={4}>
+                                        <Fab  onClick={() => _setArchive(MerchantList.id)} style={{ margin: '2px', color: 'white' }} size="small" color="primary"><ArchiveIcon /></Fab>
                                     </Grid>
                                     <Grid item lg={4} xl={4} md={4} sm={4} xs={4}>
                                         <Fab style={{ margin: '2px', color: 'white' }} size="small" color="primary"><MenuIcon /></Fab>
