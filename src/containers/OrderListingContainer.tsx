@@ -27,7 +27,8 @@ function OrderListingContainer() {
 
     const [editMyItemState, setEditMyItemState] = useState({ id: myItemState.length + 1, orderClient: '', orderName: '', price: 0, amount: 0, isDone: false });
     const [openSnackbarMui, setOpenSnackbarMui] = React.useState(false);
-
+    const [snackMessage, setSnackMessage] = React.useState('');
+ 
     useEffect(() => {
         if (myItemState) {
 
@@ -51,7 +52,7 @@ function OrderListingContainer() {
         if (reason === 'clickaway') {
             return;
         }
-
+        setSnackMessage('')
         setOpenSnackbarMui(false);
     };
 
@@ -62,11 +63,14 @@ function OrderListingContainer() {
                     ? { ...item, isDone: isDone }
                     : item
             ))
+       setSnackMessage('Updated Task')
         setOpenSnackbarMui(true)
     }
 
     const addTask = () => {
         setMyItemState(prevArray => [...prevArray, { id: myItemState.length + 1, orderClient: 'add new', orderName: 'add new', price: 0, amount: 0, isDone: false }])
+        setSnackMessage('Added Task')
+        setOpenSnackbarMui(true)
     }
 
     const editTask = (data) => {
@@ -138,6 +142,7 @@ function OrderListingContainer() {
             ))
 
         setCurrentScreen(CONTAINER_SCREEN)
+        setSnackMessage('Edited Task')
         setOpenSnackbarMui(true)
     }
 
@@ -295,7 +300,7 @@ function OrderListingContainer() {
             </div>}
 
             <SnackBarData
-                message={'Success'}
+                message={snackMessage}
                 openSnackbarMui={openSnackbarMui}
                 handleClose={handleClose}
             />

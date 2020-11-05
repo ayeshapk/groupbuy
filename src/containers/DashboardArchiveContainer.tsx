@@ -14,6 +14,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import moment from 'moment';
 import FileCopyIcon from '@material-ui/icons/FileCopy';
+import SnackBarData from '../component/SnackBarData';
 
 let myItems = [
     { id: 0, Merchant: 'Terminal 21', Participants: 6, DeliveryDate: new Date('2020-10-18T21:12:54'), OrderAmount: 2 },
@@ -28,6 +29,9 @@ function DashboardArchiveContainer() {
     const router = useRouter()
     const [myItemState, setMyItemState] = useState(myItems);
     const [expanded, setExpanded] = React.useState(false);
+    const [snackMessage, setSnackMessage] = React.useState('');
+    const [openSnackbarMui, setOpenSnackbarMui] = React.useState(false);
+
 
     const handleChange = (panel) => (event, isExpanded) => {
         setExpanded(isExpanded ? panel : false);
@@ -43,6 +47,19 @@ function DashboardArchiveContainer() {
         router.push('/' + pagename)
     }
 
+    const _copy = () => {
+        setOpenSnackbarMui(true);
+        setSnackMessage('Copy To Clipboard')
+    }
+
+    const handleClose = (event: React.SyntheticEvent | React.MouseEvent, reason?: string) => {
+        if (reason === 'clickaway') {
+          return;
+        }
+    
+        setOpenSnackbarMui(false);
+        setSnackMessage('')
+      };
 
     return (
         <div>
@@ -59,7 +76,7 @@ function DashboardArchiveContainer() {
             </Grid>
 
             {myItemState && myItemState.map((groupList, index: number) => (
-                <Accordion key={index} onChange={handleChange(groupList.id)} style={{margin:0}}>
+                <Accordion key={index} onChange={handleChange(groupList.id)} style={{ margin: 0 }}>
                     <AccordionSummary
                         expandIcon={<ExpandMoreIcon />}
                         aria-controls="panel1bh-content"
@@ -86,8 +103,8 @@ function DashboardArchiveContainer() {
                                 <Typography variant='caption'>Participants:</Typography>
                                 <Typography variant='subtitle1' color='secondary'>{groupList.Participants}</Typography>
                             </Grid>
-                            <Grid item xs={2} style={{ margin: '0 auto',textAlign:'right'}}>
-                                <Fab color="primary" size='small' ><FileCopyIcon style={{color:'white'}}/></Fab>
+                            <Grid item xs={2} style={{ margin: '0 auto', textAlign: 'right' }}>
+                                <Fab onClick={()=>_copy()} color="primary" size='small' ><FileCopyIcon style={{ color: 'white' }} /></Fab>
                             </Grid>
 
                         </Grid>
@@ -95,6 +112,12 @@ function DashboardArchiveContainer() {
                     </AccordionDetails>
                 </Accordion>
             ))}
+
+            <SnackBarData
+                message={snackMessage}
+                openSnackbarMui={openSnackbarMui}
+                handleClose={handleClose}
+            />
 
         </div >
     );
