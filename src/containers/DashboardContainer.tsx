@@ -66,8 +66,6 @@ function DashboardContainer() {
     const editGroup = (data) => {
         setCurrentScreen(MODAL_SCREEN)
         setEditMyItemState(data)
-        setSnackMessage('Edit Complete')
-        setOpenSnackbarMui(true);
     }
 
       const handleClose = (event: React.SyntheticEvent | React.MouseEvent, reason?: string) => {
