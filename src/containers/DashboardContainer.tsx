@@ -38,12 +38,14 @@ function DashboardContainer() {
 
     const [selectedDate, setSelectedDate] = React.useState(new Date('2014-08-18T21:11:54'));
 
+    const [snackMessage, setSnackMessage] = React.useState('');
     const [openSnackbarMui, setOpenSnackbarMui] = React.useState(false);
+
+    console.log(openSnackbarMui)
 
     useEffect(() => {
         if (myItemState.length) {
             setCurrentScreen(CONTAINER_SCREEN)
-            setOpenSnackbarMui(false);
         }
     }, [myItemState.length]);
 
@@ -57,11 +59,15 @@ function DashboardContainer() {
 
     const addGroup = () => {
         setMyItemState(prevArray => [...prevArray, { id: myItemState.length + 1, Merchant: 'NEW', Participants: 0, DeliveryDate: new Date('2014-08-18T21:11:54'), OrderAmount: 0 }])
+        setSnackMessage('Add Complete')
+        setOpenSnackbarMui(true);
     }
 
     const editGroup = (data) => {
         setCurrentScreen(MODAL_SCREEN)
         setEditMyItemState(data)
+        setSnackMessage('Edit Complete')
+        setOpenSnackbarMui(true);
     }
 
       const handleClose = (event: React.SyntheticEvent | React.MouseEvent, reason?: string) => {
@@ -70,6 +76,7 @@ function DashboardContainer() {
         }
     
         setOpenSnackbarMui(false);
+        setSnackMessage('')
       };
 
     const _handleGroupChange = (key: string, event) => {
@@ -102,6 +109,7 @@ function DashboardContainer() {
             ))
 
         setCurrentScreen(CONTAINER_SCREEN)
+        setSnackMessage('Edit Complete')
         setOpenSnackbarMui(true)
     }
 
@@ -136,6 +144,8 @@ function DashboardContainer() {
                 break;
             }
         }
+        setSnackMessage('Set To Archive')
+        setOpenSnackbarMui(true);
     }
 
     return (
@@ -263,7 +273,7 @@ function DashboardContainer() {
             </div>}
 
                 <SnackBarData 
-                  message={'Edit Success'}
+                  message={snackMessage}
                   openSnackbarMui={openSnackbarMui}
                   handleClose={handleClose}
                 />
