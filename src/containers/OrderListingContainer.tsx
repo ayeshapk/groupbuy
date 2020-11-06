@@ -192,7 +192,7 @@ function OrderListingContainer() {
                 </Grid>
 
                 <Card variant="outlined" >
-                    <Grid container direction="row" justify="space-evenly" alignItems="center" style={{ paddingTop: '10px', paddingBottom: '10px',backgroundColor:'#f9f9f9'}}>
+                    <Grid container direction="row" justify="space-evenly" alignItems="center" style={{ paddingTop: '10px', paddingBottom: '10px', backgroundColor: '#f9f9f9' }}>
                         <Grid item lg={3} xl={3} md={3} sm={3} xs={3}>
                             <Typography variant='caption' color='primary' style={{ textAlign: 'left', marginLeft: '5px', paddingTop: '3vh', paddingBottom: '1vh' }}>Order Name</Typography>
                         </Grid>
@@ -219,7 +219,7 @@ function OrderListingContainer() {
                     </Grid>
 
                     {myItemState && myItemState.map((itemlist, index: number) => (
-                        <Grid key={index} container direction="row" justify="space-evenly" alignItems="center" style={index%2?{ paddingTop: '10px', paddingBottom: '10px',backgroundColor:'#f9f9f9'}:{ marginTop: '10px', marginBottom: '10px' }}>
+                        <Grid key={index} container direction="row" justify="space-evenly" alignItems="center" style={index % 2 ? { paddingTop: '10px', paddingBottom: '10px', backgroundColor: '#f9f9f9' } : { marginTop: '10px', marginBottom: '10px' }}>
 
                             <Grid item lg={3} xl={3} md={3} sm={3} xs={3} >
                                 {itemlist.isDone === false && <Typography onClick={() => editTask(itemlist)} variant='caption' color='primary' style={{ textAlign: 'left', marginLeft: '12px', paddingTop: '3vh', paddingBottom: '1vh' }}>{itemlist.orderName}</Typography>}
@@ -255,16 +255,18 @@ function OrderListingContainer() {
 
                     <Grid container direction="row" justify="space-evenly" alignItems="center" style={{ marginTop: '10px', marginBottom: '10px' }}>
                         <Grid item lg={6} xl={6} md={6} sm={6} xs={6}>
-                            <Typography variant='subtitle1' color='secondary' style={{ paddingTop: '3vh', paddingBottom: '1vh',textAlign: 'center' }}>Remaining buy: {activePriceState} $</Typography>
+                            <Typography variant='body2' color='secondary' style={{ paddingTop: '1vh', paddingBottom: '1vh', textAlign: 'center' }}>Remaining buy</Typography>
+                            <Typography variant='subtitle1' color='secondary' style={{ paddingTop: '1vh', paddingBottom: '1vh', textAlign: 'center' }}> {activePriceState} $</Typography>
                         </Grid>
                         <Grid item lg={6} xl={6} md={6} sm={6} xs={6}>
-                            <Typography variant='subtitle1' color='primary' style={{ paddingTop: '3vh', paddingBottom: '1vh',textAlign: 'center' }}>Total: {totalPriceState} $</Typography>
+                            <Typography variant='body2' color='primary' style={{ paddingTop: '1vh', paddingBottom: '1vh', textAlign: 'center' }}>Total</Typography>
+                            <Typography variant='subtitle1' color='primary' style={{ paddingTop: '1vh', paddingBottom: '1vh', textAlign: 'center' }}>{totalPriceState} $</Typography>
                         </Grid>
                     </Grid>
                 </Card >
 
                 {<Button style={{ marginTop: '15px' }} variant='outlined' fullWidth color="primary" onClick={() => addTask()}>Add</Button>}
-                <div> <List aria-label="main mailbox folders"  style={{ marginTop: '15px',marginBottom:'15px' }}  /></div>
+                <div> <List aria-label="main mailbox folders" style={{ marginTop: '15px', marginBottom: '15px' }} /></div>
             </div>}
 
             {currentScreen === MODAL_SCREEN && <div>
