@@ -28,10 +28,14 @@ function OrderListingContainer() {
     const [editMyItemState, setEditMyItemState] = useState({ id: myItemState.length + 1, orderClient: '', orderName: '', price: 0, amount: 0, isDone: false });
     const [openSnackbarMui, setOpenSnackbarMui] = React.useState(false);
     const [snackMessage, setSnackMessage] = React.useState('');
- 
+
+    const [totalPriceState, setTotalPriceState] = useState(0);
+    const [activePriceState, setActivePriceState] = useState(0);
+
     useEffect(() => {
         if (myItemState) {
-
+            updateTotalPriceState()
+            updateActiveTotalPriceState()
         }
     }, [myItemState]);
 
@@ -48,6 +52,29 @@ function OrderListingContainer() {
         }
     }*/
 
+    const updateTotalPriceState = () => {
+        if (myItemState) {
+            let priceTotal = myItemState.reduce(function (prev, cur) {
+                return prev + (cur.price * cur.amount);
+            }, 0);
+            setTotalPriceState(priceTotal)
+        }
+    }
+
+    const updateActiveTotalPriceState = () => {
+        if (myItemState) {
+            let priceTotal = myItemState.reduce(function (prev, cur) {
+                if (cur.isDone === true) {
+                    return prev + 0;
+                } else {
+                    return prev + (cur.price * cur.amount);
+                }
+            }, 0);
+            setActivePriceState(priceTotal)
+        }
+    }
+
+
     const handleClose = (event: React.SyntheticEvent | React.MouseEvent, reason?: string) => {
         if (reason === 'clickaway') {
             return;
@@ -63,7 +90,7 @@ function OrderListingContainer() {
                     ? { ...item, isDone: isDone }
                     : item
             ))
-       setSnackMessage('Updated Task')
+        setSnackMessage('Updated Task')
         setOpenSnackbarMui(true)
     }
 
@@ -79,7 +106,7 @@ function OrderListingContainer() {
     }
 
     const _handleTaskChange = (key: string, event) => {
-        let code:string = event.target.value
+        let code: string = event.target.value
         let data = { ...editMyItemState }
         //console.log('DATA>>>', data)
         data[key] = key
@@ -99,7 +126,7 @@ function OrderListingContainer() {
     }
 
     const _handleNumberChange = (key: string, event) => {
-        let code:number = event.target.value
+        let code: number = event.target.value
         let data = { ...editMyItemState }
         //console.log('DATA>>>', data)
         data[key] = key
@@ -146,11 +173,12 @@ function OrderListingContainer() {
         setOpenSnackbarMui(true)
     }
 
-
+    console.log(totalPriceState)
     return (
         <div>
 
             {currentScreen === CONTAINER_SCREEN && <div>
+
                 <Grid container direction="row" justify="space-around"
                     alignItems="center" style={{ marginTop: '10px', marginBottom: '10px' }}>
                     <Grid item lg={3} xl={3} md={3} sm={3} xs={3} style={{ textAlign: 'center' }}>
@@ -170,7 +198,7 @@ function OrderListingContainer() {
                             <Typography variant='caption' color='primary' style={{ textAlign: 'left', marginLeft: '5px', paddingTop: '3vh', paddingBottom: '1vh' }}>Order Name</Typography>
                         </Grid>
                         <Grid item lg={2} xl={2} md={2} sm={2} xs={2} style={{ textAlign: 'center', }}>
-                            <Typography variant='caption' color='inherit' style={{ textAlign: 'center', paddingTop: '3vh', paddingBottom: '1vh' }}>Price</Typography>
+                            <Typography variant='caption' color='inherit' style={{ textAlign: 'center', paddingTop: '3vh', paddingBottom: '1vh' }}>Price ($)</Typography>
                         </Grid>
                         <Grid item lg={2} xl={2} md={2} sm={2} xs={2} style={{ textAlign: 'center', }}>
                             <Typography variant='caption' color='inherit' style={{ textAlign: 'center', paddingTop: '3vh', paddingBottom: '1vh' }}>Amount</Typography>
@@ -190,8 +218,6 @@ function OrderListingContainer() {
                             </Grid>
                         </Grid>
                     </Grid>
-
-
 
                     {myItemState && myItemState.map((itemlist, index: number) => (
                         <Grid key={index} container direction="row" justify="space-evenly" alignItems="center" style={{ marginTop: '10px', marginBottom: '10px' }}>
@@ -227,6 +253,15 @@ function OrderListingContainer() {
                                 </Grid>
                             </Grid>
                         </Grid >))}
+
+                    <Grid container direction="row" justify="space-evenly" alignItems="center" style={{ marginTop: '10px', marginBottom: '10px' }}>
+                        <Grid item lg={6} xl={6} md={6} sm={6} xs={6}>
+                            <Typography variant='subtitle1' color='secondary' style={{ paddingTop: '3vh', paddingBottom: '1vh',textAlign: 'center' }}>Remaining buy: {activePriceState} $</Typography>
+                        </Grid>
+                        <Grid item lg={6} xl={6} md={6} sm={6} xs={6}>
+                            <Typography variant='subtitle1' color='primary' style={{ paddingTop: '3vh', paddingBottom: '1vh',textAlign: 'center' }}>Total: {totalPriceState} $</Typography>
+                        </Grid>
+                    </Grid>
                 </Card >
 
                 {<Button style={{ marginTop: '15px' }} variant='outlined' fullWidth color="primary" onClick={() => addTask()}>Add</Button>}
