@@ -142,7 +142,7 @@ export default function MenuBar() {
                 <Typography style={{ color: MainText }}>Lobang App</Typography>
             </IconButton>
 
-            <MenuItem onClick={() => goPage('/')}>
+            <MenuItem onClick={() => goPage('')}>
                 <Typography style={{ color: DescriptionText }}>List</Typography>
             </MenuItem>
 
