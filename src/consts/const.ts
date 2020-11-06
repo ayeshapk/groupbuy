@@ -31,3 +31,6 @@ export const DescriptionText = '#F26E22';
 export const ICON_COLOR = '#2678BF';
 export const LOGO_COLOR = '#A60321';
 
+export const PRIMARY_COLOR = '#F26E22';
+export const SECONDARY_COLOR = '#2678BF';
+export const ITEM_COLOR ='rgb(38, 120, 191)';

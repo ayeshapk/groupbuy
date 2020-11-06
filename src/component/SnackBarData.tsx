@@ -1,6 +1,7 @@
 import { IconButton, makeStyles, Snackbar, Theme, } from "@material-ui/core";
 import * as React from "react";
 import CloseIcon from '@material-ui/icons/Close';
+import { ICON_COLOR, PRIMARY_COLOR } from "../consts/const";
 
 interface SnackBarDataInterfaceProps {
     message: string;
@@ -59,7 +60,7 @@ const SnackBarData: React.SFC<SnackBarDataInterfaceProps> = ({
                 }}
                 ContentProps={{
                     style: {
-                       backgroundColor:backgroundColor?backgroundColor:'green'
+                       backgroundColor:backgroundColor?backgroundColor:PRIMARY_COLOR
                     }
                 }}
                 open={openSnackbarMui}
@@ -68,7 +69,7 @@ const SnackBarData: React.SFC<SnackBarDataInterfaceProps> = ({
                 message={message}
                 action={
                     <React.Fragment >
-                        <IconButton style={{ backgroundColor: 'red' }} size="small" aria-label="close" color="inherit" onClick={handleClose}>
+                        <IconButton style={{ backgroundColor: ICON_COLOR }} size="small" aria-label="close" color="inherit" onClick={handleClose}>
                             <CloseIcon fontSize="small" />
                         </IconButton>
                     </React.Fragment>
