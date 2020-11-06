@@ -1,5 +1,5 @@
 
-import { Box, Button, Card, CardMedia, Divider, Fab, Grid, Paper, TextField, Typography } from '@material-ui/core';
+import { Box, Button, Card, CardMedia, Divider, Fab, Grid, List, Paper, TextField, Typography } from '@material-ui/core';
 import React from 'react'
 import { useState, useEffect } from 'react';
 import useWindowSize from '../HookServerData/Windowsize';
@@ -173,14 +173,13 @@ function OrderListingContainer() {
         setOpenSnackbarMui(true)
     }
 
-    console.log(totalPriceState)
     return (
         <div>
 
             {currentScreen === CONTAINER_SCREEN && <div>
 
                 <Grid container direction="row" justify="space-around"
-                    alignItems="center" style={{ marginTop: '10px', marginBottom: '10px' }}>
+                    alignItems="center" style={{ marginTop: '10px', marginBottom: '10px', }}>
                     <Grid item lg={3} xl={3} md={3} sm={3} xs={3} style={{ textAlign: 'center' }}>
                         <Fab onClick={_goBack} style={{ margin: 'auto 12%', color: 'white', textAlign: 'center', }} size="small" color="primary"><ArrowBackIcon /></Fab>
                     </Grid>
@@ -193,7 +192,7 @@ function OrderListingContainer() {
                 </Grid>
 
                 <Card variant="outlined" >
-                    <Grid container direction="row" justify="space-evenly" alignItems="center" style={{ marginTop: '10px', marginBottom: '10px' }}>
+                    <Grid container direction="row" justify="space-evenly" alignItems="center" style={{ paddingTop: '10px', paddingBottom: '10px',backgroundColor:'#f9f9f9'}}>
                         <Grid item lg={3} xl={3} md={3} sm={3} xs={3}>
                             <Typography variant='caption' color='primary' style={{ textAlign: 'left', marginLeft: '5px', paddingTop: '3vh', paddingBottom: '1vh' }}>Order Name</Typography>
                         </Grid>
@@ -220,7 +219,7 @@ function OrderListingContainer() {
                     </Grid>
 
                     {myItemState && myItemState.map((itemlist, index: number) => (
-                        <Grid key={index} container direction="row" justify="space-evenly" alignItems="center" style={{ marginTop: '10px', marginBottom: '10px' }}>
+                        <Grid key={index} container direction="row" justify="space-evenly" alignItems="center" style={index%2?{ paddingTop: '10px', paddingBottom: '10px',backgroundColor:'#f9f9f9'}:{ marginTop: '10px', marginBottom: '10px' }}>
 
                             <Grid item lg={3} xl={3} md={3} sm={3} xs={3} >
                                 {itemlist.isDone === false && <Typography onClick={() => editTask(itemlist)} variant='caption' color='primary' style={{ textAlign: 'left', marginLeft: '12px', paddingTop: '3vh', paddingBottom: '1vh' }}>{itemlist.orderName}</Typography>}
@@ -265,7 +264,7 @@ function OrderListingContainer() {
                 </Card >
 
                 {<Button style={{ marginTop: '15px' }} variant='outlined' fullWidth color="primary" onClick={() => addTask()}>Add</Button>}
-
+                <div> <List aria-label="main mailbox folders"  style={{ marginTop: '15px',marginBottom:'15px' }}  /></div>
             </div>}
 
             {currentScreen === MODAL_SCREEN && <div>
