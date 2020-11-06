@@ -1,4 +1,4 @@
-import { IconButton, Snackbar, } from "@material-ui/core";
+import { IconButton, makeStyles, Snackbar, Theme, } from "@material-ui/core";
 import * as React from "react";
 import CloseIcon from '@material-ui/icons/Close';
 
@@ -10,7 +10,18 @@ interface SnackBarDataInterfaceProps {
     //clearMessage: (message: string) => void;
     handleClick?: () => void;
     handleClose: (event: React.SyntheticEvent | React.MouseEvent, reason?: string) => void;
+    backgroundColor?: string;
 }
+
+const useStyles = makeStyles((theme: Theme) => ({
+    root: {
+        width: '100%',
+        '& > * + *': {
+            marginTop: theme.spacing(2),
+        },
+        backgroundColor:'green'
+    },
+}));
 
 const SnackBarData: React.SFC<SnackBarDataInterfaceProps> = ({
     message,
@@ -19,8 +30,11 @@ const SnackBarData: React.SFC<SnackBarDataInterfaceProps> = ({
     handleClick,
     handleClose,
     //playMessage,
-    //clearMessage
+    //clearMessage,
+    backgroundColor,
 }) => {
+
+    const classes = useStyles();
 
     //const [openSnackbarMui, setOpenSnackbarMui] = React.useState(false);
 
@@ -39,10 +53,14 @@ const SnackBarData: React.SFC<SnackBarDataInterfaceProps> = ({
     return (
         <div>
             <Snackbar
-                color="primary"
                 anchorOrigin={{
                     vertical: 'bottom',
                     horizontal: 'left',
+                }}
+                ContentProps={{
+                    style: {
+                       backgroundColor:backgroundColor?backgroundColor:'green'
+                    }
                 }}
                 open={openSnackbarMui}
                 autoHideDuration={4000}
@@ -50,11 +68,9 @@ const SnackBarData: React.SFC<SnackBarDataInterfaceProps> = ({
                 message={message}
                 action={
                     <React.Fragment >
-                     
-                            <IconButton style={{ backgroundColor: 'red' }} size="small" aria-label="close" color="inherit" onClick={handleClose}>
-                                <CloseIcon fontSize="small" />
-                            </IconButton>
-                  
+                        <IconButton style={{ backgroundColor: 'red' }} size="small" aria-label="close" color="inherit" onClick={handleClose}>
+                            <CloseIcon fontSize="small" />
+                        </IconButton>
                     </React.Fragment>
                 }
             />
