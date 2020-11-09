@@ -2,23 +2,23 @@
 import { AppBar, CardMedia, Divider, Fab, Grid, TextField, Typography } from '@material-ui/core';
 import React from 'react'
 import { useState, useEffect } from 'react';
-import useWindowSize from '../HookServerData/Windowsize';
+import useWindowSize from '../../HookServerData/Windowsize';
 
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 
 import { useRouter, Router } from 'next/router'
-import MerchantName from '../component/MerchantName';
-import { DESCRIPTION_COLOR, MainText, PRICE_COLOR, SubText, TEXT_COLOR } from '../consts/const';
+import MerchantName from '../../component/MerchantName';
+import { DESCRIPTION_COLOR, MainText, PRICE_COLOR, SubText, TEXT_COLOR } from '../../consts/const';
 
 const merchant = {
     id: 0, name: 'Demo SHOP', host: 'ayesha', description: 'Just softdrink sent every week Storage 2-3 day in chiller', alt: '1', image: 'https://res.cloudinary.com/www-weddingpenguin-co/image/upload/v1559550999/ING_33849_10771_v61zjx.jpg', location: 'Jurong, Tuas , 611140', date: '10 october 2020'
 };
 
 const items = [
-    { id: 0, name: 'coke', image: 'https://res.cloudinary.com/www-weddingpenguin-co/image/upload/v1600851614/001397056_qsr44y.jpg', price: 15, amount: 3, Description: 'lipsum adadada fasdgfasdgraesdgedagdfgbhd fdhrfht rhrhrhtrdhserhe. asfdawsfasfdsafasf.', retailPrice: 16 },
-    { id: 1, name: 'pepsi', image: 'https://res.cloudinary.com/www-weddingpenguin-co/image/upload/v1600851613/172935e5ab484423dd674574b205a77d_whbquq.jpg', price: 22, amount: 2, Description: 'lipsum adadada fasdgfasdgraesdgedagdfgbhd fdhrfht rhrhrhtrdhserhe. asfdawsfasfdsafasf.', retailPrice: 25 },
-    { id: 2, name: '7up', image: 'https://res.cloudinary.com/www-weddingpenguin-co/image/upload/v1600851614/71wN2KS-i1L._SL1500__qahrbm.jpg', price: 16, amount: 1, Description: 'lipsum adadada fasdgfasdgraesdgedagdfgbhd fdhrfht rhrhrhtrdhserhe. asfdawsfasfdsafasf.', retailPrice: 18 },
-    { id: 3, name: 'fanta', image: 'https://res.cloudinary.com/www-weddingpenguin-co/image/upload/v1600851613/c47555d95d284d6de5abeaf1049b0474b53b906c-large_ptsrtr.jpg', price: 30, amount: 0, Description: 'lipsum adadada fasdgfasdgraesdgedagdfgbhd fdhrfht rhrhrhtrdhserhe. asfdawsfasfdsafasf.', retailPrice: 31 }
+    { id: 0, name: 'coke', image: 'https://res.cloudinary.com/www-weddingpenguin-co/image/upload/v1600851614/001397056_qsr44y.jpg', price: 15, amount: 3, Description: 'lipsum', retailPrice: 16 },
+    { id: 1, name: 'pepsi', image: 'https://res.cloudinary.com/www-weddingpenguin-co/image/upload/v1600851613/172935e5ab484423dd674574b205a77d_whbquq.jpg', price: 22, amount: 2, Description: 'lipsum', retailPrice: 25 },
+    { id: 2, name: '7up', image: 'https://res.cloudinary.com/www-weddingpenguin-co/image/upload/v1600851614/71wN2KS-i1L._SL1500__qahrbm.jpg', price: 16, amount: 1, Description: 'lipsum', retailPrice: 18 },
+    { id: 3, name: 'fanta', image: 'https://res.cloudinary.com/www-weddingpenguin-co/image/upload/v1600851613/c47555d95d284d6de5abeaf1049b0474b53b906c-large_ptsrtr.jpg', price: 30, amount: 0, Description: 'lipsum', retailPrice: 31 }
 ];
 
 const group = {
@@ -110,18 +110,20 @@ function OrderProduct() {
 
     return (
         <div>
-
-
-            <Typography variant='h6' color='primary' style={{ fontWeight: 'bold', textAlign: 'left', textIndent: '3vw', paddingTop: '3vh', paddingBottom: '1vh' }}>{groupState.groupName.toLocaleUpperCase()}</Typography>
+            
+           
+            <Typography variant='h6' color='primary' style={{ textAlign: 'left', textIndent: '3vw', paddingTop: '3vh', paddingBottom: '1vh' }}>Menu {groupState.groupName}</Typography>
             <div style={{ marginTop: '10px', marginBottom: '10px' }} />
             <Typography variant='body2' style={{ textIndent: '3vw', color: MainText }}> {groupState.description}</Typography>
             <Typography variant='body2' style={{ textIndent: '3vw', color: SubText }}> {groupState.location}</Typography>
             <Typography variant='body2' style={{ textIndent: '3vw', color: SubText }}> {groupState.limit}</Typography>
-
-            <Grid container spacing={0} direction="row" justify="space-evenly" alignItems="flex-start" style={{ padding: '1px' }}>
+            
+            <Grid container spacing={0} direction="row" justify="space-evenly" alignItems="center" style={{ padding: '1px' }}>
                 {itemState && itemState.map((item, index: number) => (
                     <Grid item xs={12} key={index} style={{ padding: '3px' }} >
-                        <Grid style={{ padding: '10px' }} container spacing={0} direction="row" justify="space-evenly" alignItems="flex-start" >
+                        <Typography variant='h6' color='primary' style={{ textAlign: 'left', textIndent: '3vw', paddingTop: '3vh', paddingBottom: '1vh' }}>{item.name}</Typography>
+
+                        <Grid style={{ padding: '10px' }} container spacing={0} direction="row" justify="space-evenly" alignItems="center" >
                             <Grid item xs={4} style={{ padding: '3px' }}>
                                 <div style={{ margin: '0 auto', textAlign: 'center' }}>
                                     <CardMedia
@@ -135,16 +137,43 @@ function OrderProduct() {
 
                             <Grid item xs={8} style={{ padding: '3px' }}>
                                 <Grid item xs={12} style={{ padding: '3px' }}>
-                                    <Grid container spacing={0} direction="row" justify="space-evenly" alignItems="flex-start" style={{ padding: '1px' }}>
-                                        <Grid item xs={12} style={{ padding: '3px' }}>
-                                            <Typography variant='h5' style={{ textAlign: 'left', color: TEXT_COLOR, fontWeight: 'bold', }}>{item.name}</Typography>
-                                            <Typography variant='body2' style={{ textAlign: 'left', color: DESCRIPTION_COLOR }}>{item.Description}</Typography>
+                                    <Grid container spacing={0} direction="row" justify="space-evenly" alignItems="center" style={{ padding: '1px' }}>
+                                        <Grid item xs={6} style={{ padding: '3px' }}>
+                                            <Typography variant='subtitle2' style={{ textAlign: 'left', color: DESCRIPTION_COLOR }}>name</Typography>
+                                        </Grid>
+                                        <Grid item xs={6} style={{ padding: '3px' }}>
+                                            <Typography variant='subtitle2' style={{ textAlign: 'right', color: DESCRIPTION_COLOR }}>each</Typography>
+                                        </Grid>
+                                    </Grid>
+
+                                    <Grid container spacing={0} direction="row" justify="space-evenly" alignItems="center" style={{ padding: '1px' }}>
+                                        <Grid item xs={6} style={{ padding: '3px' }}>
+                                            <Typography variant='body1' style={{ textAlign: 'left', color: TEXT_COLOR }}>{item.name}</Typography>
+                                        </Grid>
+                                        <Grid item xs={6} style={{ padding: '3px' }}>
+                                            <Typography variant='body1' style={{ textAlign: 'right', color: PRICE_COLOR }}>{item.price} $</Typography>
                                         </Grid>
                                     </Grid>
                                 </Grid>
+                                <Grid item xs={12} style={{ padding: '3px' }}>
+                                    <Typography variant='subtitle2' style={{ textAlign: 'left', color: DESCRIPTION_COLOR }}>description</Typography>
+                                    <Typography variant='body2' style={{ textAlign: 'left', color: TEXT_COLOR }}>{item.Description}</Typography>
+                                </Grid>
+                                {/*<Grid item xs={12} style={{ padding: '3px' }}>
+                                    <Typography variant='subtitle2' style={{ textAlign: 'left', color: DESCRIPTION_COLOR }}>retail price</Typography>
+                                    <Typography variant='body1' style={{ textAlign: 'left', color: DESCRIPTION_COLOR }}>{item.retailPrice} $</Typography>
+                </Grid>*/}
+                                {/*<Grid item xs={12} style={{ padding: '3px' }}>
+                                    <Typography variant='subtitle2' style={{ textAlign: 'left', color: DESCRIPTION_COLOR }}>price</Typography>
+                                    <Typography variant='body1' style={{ textAlign: 'left', color: PRICE_COLOR }}>{item.price} $</Typography>
+            </Grid>*/}
                             </Grid>
                         </Grid>
 
+                        {/*<Grid style={{ padding: '10px' }} container spacing={0} direction="row" justify="space-evenly" alignItems="center" >
+                           
+                           
+                    </Grid>*/}
 
 
 
@@ -169,10 +198,10 @@ function OrderProduct() {
                                 <Grid container spacing={0} justify="center" alignItems="center" >
                                     <Grid item xs={6} style={{ padding: '3px' }}>
                                         <Typography variant='body1' style={{ textAlign: 'right', color: TEXT_COLOR }}>Price</Typography>
-
+                                  
                                     </Grid>
                                     <Grid item xs={6} style={{ padding: '3px' }}>
-                                        <Typography variant='h6' style={{ textAlign: 'right', color: PRICE_COLOR }}>$ {item.price}</Typography>
+                                        <Typography variant='h6' style={{ textAlign: 'right', color: PRICE_COLOR }}>$ {item.price * item.amount}</Typography>
                                     </Grid>
                                 </Grid>
                             </Grid>
@@ -185,7 +214,7 @@ function OrderProduct() {
 
 
             <MerchantName
-                type={'div'}
+            type={'div'}
                 image={merchantState.image}
                 imageAlt={merchantState.alt}
                 merchantName={merchantState.name}
@@ -202,8 +231,8 @@ function OrderProduct() {
                 <Grid container spacing={0} direction="row" justify="space-evenly" alignItems="center" >
                     <Grid item xs={6} style={{ padding: '10px' }}>
                         <Typography variant='caption'>Total</Typography>
-
-                        <Typography variant='h6' color='primary'>$ {totalPriceState} ({totalAmountState} unit)</Typography>
+                        
+                                        <Typography variant='h6' color='primary'>$ {totalPriceState} ({totalAmountState} unit)</Typography>
                     </Grid>
                     <Grid item xs={6} style={{ padding: '3px' }}>
                         <Fab

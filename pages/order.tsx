@@ -11,7 +11,6 @@ const OrderPage = () => {
     return (
         <Layout>
               <MenuBar/>
-            <SearchBar/>
             <OrderProduct/>
         </Layout>
     );
