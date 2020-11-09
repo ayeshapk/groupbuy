@@ -31,11 +31,13 @@ function OrderListingContainer() {
 
     const [totalPriceState, setTotalPriceState] = useState(0);
     const [activePriceState, setActivePriceState] = useState(0);
+    const [activeCountState, setActiveCountState] = useState(0);
 
     useEffect(() => {
         if (myItemState) {
             updateTotalPriceState()
             updateActiveTotalPriceState()
+            updateActiveTotalCountState()
         }
     }, [myItemState]);
 
@@ -71,6 +73,19 @@ function OrderListingContainer() {
                 }
             }, 0);
             setActivePriceState(priceTotal)
+        }
+    }
+
+    const updateActiveTotalCountState = () => {
+        if (myItemState) {
+            let countTotal = myItemState.reduce(function (prev, cur) {
+                if (cur.isDone === true) {
+                    return prev + 0;
+                } else {
+                    return prev + 1;
+                }
+            }, 0);
+            setActiveCountState(countTotal)
         }
     }
 
@@ -190,6 +205,19 @@ function OrderListingContainer() {
                         <Fab style={{ margin: 'auto 12%', color: 'white', textAlign: 'center', }} size="small" color="secondary"><MenuIcon /></Fab>
                     </Grid>
                 </Grid>
+
+
+                <Grid container direction="row" justify="space-evenly" alignItems="center" style={{ marginTop: '10px', marginBottom: '10px' }}>
+                        <Grid item lg={6} xl={6} md={6} sm={6} xs={6}>
+                            <Typography variant='body2' color='secondary' style={{ paddingTop: '1vh', paddingBottom: '1vh', textAlign: 'center' }}>Remaining</Typography>
+                            <Typography variant='subtitle1' color='secondary' style={{ paddingTop: '1vh', paddingBottom: '1vh', textAlign: 'center' }}> {activeCountState} List </Typography>
+                        </Grid>
+                        <Grid item lg={6} xl={6} md={6} sm={6} xs={6}>
+                            <Typography variant='body2' color='primary' style={{ paddingTop: '1vh', paddingBottom: '1vh', textAlign: 'center' }}>Total</Typography>
+                            <Typography variant='subtitle1' color='primary' style={{ paddingTop: '1vh', paddingBottom: '1vh', textAlign: 'center' }}>{myItemState.length} List</Typography>
+                        </Grid>
+                    </Grid>
+                
 
                 <Card variant="outlined" >
                     <Grid container direction="row" justify="space-evenly" alignItems="center" style={{ paddingTop: '10px', paddingBottom: '10px', backgroundColor: '#f9f9f9' }}>
