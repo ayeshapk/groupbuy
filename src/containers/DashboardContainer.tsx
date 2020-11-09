@@ -1,5 +1,5 @@
 
-import { Avatar, Box, Button, Card, CardActionArea, CardMedia, Chip, Divider, Fab, Grid, Paper, TextField, Typography } from '@material-ui/core';
+import { AppBar, Avatar, Box, Button, Card, CardActionArea, CardMedia, Chip, Divider, Fab, Grid, List, Paper, TextField, Typography } from '@material-ui/core';
 import React from 'react'
 import { useState, useEffect } from 'react';
 import useWindowSize from '../HookServerData/Windowsize';
@@ -10,6 +10,8 @@ import { DescriptionText, MainText, SubText } from '../consts/const';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import ArchiveIcon from '@material-ui/icons/Archive';
 import MenuIcon from '@material-ui/icons/Menu';
+import AddIcon from '@material-ui/icons/Add';
+
 let myItems = [
     { id: 0, Merchant: 'TESCO LOTUS', Participants: 6, DeliveryDate: new Date('2014-08-18T21:11:54'), OrderAmount: 9 },
     { id: 1, Merchant: 'BIG C', Participants: 7, DeliveryDate: new Date('2014-08-18T21:11:54'), OrderAmount: 8 },
@@ -36,16 +38,16 @@ function DashboardContainer() {
     const [currentScreen, setCurrentScreen] = useState(CONTAINER_SCREEN)
     const [editMyItemState, setEditMyItemState] = useState({ id: myItemState.length + 1, Merchant: '', Participants: 0, DeliveryDate: new Date('2014-08-18T21:11:54'), OrderAmount: 0 });
 
-    const [selectedDate, setSelectedDate] = React.useState(new Date('2014-08-18T21:11:54'));
-
     const [snackMessage, setSnackMessage] = React.useState('');
     const [openSnackbarMui, setOpenSnackbarMui] = React.useState(false);
 
-    console.log(openSnackbarMui)
+    const [participantsCountState, setParticipantsCountState] = useState(0);
 
+   
     useEffect(() => {
         if (myItemState.length) {
             setCurrentScreen(CONTAINER_SCREEN)
+            updateActiveParticipantsCountState()
         }
     }, [myItemState.length]);
 
@@ -68,14 +70,14 @@ function DashboardContainer() {
         setEditMyItemState(data)
     }
 
-      const handleClose = (event: React.SyntheticEvent | React.MouseEvent, reason?: string) => {
+    const handleClose = (event: React.SyntheticEvent | React.MouseEvent, reason?: string) => {
         if (reason === 'clickaway') {
-          return;
+            return;
         }
-    
+
         setOpenSnackbarMui(false);
         setSnackMessage('')
-      };
+    };
 
     const _handleGroupChange = (key: string, event) => {
         let code = event.target.value
@@ -131,11 +133,11 @@ function DashboardContainer() {
             ))
     }
 
-    const _setArchive =( id: number )=>{
+    const _setArchive = (id: number) => {
         //console.log(id)
-        for(var i = 0; i < myItemState.length; i++) {
+        for (var i = 0; i < myItemState.length; i++) {
             let data = [...myItemState]
-            if(data[i].id == id) {
+            if (data[i].id == id) {
                 data.splice(i, 1);
                 //console.log(data)
                 setMyItemState(data)
@@ -144,6 +146,19 @@ function DashboardContainer() {
         }
         setSnackMessage('Set To Archive')
         setOpenSnackbarMui(true);
+    }
+
+    const updateActiveParticipantsCountState = () => {
+        if (myItemState) {
+            let countParticipants = myItemState.reduce(function (prev, cur) {
+                if (cur.Participants < 1) {
+                    return prev + 0;
+                } else {
+                    return prev + cur.Participants;
+                }
+            }, 0);
+            setParticipantsCountState(countParticipants)
+        }
     }
 
     return (
@@ -201,8 +216,8 @@ function DashboardContainer() {
                                     <Grid item lg={4} xl={4} md={4} sm={4} xs={4}>
                                         <Fab onClick={() => _clickView('orderlisting')} style={{ margin: '2px', color: 'white' }} size="small" color="secondary"><VisibilityIcon /></Fab>
                                     </Grid>
-                                    <Grid  item lg={4} xl={4} md={4} sm={4} xs={4}>
-                                        <Fab  onClick={() => _setArchive(MerchantList.id)} style={{ margin: '2px', color: 'white' }} size="small" color="primary"><ArchiveIcon /></Fab>
+                                    <Grid item lg={4} xl={4} md={4} sm={4} xs={4}>
+                                        <Fab onClick={() => _setArchive(MerchantList.id)} style={{ margin: '2px', color: 'white' }} size="small" color="primary"><ArchiveIcon /></Fab>
                                     </Grid>
                                     <Grid item lg={4} xl={4} md={4} sm={4} xs={4}>
                                         <Fab style={{ margin: '2px', color: 'white' }} size="small" color="primary"><MenuIcon /></Fab>
@@ -214,7 +229,8 @@ function DashboardContainer() {
                     </Card>
                 ))}
 
-                {<Button variant='outlined' fullWidth color="primary" onClick={() => addGroup()} >Add</Button>}
+                {/*<Button variant='outlined' fullWidth color="primary" onClick={() => addGroup()} >Add</Button>*/}
+                <div> <List aria-label="SPACEing" style={{ marginTop: '30px', marginBottom: '30px' }} /></div>
             </div>}
 
             {currentScreen === MODAL_SCREEN && <div>
@@ -270,11 +286,37 @@ function DashboardContainer() {
                 {<Button style={{ marginTop: '15px' }} variant='outlined' fullWidth color="primary" onClick={() => _updateEditGroup()}>Edit</Button>}
             </div>}
 
-                <SnackBarData 
-                  message={snackMessage}
-                  openSnackbarMui={openSnackbarMui}
-                  handleClose={handleClose}
-                />
+            <SnackBarData
+                message={snackMessage}
+                openSnackbarMui={openSnackbarMui}
+                handleClose={handleClose}
+                specialMargin={100}
+            />
+
+            {currentScreen === CONTAINER_SCREEN && <AppBar position="fixed" color="inherit" style={{ top: 'auto', bottom: 0, }}>
+                <Grid container direction="row" justify="space-evenly" alignItems="center" style={{ marginTop: '10px', marginBottom: '10px' }}>
+                    <Grid item lg={6} xl={6} md={6} sm={6} xs={6}>
+                        <Typography variant='subtitle1' color='secondary' style={{ paddingTop: '1vh', paddingBottom: '1vh', textAlign: 'center' }}> Group : {myItemState.length} </Typography>
+                    </Grid>
+                    <Grid item lg={6} xl={6} md={6} sm={6} xs={6}>
+                        <Typography variant='subtitle1' color='secondary' style={{ paddingTop: '1vh', paddingBottom: '1vh', textAlign: 'center' }}> All Participants : {participantsCountState}</Typography>
+                    </Grid>
+                </Grid>
+
+                <Fab
+                    onClick={() => addGroup()}
+                    color="secondary" aria-label="add" style={{
+                        position: 'absolute',
+                        zIndex: 1,
+                        top: -30,
+                        left: 0,
+                        right: 0,
+                        margin: '0 auto',
+                    }}>
+                    <AddIcon />
+                </Fab>
+            </AppBar>}
+
 
         </div >
     );

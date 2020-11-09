@@ -1,5 +1,5 @@
 
-import { Box, Button, Card, CardMedia, Divider, Fab, Grid, List, Paper, TextField, Typography } from '@material-ui/core';
+import { AppBar, BottomNavigation, Box, Button, Card, CardMedia, Divider, Fab, Grid, List, Paper, TextField, Typography } from '@material-ui/core';
 import React from 'react'
 import { useState, useEffect } from 'react';
 import useWindowSize from '../HookServerData/Windowsize';
@@ -10,6 +10,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import SnackBarData from '../component/SnackBarData';
+import AddIcon from '@material-ui/icons/Add';
 let myItems = [
     { id: 1, orderClient: 'ayesha', orderName: 'coke', price: 7, amount: 3, isDone: false }, { id: 2, orderClient: 'escha', orderName: 'fanta', price: 7, amount: 4, isDone: false }, { id: 3, orderClient: 'ayesha', orderName: 'fanta', price: 7, amount: 4, isDone: true },
     { id: 4, orderClient: 'emma', orderName: 'coke', price: 7, amount: 3, isDone: true }, { id: 5, orderClient: 'escha', orderName: 'lays', price: 1, amount: 4, isDone: false }, { id: 6, orderClient: 'marie', orderName: 'icecube', price: 1, amount: 4, isDone: true }
@@ -206,19 +207,6 @@ function OrderListingContainer() {
                     </Grid>
                 </Grid>
 
-
-                <Grid container direction="row" justify="space-evenly" alignItems="center" style={{ marginTop: '10px', marginBottom: '10px' }}>
-                        <Grid item lg={6} xl={6} md={6} sm={6} xs={6}>
-                            <Typography variant='body2' color='secondary' style={{ paddingTop: '1vh', paddingBottom: '1vh', textAlign: 'center' }}>Remaining</Typography>
-                            <Typography variant='subtitle1' color='secondary' style={{ paddingTop: '1vh', paddingBottom: '1vh', textAlign: 'center' }}> {activeCountState} List </Typography>
-                        </Grid>
-                        <Grid item lg={6} xl={6} md={6} sm={6} xs={6}>
-                            <Typography variant='body2' color='primary' style={{ paddingTop: '1vh', paddingBottom: '1vh', textAlign: 'center' }}>Total</Typography>
-                            <Typography variant='subtitle1' color='primary' style={{ paddingTop: '1vh', paddingBottom: '1vh', textAlign: 'center' }}>{myItemState.length} List</Typography>
-                        </Grid>
-                    </Grid>
-                
-
                 <Card variant="outlined" >
                     <Grid container direction="row" justify="space-evenly" alignItems="center" style={{ paddingTop: '10px', paddingBottom: '10px', backgroundColor: '#f9f9f9' }}>
                         <Grid item lg={3} xl={3} md={3} sm={3} xs={3}>
@@ -281,20 +269,11 @@ function OrderListingContainer() {
                             </Grid>
                         </Grid >))}
 
-                    <Grid container direction="row" justify="space-evenly" alignItems="center" style={{ marginTop: '10px', marginBottom: '10px' }}>
-                        <Grid item lg={6} xl={6} md={6} sm={6} xs={6}>
-                            <Typography variant='body2' color='secondary' style={{ paddingTop: '1vh', paddingBottom: '1vh', textAlign: 'center' }}>Remaining buy</Typography>
-                            <Typography variant='subtitle1' color='secondary' style={{ paddingTop: '1vh', paddingBottom: '1vh', textAlign: 'center' }}> {activePriceState} $</Typography>
-                        </Grid>
-                        <Grid item lg={6} xl={6} md={6} sm={6} xs={6}>
-                            <Typography variant='body2' color='primary' style={{ paddingTop: '1vh', paddingBottom: '1vh', textAlign: 'center' }}>Total</Typography>
-                            <Typography variant='subtitle1' color='primary' style={{ paddingTop: '1vh', paddingBottom: '1vh', textAlign: 'center' }}>{totalPriceState} $</Typography>
-                        </Grid>
-                    </Grid>
+
                 </Card >
 
-                {<Button style={{ marginTop: '15px' }} variant='outlined' fullWidth color="primary" onClick={() => addTask()}>Add</Button>}
-                <div> <List aria-label="main mailbox folders" style={{ marginTop: '15px', marginBottom: '15px' }} /></div>
+                {/*<Button style={{ marginTop: '15px' }} variant='outlined' fullWidth color="primary" onClick={() => addTask()}>Add</Button>*/}
+                <div> <List aria-label="SPACEing" style={{ marginTop: '30px', marginBottom: '30px' }} /></div>
             </div>}
 
             {currentScreen === MODAL_SCREEN && <div>
@@ -363,10 +342,38 @@ function OrderListingContainer() {
 
             </div>}
 
+
+            {currentScreen === CONTAINER_SCREEN &&<AppBar position="fixed" color="inherit" style={{ top: 'auto', bottom: 0, }}>
+                <Grid container direction="row" justify="space-evenly" alignItems="center" style={{ marginTop: '10px', marginBottom: '10px' }}>
+                    <Grid item lg={6} xl={6} md={6} sm={6} xs={6}>
+                        {/*<Typography variant='body2' color='secondary' style={{ paddingTop: '1vh', paddingBottom: '1vh', textAlign: 'center' }}>Remaining</Typography>*/}
+                        <Typography variant='subtitle1' color='secondary' style={{ paddingTop: '1vh', paddingBottom: '1vh', textAlign: 'center' }}> {activeCountState} / {myItemState.length} List </Typography>
+                    </Grid>
+                    <Grid item lg={6} xl={6} md={6} sm={6} xs={6}>
+                        {/*<Typography variant='body2' color='primary' style={{ paddingTop: '1vh', paddingBottom: '1vh', textAlign: 'center' }}>Total</Typography>*/}
+                        <Typography variant='subtitle1' color='primary' style={{ paddingTop: '1vh', paddingBottom: '1vh', textAlign: 'center' }}>{activePriceState}/{totalPriceState} $</Typography>
+                    </Grid>
+                </Grid>
+
+                <Fab
+                    onClick={() => addTask()}
+                    color="secondary" aria-label="add" style={{
+                        position: 'absolute',
+                        zIndex: 1,
+                        top: -30,
+                        left: 0,
+                        right: 0,
+                        margin: '0 auto',
+                    }}>
+                    <AddIcon />
+                </Fab>
+            </AppBar>}
+
             <SnackBarData
                 message={snackMessage}
                 openSnackbarMui={openSnackbarMui}
                 handleClose={handleClose}
+                specialMargin={100}
             />
 
 

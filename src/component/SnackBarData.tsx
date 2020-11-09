@@ -12,6 +12,7 @@ interface SnackBarDataInterfaceProps {
     handleClick?: () => void;
     handleClose: (event: React.SyntheticEvent | React.MouseEvent, reason?: string) => void;
     backgroundColor?: string;
+    specialMargin?: number;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -20,7 +21,7 @@ const useStyles = makeStyles((theme: Theme) => ({
         '& > * + *': {
             marginTop: theme.spacing(2),
         },
-        backgroundColor:'green'
+        backgroundColor: 'green'
     },
 }));
 
@@ -33,6 +34,7 @@ const SnackBarData: React.SFC<SnackBarDataInterfaceProps> = ({
     //playMessage,
     //clearMessage,
     backgroundColor,
+    specialMargin,
 }) => {
 
     const classes = useStyles();
@@ -52,15 +54,16 @@ const SnackBarData: React.SFC<SnackBarDataInterfaceProps> = ({
     };*/
 
     return (
-        <div>
+        <div >
             <Snackbar
+                style={{ bottom: specialMargin ? `${specialMargin}px` : '0px' }}
                 anchorOrigin={{
                     vertical: 'bottom',
                     horizontal: 'left',
                 }}
                 ContentProps={{
                     style: {
-                       backgroundColor:backgroundColor?backgroundColor:PRIMARY_COLOR
+                        backgroundColor: backgroundColor ? backgroundColor : PRIMARY_COLOR,
                     }
                 }}
                 open={openSnackbarMui}
