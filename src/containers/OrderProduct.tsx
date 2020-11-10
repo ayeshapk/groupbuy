@@ -128,7 +128,7 @@ function OrderProduct() {
                 {itemState && itemState.map((item, index: number) => (
                     <Grid item xs={12} key={index} style={{ padding: '3px' }} >
                         <Grid style={{ padding: '3px' }} container spacing={0} direction="row" justify="space-evenly" alignItems="center" >
-                            <Grid item xs={4} style={{ padding: '3px' }}>
+                            <Grid item xs={5} style={{ padding: '3px' }}>
                                 <div style={{ margin: '0 auto', textAlign: 'center' }}>
                                     <CardMedia
                                         component="img"
@@ -139,7 +139,7 @@ function OrderProduct() {
                                 </div>
                             </Grid>
 
-                            <Grid item xs={8} style={{ padding: '3px' }}>
+                            <Grid item xs={7} style={{ padding: '3px' }}>
                                 <Grid item xs={12} style={{ padding: '3px' }}>
                                     <Grid container spacing={0} direction="row" justify="space-evenly" alignItems="center" style={{ padding: '1px' }}>
                                         <Grid item xs={12} style={{ padding: '3px' }}>
@@ -181,7 +181,7 @@ function OrderProduct() {
 
 
 
-                        <Divider style={{ width: '90vw', margin: '3% auto' }} />
+                        <Divider style={{ width: '90vw', margin: '1% auto' }} />
                     </Grid>))}
 
 

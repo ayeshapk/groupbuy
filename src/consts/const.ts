@@ -34,3 +34,7 @@ export const LOGO_COLOR = '#A60321';
 export const PRIMARY_COLOR = '#F26E22';
 export const SECONDARY_COLOR = '#2678BF';
 export const ITEM_COLOR ='rgb(38, 120, 191)';
+
+export const LOGO_BLUE_DARK_COLOR ='#1F419B';
+export const LOGO_BLUE_NORMAL_COLOR ='#33469D';
+export const LOGO_BLUE_LIGHT_COLOR ='#5EADE0';

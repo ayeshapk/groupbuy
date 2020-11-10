@@ -13,9 +13,10 @@ import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import { Divider, Drawer, Grid, Hidden } from '@material-ui/core';
 import { useRouter } from 'next/router';
-import { DescriptionText, ICON_COLOR, ListText, LOGO_COLOR, MainText, SubText } from '../consts/const';
+import { DescriptionText, ICON_COLOR, ListText, LOGO_BLUE_NORMAL_COLOR, LOGO_COLOR, MainText, SubText } from '../consts/const';
 import useWindowSize from '../HookServerData/Windowsize';
 
+const LOGO_IMAGE='https://res.cloudinary.com/www-weddingpenguin-co/image/upload/v1605002016/lobangWide_etgxjr.png'
 
 export default function MenuBar() {
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -138,8 +139,8 @@ export default function MenuBar() {
                 onClick={() => setOpenDrawer(false)}
                 style={{ margin: '10px' }}
             >
-                <img src='https://res.cloudinary.com/www-weddingpenguin-co/image/upload/v1601605405/lobang_ujaiwi.png' width='auto' height='30px' />
-                <Typography style={{ color: MainText }}>Lobang App</Typography>
+                <img src={LOGO_IMAGE} width='auto' height='30px' />
+                <Typography onClick={goHome} variant="h6" noWrap style={{ padding:'10px',verticalAlign: 'center', color: LOGO_BLUE_NORMAL_COLOR }}> Lobang App</Typography>
             </IconButton>
 
             <MenuItem onClick={() => goPage('')}>
@@ -186,7 +187,7 @@ export default function MenuBar() {
                 >
                     <AccountCircle />
                 </IconButton>
-                <p>Profile</p>
+                <Typography>Profile</Typography>
             </MenuItem>
         </Menu>
     );
@@ -204,13 +205,13 @@ export default function MenuBar() {
                                 aria-label="open drawer"
                                 onClick={() => setOpenDrawer(true)}
                             >
-                                <img src='https://res.cloudinary.com/www-weddingpenguin-co/image/upload/v1601605405/lobang_ujaiwi.png' width='auto' height='30px' />
+                                <img src={LOGO_IMAGE} width='auto' height='30px' />
                             </IconButton>
                         </Grid>
 
 
                         <Grid item lg={4} xl={4} md={4} sm={4} xs={false}>
-                            <Typography onClick={goHome} variant="h6" noWrap style={{ verticalAlign: 'center', color: LOGO_COLOR }}>Lobang</Typography>
+                            <Typography onClick={goHome} variant="h6" noWrap style={{ verticalAlign: 'center', color: LOGO_BLUE_NORMAL_COLOR }}> Lobang </Typography>
                         </Grid>
 
 
