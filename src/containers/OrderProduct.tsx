@@ -111,17 +111,23 @@ function OrderProduct() {
     return (
         <div>
 
+            <MerchantName
+                type={'div'}
+                image={merchantState.image}
+                imageAlt={merchantState.alt}
+                merchantName={merchantState.name}
+            />
 
-            <Typography variant='h6' color='primary' style={{ fontWeight: 'bold', textAlign: 'left', textIndent: '3vw', paddingTop: '3vh', paddingBottom: '1vh' }}>{groupState.groupName.toLocaleUpperCase()}</Typography>
+            <Typography variant='h6' color='primary' style={{ fontWeight: 'bold', textAlign: 'left', textIndent: '3vw',/* paddingTop: '3vh',*/ paddingBottom: '1vh' }}>{groupState.groupName.toLocaleUpperCase()}</Typography>
             <div style={{ marginTop: '10px', marginBottom: '10px' }} />
             <Typography variant='body2' style={{ textIndent: '3vw', color: MainText }}> {groupState.description}</Typography>
             <Typography variant='body2' style={{ textIndent: '3vw', color: SubText }}> {groupState.location}</Typography>
             <Typography variant='body2' style={{ textIndent: '3vw', color: SubText }}> {groupState.limit}</Typography>
-
+            <div style={{ marginTop: '10px', marginBottom: '10px' }} />
             <Grid container spacing={0} direction="row" justify="space-evenly" alignItems="flex-start" style={{ padding: '1px' }}>
                 {itemState && itemState.map((item, index: number) => (
                     <Grid item xs={12} key={index} style={{ padding: '3px' }} >
-                        <Grid style={{ padding: '10px' }} container spacing={0} direction="row" justify="space-evenly" alignItems="flex-start" >
+                        <Grid style={{ padding: '3px' }} container spacing={0} direction="row" justify="space-evenly" alignItems="flex-start" >
                             <Grid item xs={4} style={{ padding: '3px' }}>
                                 <div style={{ margin: '0 auto', textAlign: 'center' }}>
                                     <CardMedia
@@ -148,7 +154,7 @@ function OrderProduct() {
 
 
 
-                        <Grid style={{ padding: '10px' }} container spacing={0} direction="row" justify="space-evenly" alignItems="center" >
+                        <Grid container spacing={0} direction="row" justify="space-evenly" alignItems="center" >
 
                             <Grid item xs={6} style={{ padding: '3px' }}>
                                 <Grid container spacing={0} justify="center" alignItems="center" >
@@ -168,11 +174,11 @@ function OrderProduct() {
                             <Grid item xs={6} style={{ padding: '3px', }}>
                                 <Grid container spacing={0} justify="center" alignItems="center" >
                                     <Grid item xs={6} style={{ padding: '3px' }}>
-                                        <Typography variant='body1' style={{ textAlign: 'right', color: TEXT_COLOR }}>Price</Typography>
+                                        <Typography variant='body1' style={{ textAlign: 'center', color: TEXT_COLOR }}>Price</Typography>
 
                                     </Grid>
                                     <Grid item xs={6} style={{ padding: '3px' }}>
-                                        <Typography variant='h6' style={{ textAlign: 'right', color: PRICE_COLOR }}>$ {item.price}</Typography>
+                                        <Typography variant='h6' style={{ textAlign: 'center', color: PRICE_COLOR }}>$ {item.price}</Typography>
                                     </Grid>
                                 </Grid>
                             </Grid>
@@ -184,12 +190,7 @@ function OrderProduct() {
             </Grid>
 
 
-            <MerchantName
-                type={'div'}
-                image={merchantState.image}
-                imageAlt={merchantState.alt}
-                merchantName={merchantState.name}
-            />
+
 
             <div style={{ paddingBottom: '20%' }}>
                 <Typography variant='caption' style={{

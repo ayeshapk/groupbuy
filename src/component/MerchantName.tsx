@@ -20,7 +20,7 @@ const MerchantName: React.FunctionComponent<appProps> = ({
 }) => {
     return (
         <div>
-            {type === 'Paper' && <Paper style={{ margin: '10px',paddingTop:'2vh',paddingBottom:'2vh' }}>
+            {type === 'Paper' && <Paper style={{ margin: '10px',/*paddingTop:'2vh',paddingBottom:'2vh'*/ }}>
                 <Grid container spacing={0} direction="row" justify="space-around" alignItems="center" >
                     <Grid item xs={1} />
                     <Grid item xs={4} style={{ padding: '15px', margin: '0 auto' }}>
@@ -34,7 +34,7 @@ const MerchantName: React.FunctionComponent<appProps> = ({
                     </Grid>
                 </Grid>
             </Paper>}
-            {type === 'div' && <div style={{ margin: '10px',paddingTop:'2vh',paddingBottom:'2vh' }}>
+            {type === 'div' && <div style={{ margin: '10px',/*paddingTop:'2vh',paddingBottom:'2vh'*/ }}>
                 <Grid container spacing={0} direction="row" justify="space-around" alignItems="center" >
                     <Grid item xs={1} />
                     <Grid item xs={4} style={{ padding: '15px', margin: '0 auto' }}>
