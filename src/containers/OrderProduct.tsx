@@ -118,16 +118,16 @@ function OrderProduct() {
                 merchantName={merchantState.name}
             />
 
-            <Typography variant='h6' color='primary' style={{ fontWeight: 'bold', textAlign: 'left', textIndent: '3vw',/* paddingTop: '3vh',*/ paddingBottom: '1vh' }}>{groupState.groupName.toLocaleUpperCase()}</Typography>
+            <Typography variant='h6' color='primary' style={{ fontWeight: 'bold', textAlign: 'left', textIndent: '3vw', paddingBottom: '1vh' }}>{groupState.groupName.toLocaleUpperCase()}</Typography>
             <div style={{ marginTop: '10px', marginBottom: '10px' }} />
             <Typography variant='body2' style={{ textIndent: '3vw', color: MainText }}> {groupState.description}</Typography>
             <Typography variant='body2' style={{ textIndent: '3vw', color: SubText }}> {groupState.location}</Typography>
             <Typography variant='body2' style={{ textIndent: '3vw', color: SubText }}> {groupState.limit}</Typography>
             <div style={{ marginTop: '10px', marginBottom: '10px' }} />
-            <Grid container spacing={0} direction="row" justify="space-evenly" alignItems="flex-start" style={{ padding: '1px' }}>
+            <Grid container spacing={0} direction="row" justify="space-evenly" alignItems="center" style={{ padding: '1px' }}>
                 {itemState && itemState.map((item, index: number) => (
                     <Grid item xs={12} key={index} style={{ padding: '3px' }} >
-                        <Grid style={{ padding: '3px' }} container spacing={0} direction="row" justify="space-evenly" alignItems="flex-start" >
+                        <Grid style={{ padding: '3px' }} container spacing={0} direction="row" justify="space-evenly" alignItems="center" >
                             <Grid item xs={4} style={{ padding: '3px' }}>
                                 <div style={{ margin: '0 auto', textAlign: 'center' }}>
                                     <CardMedia
@@ -141,48 +141,46 @@ function OrderProduct() {
 
                             <Grid item xs={8} style={{ padding: '3px' }}>
                                 <Grid item xs={12} style={{ padding: '3px' }}>
-                                    <Grid container spacing={0} direction="row" justify="space-evenly" alignItems="flex-start" style={{ padding: '1px' }}>
+                                    <Grid container spacing={0} direction="row" justify="space-evenly" alignItems="center" style={{ padding: '1px' }}>
                                         <Grid item xs={12} style={{ padding: '3px' }}>
                                             <Typography variant='h5' style={{ textAlign: 'left', color: TEXT_COLOR, fontWeight: 'bold', }}>{item.name}</Typography>
                                             <Typography variant='body2' style={{ textAlign: 'left', color: DESCRIPTION_COLOR }}>{item.Description}</Typography>
                                         </Grid>
                                     </Grid>
                                 </Grid>
-                            </Grid>
-                        </Grid>
-
-
-
-
-                        <Grid container spacing={0} direction="row" justify="space-evenly" alignItems="center" >
-
-                            <Grid item xs={6} style={{ padding: '3px' }}>
-                                <Grid container spacing={0} justify="center" alignItems="center" >
-                                    <Grid item xs={4} style={{ padding: '3px' }}>
-                                        <Typography variant='body1' style={{ textAlign: 'center', }} onClick={() => _changeAmount(item.id, item.amount - 1)}>-</Typography>
-                                    </Grid>
-                                    <Grid item xs={4} style={{ padding: '3px' }}>
-                                        {/*<Typography variant='body1' style={{ textAlign: 'center', color: TEXT_COLOR }}>{item.amount}</Typography>*/}
-                                        <TextField inputProps={{ style: { textAlign: 'center' } }} type='number' value={item.amount} size="small" onChange={(event) => _fixAmount(event, item.id)} />
-                                    </Grid>
-                                    <Grid item xs={4} style={{ padding: '3px' }}>
-                                        <Typography variant='body1' style={{ textAlign: 'center', }} onClick={() => _changeAmount(item.id, item.amount + 1)}>+</Typography>
-                                    </Grid>
-                                </Grid>
-                            </Grid>
-
-                            <Grid item xs={6} style={{ padding: '3px', }}>
-                                <Grid container spacing={0} justify="center" alignItems="center" >
-                                    <Grid item xs={6} style={{ padding: '3px' }}>
-                                        <Typography variant='body1' style={{ textAlign: 'center', color: TEXT_COLOR }}>Price</Typography>
-
+                                <Grid container spacing={0} direction="row" justify="space-between" alignItems="center" >
+                                    <Grid item xs={6} style={{ padding: '3px', }}>
+                                        <Grid container spacing={0} justify="space-between" alignItems="center" >
+                                            <Typography variant='h5' style={{ textAlign: 'left', color: PRICE_COLOR }}>$ {item.price}</Typography>
+                                        </Grid>
                                     </Grid>
                                     <Grid item xs={6} style={{ padding: '3px' }}>
-                                        <Typography variant='h6' style={{ textAlign: 'center', color: PRICE_COLOR }}>$ {item.price}</Typography>
+                                        {item.amount > 0 && <Grid container spacing={0} justify="center" alignItems="center" >
+                                            <Grid item xs={4} style={{ padding: '3px' }}>
+                                                <Typography variant='body1' style={{ textAlign: 'center', }} onClick={() => _changeAmount(item.id, item.amount - 1)}>-</Typography>
+                                            </Grid>
+                                            <Grid item xs={4} style={{ padding: '3px' }}>
+                                                {/*<Typography variant='body1' style={{ textAlign: 'center', color: TEXT_COLOR }}>{item.amount}</Typography>*/}
+                                                <TextField inputProps={{ style: { textAlign: 'center' } }} type='number' value={item.amount} size="small" onChange={(event) => _fixAmount(event, item.id)} />
+                                            </Grid>
+                                            <Grid item xs={4} style={{ padding: '3px' }}>
+                                                <Typography variant='body1' style={{ textAlign: 'center', }} onClick={() => _changeAmount(item.id, item.amount + 1)}>+</Typography>
+                                            </Grid>
+                                        </Grid>}
+                                        {item.amount === 0 && <Grid container spacing={0} justify="center" alignItems="center" >
+                                            <Fab size='small' variant='extended' color='primary' style={{ color: 'white', }} onClick={() => _changeAmount(item.id, item.amount + 1)}>Buy this</Fab>
+                                        </Grid>}
                                     </Grid>
+
+
                                 </Grid>
                             </Grid>
                         </Grid>
+
+
+
+
+
                         <Divider style={{ width: '90vw', margin: '3% auto' }} />
                     </Grid>))}
 

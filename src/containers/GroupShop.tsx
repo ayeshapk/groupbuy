@@ -1,5 +1,5 @@
 
-import { CardMedia, Fab, Grid, Paper, Typography } from '@material-ui/core';
+import { CardMedia, Fab, Grid, List, Paper, Typography } from '@material-ui/core';
 import React from 'react'
 import { useState, useEffect } from 'react';
 import useWindowSize from '../HookServerData/Windowsize';
@@ -10,8 +10,8 @@ import MerchantName from '../component/MerchantName';
 import { DescriptionText, MainText, SubText } from '../consts/const';
 
 
-const merchant =   {
-    id: 0, name: 'Demo SHOP',host:'ayesha', description: 'Just softdrink sent every week Storage 2-3 day in chiller',alt:'1',image:'https://res.cloudinary.com/www-weddingpenguin-co/image/upload/v1559550999/ING_33849_10771_v61zjx.jpg',location:'Jurong, Tuas , 611140',date:'10 october 2020'
+const merchant = {
+    id: 0, name: 'Demo SHOP', host: 'ayesha', description: 'Just softdrink sent every week Storage 2-3 day in chiller', alt: '1', image: 'https://res.cloudinary.com/www-weddingpenguin-co/image/upload/v1559550999/ING_33849_10771_v61zjx.jpg', location: 'Jurong, Tuas , 611140', date: '10 october 2020'
 };
 
 let items = [
@@ -52,11 +52,11 @@ function GroupShop() {
 
     return (
         <div>
-            <MerchantName 
-            type={'Paper'}
-              image={merchantState.image}
-              imageAlt={merchantState.alt}
-              merchantName={merchantState.name}
+            <MerchantName
+                type={'Paper'}
+                image={merchantState.image}
+                imageAlt={merchantState.alt}
+                merchantName={merchantState.name}
             />
             {
                 itemState && itemState.map((item, index: number) => (
@@ -125,6 +125,9 @@ function GroupShop() {
                                             </div>
                                         ))}
                                     </Grid>
+                                    <Grid item xs={12}>
+                                        <div> <List aria-label="SPACEing" style={{padding:0}}/></div>
+                                    </Grid>
                                 </Grid>
 
 
@@ -153,6 +156,9 @@ function GroupShop() {
                                 <ArrowForwardIosIcon fontSize='small' />
 
                                         </Fab>
+                                    </Grid>
+                                    <Grid item xs={12}>
+                                        <div> <List aria-label="SPACEing" style={{padding:0}}/></div>
                                     </Grid>
                                 </Grid>
 
