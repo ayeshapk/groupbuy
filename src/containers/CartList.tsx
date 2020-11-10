@@ -117,7 +117,7 @@ function CartList() {
 
     return (
         <div>
-            <Typography variant='h6' color='primary' style={{ marginLeft: '15px' }}>Shopping Bag</Typography>
+            <Typography variant='h6' color='primary' style={{ marginLeft: '7px' }}>Shopping Bag</Typography>
 
             <Paper style={{ margin: '2%', paddingTop: '2%' }}>
 
@@ -131,7 +131,7 @@ function CartList() {
                 <div style={{ marginTop: '10px', marginBottom: '10px' }} />
 
                 <Grid container spacing={0} direction="column" justify="space-around" alignItems="flex-start" >
-                    <Grid item xs={12} style={{ padding: '15px', }}>
+                    <Grid item xs={12} style={{ padding: '7px', }}>
                         <Typography variant='h6' color='primary' style={{ textAlign: 'left', paddingTop: '3vh', paddingBottom: '1vh' }}>{groupState.groupName}</Typography>
                         <Typography variant='body2' style={{ color: MainText }}> {groupState.description}</Typography>
                         <Typography variant='body2' style={{ color: SubText }}> {groupState.limit}</Typography>
@@ -140,7 +140,7 @@ function CartList() {
 
                 {itemState && itemState.map((item, index: number) => (
                     <Grid key={index} container spacing={0} direction="row" justify="space-around" alignItems="flex-end" >
-                        <Grid item xs={12} style={{ padding: '15px', margin: '0 auto' }}>
+                        <Grid item xs={12} style={{ padding: '7px', margin: '0 auto' }}>
                             <Typography variant='h6'>{item.name}</Typography>
                             <Grid container spacing={0} direction="row" justify="space-evenly" alignItems="center" >
                                 <Grid item xs={4}>
@@ -169,7 +169,7 @@ function CartList() {
 
                         </Grid>
                     </Grid>))}
-                <Typography variant='body2' style={{ marginLeft: '3vw', color: SubText }}> Location : {groupState.location}</Typography>
+                <Typography variant='body2' style={{ marginLeft: '2vw', color: SubText }}> Location : {groupState.location}</Typography>
                 <div style={{ paddingBottom: '2vh' }} />
             </Paper>
 
