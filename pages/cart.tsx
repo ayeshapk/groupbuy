@@ -11,7 +11,6 @@ const CartPage = () => {
         <Layout>
      
               <MenuBar/>
-            <SearchBar/>
             <CartList/>
         </Layout>
     );

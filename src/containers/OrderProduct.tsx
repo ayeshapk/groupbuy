@@ -15,10 +15,10 @@ const merchant = {
 };
 
 const items = [
-    { id: 0, name: 'coke', image: 'https://res.cloudinary.com/www-weddingpenguin-co/image/upload/v1600851614/001397056_qsr44y.jpg', price: 15, amount: 3, Description: 'lipsum adadada fasdgfasdgraesdgedagdfgbhd fdhrfht rhrhrhtrdhserhe. asfdawsfasfdsafasf.', retailPrice: 16 },
-    { id: 1, name: 'pepsi', image: 'https://res.cloudinary.com/www-weddingpenguin-co/image/upload/v1600851613/172935e5ab484423dd674574b205a77d_whbquq.jpg', price: 22, amount: 2, Description: 'lipsum adadada fasdgfasdgraesdgedagdfgbhd fdhrfht rhrhrhtrdhserhe. asfdawsfasfdsafasf.', retailPrice: 25 },
-    { id: 2, name: '7up', image: 'https://res.cloudinary.com/www-weddingpenguin-co/image/upload/v1600851614/71wN2KS-i1L._SL1500__qahrbm.jpg', price: 16, amount: 1, Description: 'lipsum adadada fasdgfasdgraesdgedagdfgbhd fdhrfht rhrhrhtrdhserhe. asfdawsfasfdsafasf.', retailPrice: 18 },
-    { id: 3, name: 'fanta', image: 'https://res.cloudinary.com/www-weddingpenguin-co/image/upload/v1600851613/c47555d95d284d6de5abeaf1049b0474b53b906c-large_ptsrtr.jpg', price: 30, amount: 0, Description: 'lipsum adadada fasdgfasdgraesdgedagdfgbhd fdhrfht rhrhrhtrdhserhe. asfdawsfasfdsafasf.', retailPrice: 31 }
+    { id: 0, name: 'coke', image: 'https://res.cloudinary.com/www-weddingpenguin-co/image/upload/v1600851614/001397056_qsr44y.jpg', price: 15, amount: 3, Description: 'lipsum adadada fasdgfasdgraesd gedagdfgbhd fdhrfht rhrhrhtrdhserhe. asfdawsfasfdsafasf.', retailPrice: 16 },
+    { id: 1, name: 'pepsi', image: 'https://res.cloudinary.com/www-weddingpenguin-co/image/upload/v1600851613/172935e5ab484423dd674574b205a77d_whbquq.jpg', price: 22, amount: 2, Description: 'lipsum adadada fasdgfasdgraesdgeda gdfgbhd fdhrfht rhrhrhtrdhserhe. asfdawsfasfdsafasf.', retailPrice: 25 },
+    { id: 2, name: '7up', image: 'https://res.cloudinary.com/www-weddingpenguin-co/image/upload/v1600851614/71wN2KS-i1L._SL1500__qahrbm.jpg', price: 16, amount: 1, Description: 'lipsum adadada fasdgfasdgraesdgedag dfgbhd fdhrfht rhrhrhtrdhserhe. asfdawsfasfdsafasf.', retailPrice: 18 },
+    { id: 3, name: 'fanta', image: 'https://res.cloudinary.com/www-weddingpenguin-co/image/upload/v1600851613/c47555d95d284d6de5abeaf1049b0474b53b906c-large_ptsrtr.jpg', price: 30, amount: 0, Description: 'lipsum adadada fasdgfasdgra esdgedagdfgbhd fdhrfht rhrhrhtrdhserhe. asfdawsfasfdsafasf.', retailPrice: 31 }
 ];
 
 const group = {
@@ -118,11 +118,39 @@ function OrderProduct() {
                 merchantName={merchantState.name}
             />
 
-            <Typography variant='h6' color='primary' style={{ fontWeight: 'bold', textAlign: 'left', textIndent: '3vw', paddingBottom: '1vh' }}>{groupState.groupName.toLocaleUpperCase()}</Typography>
-            <div style={{ marginTop: '10px', marginBottom: '10px' }} />
-            <Typography variant='body2' style={{ textIndent: '3vw', color: MainText }}> {groupState.description}</Typography>
-            <Typography variant='body2' style={{ textIndent: '3vw', color: SubText }}> {groupState.location}</Typography>
-            <Typography variant='body2' style={{ textIndent: '3vw', color: SubText }}> {groupState.limit}</Typography>
+            <Grid container spacing={0} direction="row" justify="space-evenly" alignItems="flex-start" style={{ padding: '1px' }}>
+                <Grid item xs={12} style={{ padding: '3px' }}>
+                    <Typography variant='h6' color='primary' style={{ fontWeight: 'bold', textAlign: 'left',}}>{groupState.groupName.toLocaleUpperCase()}</Typography>
+                    <div style={{ padding: '5px' }} />
+                </Grid>
+
+                <Grid item xs={5} style={{ padding: '3px' }}>
+                    <Typography variant='body2' style={{ color: MainText }}> Description :</Typography>
+                </Grid>
+                <Grid item xs={7} style={{ padding: '3px' }}>
+                    <Typography variant='body2' style={{ color: MainText }}> {groupState.description}</Typography>
+                </Grid>
+
+                <Grid item xs={5} style={{ padding: '3px' }}>
+                    <Typography variant='body2' style={{ color: SubText }}> Location : </Typography>
+                </Grid>
+
+                <Grid item xs={7} style={{ padding: '3px' }}>
+                    <Typography variant='body2' style={{ color: SubText }}> {groupState.location}</Typography>
+                </Grid>
+
+                <Grid item xs={5} style={{ padding: '3px' }}>
+                    <Typography variant='body2' style={{ color: SubText }}> Order Close Date :</Typography>
+                </Grid>
+
+                <Grid item xs={7} style={{ padding: '3px' }}>
+                    <Typography variant='body2' style={{ color: SubText }}> {groupState.limit}</Typography>
+                </Grid>
+
+
+            </Grid>
+
+
             <div style={{ marginTop: '10px', marginBottom: '10px' }} />
             <Grid container spacing={0} direction="row" justify="space-evenly" alignItems="center" style={{ padding: '1px' }}>
                 {itemState && itemState.map((item, index: number) => (
@@ -199,12 +227,12 @@ function OrderProduct() {
 
             <AppBar position="fixed" color='inherit' style={{ top: 'auto', bottom: 0, }}>
                 <Grid container spacing={0} direction="row" justify="space-evenly" alignItems="center" >
-                    <Grid item xs={6} style={{ padding: '10px' }}>
+                    <Grid item xs={5} style={{ padding: '10px' }}>
                         <Typography variant='caption'>Total</Typography>
 
                         <Typography variant='h6' color='primary'>$ {totalPriceState} ({totalAmountState} unit)</Typography>
                     </Grid>
-                    <Grid item xs={6} style={{ padding: '3px' }}>
+                    <Grid item xs={7} style={{ padding: '3px' }}>
                         <Fab
                             style={{ backgroundColor: '#ED2939', color: 'white', float: 'right', margin: '5px' }}
                             variant="extended"
