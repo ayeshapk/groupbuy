@@ -168,7 +168,7 @@ function OrderProduct() {
                                             </Grid>
                                         </Grid>}
                                         {item.amount === 0 && <Grid container spacing={0} justify="center" alignItems="center" >
-                                            <Fab size='small' variant='extended' color='primary' style={{ color: 'white', }} onClick={() => _changeAmount(item.id, item.amount + 1)}>Buy this</Fab>
+                                            <Fab size='small' variant='extended' color='primary' style={{ color: 'white', }} onClick={() => _changeAmount(item.id, item.amount + 1)}>Buy</Fab>
                                         </Grid>}
                                     </Grid>
 
