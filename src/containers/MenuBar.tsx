@@ -16,7 +16,7 @@ import { useRouter } from 'next/router';
 import { DescriptionText, ICON_COLOR, ListText, LOGO_BLUE_NORMAL_COLOR, LOGO_COLOR, MainText, SubText } from '../consts/const';
 import useWindowSize from '../HookServerData/Windowsize';
 
-const LOGO_IMAGE='https://res.cloudinary.com/www-weddingpenguin-co/image/upload/v1605002016/lobangWide_etgxjr.png'
+const LOGO_IMAGE='https://res.cloudinary.com/www-weddingpenguin-co/image/upload/v1605062660/lobangAppLpgp_adullr.png'
 
 export default function MenuBar() {
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
