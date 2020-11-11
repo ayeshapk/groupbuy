@@ -1,5 +1,5 @@
 
-import { AppBar, CardMedia, Divider, Fab, Grid, TextField, Typography } from '@material-ui/core';
+import { AppBar, Card, CardMedia, Divider, Fab, Grid, TextField, Typography } from '@material-ui/core';
 import React from 'react'
 import { useState, useEffect } from 'react';
 import useWindowSize from '../HookServerData/Windowsize';
@@ -111,45 +111,44 @@ function OrderProduct() {
     return (
         <div>
 
-            <MerchantName
-                type={'div'}
-                image={merchantState.image}
-                imageAlt={merchantState.alt}
-                merchantName={merchantState.name}
-            />
+            <Card style={{marginTop:'3vh',paddingBottom:'10px'}}>
+                <MerchantName
+                    type={'div'}
+                    image={merchantState.image}
+                    imageAlt={merchantState.alt}
+                    merchantName={merchantState.name}
+                />
 
-            <Grid container spacing={0} direction="row" justify="space-evenly" alignItems="flex-start" style={{ padding: '1px' }}>
-                <Grid item xs={12} style={{ padding: '3px' }}>
-                    <Typography variant='h6' color='primary' style={{ fontWeight: 'bold', textAlign: 'left',}}>{groupState.groupName.toLocaleUpperCase()}</Typography>
-                    <div style={{ padding: '5px' }} />
+                <Grid container spacing={0} direction="row" justify="space-evenly" alignItems="flex-start" style={{ padding: '5px' }}>
+                    <Grid item xs={12} style={{ padding: '3px' }}>
+                        <Typography variant='h6' color='primary' style={{ fontWeight: 'bold', textAlign: 'left', }}>{groupState.groupName.toLocaleUpperCase()}</Typography>
+                        <div style={{ padding: '5px' }} />
+                    </Grid>
+
+                    <Grid item xs={5} style={{ padding: '3px' }}>
+                        <Typography variant='body2' style={{ color: MainText }}> Description :</Typography>
+                    </Grid>
+                    <Grid item xs={7} style={{ padding: '3px' }}>
+                        <Typography variant='body2' style={{ color: MainText }}> {groupState.description}</Typography>
+                    </Grid>
+
+                    <Grid item xs={5} style={{ padding: '3px' }}>
+                        <Typography variant='body2' style={{ color: SubText }}> Location : </Typography>
+                    </Grid>
+
+                    <Grid item xs={7} style={{ padding: '3px' }}>
+                        <Typography variant='body2' style={{ color: SubText }}> {groupState.location}</Typography>
+                    </Grid>
+
+                    <Grid item xs={5} style={{ padding: '3px' }}>
+                        <Typography variant='body2' style={{ color: SubText }}> Order Close Date :</Typography>
+                    </Grid>
+
+                    <Grid item xs={7} style={{ padding: '3px' }}>
+                        <Typography variant='body2' style={{ color: SubText }}> {groupState.limit}</Typography>
+                    </Grid>
                 </Grid>
-
-                <Grid item xs={5} style={{ padding: '3px' }}>
-                    <Typography variant='body2' style={{ color: MainText }}> Description :</Typography>
-                </Grid>
-                <Grid item xs={7} style={{ padding: '3px' }}>
-                    <Typography variant='body2' style={{ color: MainText }}> {groupState.description}</Typography>
-                </Grid>
-
-                <Grid item xs={5} style={{ padding: '3px' }}>
-                    <Typography variant='body2' style={{ color: SubText }}> Location : </Typography>
-                </Grid>
-
-                <Grid item xs={7} style={{ padding: '3px' }}>
-                    <Typography variant='body2' style={{ color: SubText }}> {groupState.location}</Typography>
-                </Grid>
-
-                <Grid item xs={5} style={{ padding: '3px' }}>
-                    <Typography variant='body2' style={{ color: SubText }}> Order Close Date :</Typography>
-                </Grid>
-
-                <Grid item xs={7} style={{ padding: '3px' }}>
-                    <Typography variant='body2' style={{ color: SubText }}> {groupState.limit}</Typography>
-                </Grid>
-
-
-            </Grid>
-
+            </Card>
 
             <div style={{ marginTop: '10px', marginBottom: '10px' }} />
             <Grid container spacing={0} direction="row" justify="space-evenly" alignItems="center" style={{ padding: '1px' }}>
