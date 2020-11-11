@@ -113,10 +113,8 @@ function CartList() {
             if (newArr[i].id == key) {
                 newArr[i].amount = newEvent;
                 if (newArr[i].amount <= 0) {
-                    newArr[i].amount = 0;
-
-                    _removeItem(key)
-                    //setItemState(newArr)
+                    newArr[i].amount = 1;
+                    setItemState(newArr)
                 }
                 if (newArr[i].amount >= 99) {
                     newArr[i].amount = 99;
