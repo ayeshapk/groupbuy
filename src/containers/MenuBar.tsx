@@ -11,12 +11,12 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import { Divider, Drawer, Grid, Hidden } from '@material-ui/core';
+import { Button, Divider, Drawer, Grid, Hidden } from '@material-ui/core';
 import { useRouter } from 'next/router';
 import { DescriptionText, ICON_COLOR, ListText, LOGO_BLUE_NORMAL_COLOR, LOGO_COLOR, MainText, SubText } from '../consts/const';
 import useWindowSize from '../HookServerData/Windowsize';
 
-const LOGO_IMAGE='https://res.cloudinary.com/www-weddingpenguin-co/image/upload/v1605062660/lobangAppLpgp_adullr.png'
+const LOGO_IMAGE='https://res.cloudinary.com/www-weddingpenguin-co/image/upload/v1605074832/lobangPastel_ccruh0.png'
 
 export default function MenuBar() {
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -132,8 +132,8 @@ export default function MenuBar() {
     const drawerMenu = (
         <Drawer onClose={() => setOpenDrawer(false)} anchor={'left'}
             open={openDrawer} >
-            <IconButton
-                edge="start"
+            <Button
+                //edge="start"
                 color="inherit"
                 aria-label="open drawer"
                 onClick={() => setOpenDrawer(false)}
@@ -141,7 +141,7 @@ export default function MenuBar() {
             >
                 <img src={LOGO_IMAGE} width='auto' height='30px' />
                 <Typography onClick={goHome} variant="h6" noWrap style={{ padding:'10px',verticalAlign: 'center', color: LOGO_BLUE_NORMAL_COLOR }}> Lobang App</Typography>
-            </IconButton>
+            </Button>
 
             <MenuItem onClick={() => goPage('')}>
                 <Typography style={{ color: DescriptionText }}>List</Typography>

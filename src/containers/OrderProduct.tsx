@@ -65,8 +65,8 @@ function OrderProduct() {
     }
 
 
-    const linkToPageCart = () => {
-        router.push('/cart')
+    const linkToPageConfirm = () => {
+        router.push('/confirmorder')
     }
 
     const _changeAmount = (key: number, number: number) => {
@@ -237,7 +237,7 @@ function OrderProduct() {
                             variant="extended"
                             size="small"
                             aria-label="add"
-                            onClick={linkToPageCart}
+                            onClick={linkToPageConfirm}
                         >
                             Place Order
                                 <ShoppingBasketIcon fontSize='small' style={{ margin: '5px' }} />

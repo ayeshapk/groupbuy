@@ -2,14 +2,14 @@
 import { AppBar, Divider, Fab, Grid, Paper, TextField, Typography } from '@material-ui/core';
 import React from 'react'
 import { useState, useEffect } from 'react';
-import useWindowSize from '../HookServerData/Windowsize';
+import useWindowSize from '../../HookServerData/Windowsize';
 
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 
 import { useRouter, Router } from 'next/router'
-import MerchantName from '../component/MerchantName';
-import { DescriptionText, MainText, SubText } from '../consts/const';
-import SnackBarData from '../component/SnackBarData';
+import MerchantName from '../../component/MerchantName';
+import { DescriptionText, MainText, SubText } from '../../consts/const';
+import SnackBarData from '../../component/SnackBarData';
 
 let items = [
     { id: 0, name: 'coke', price: 15, amount: 3, },

@@ -1,18 +1,17 @@
 
 import React from "react";
 import Layout from "../src/component/Layout";
-import CartList from "../src/containers/CartList";
+import ConfirmOrderContainer from "../src/containers/ConfirmOrderContainer";
 import MenuBar from "../src/containers/MenuBar";
 import SearchBar from "../src/containers/SearchBar";
 
 
-const CartPage = () => {
+const ConfirmOrderPage = () => {
     return (
         <Layout>
-     
               <MenuBar/>
-            <CartList/>
+            <ConfirmOrderContainer/>
         </Layout>
     );
 }
-export default CartPage;
+export default ConfirmOrderPage;
