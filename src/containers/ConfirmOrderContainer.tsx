@@ -79,7 +79,7 @@ function ConfirmOrderContainer() {
             <div style={{ marginTop: '5%' }}>
                 <Typography variant='h6' color='primary' style={{ marginLeft: '7px', textAlign: 'center', paddingTop: '2%', paddingBottom: '2%' }}>Your Order</Typography>
             </div>
-            <Paper style={{paddingBottom:'3%',paddingTop:'1%'}}>
+            <Paper style={{ paddingBottom: '3%', paddingTop: '1%' }}>
                 <Grid container spacing={0} direction="row" justify="space-around" alignItems="flex-start" >
                     <Grid item xs={4} style={{ padding: '7px', }}>
                         <Typography variant='h6' color='secondary' style={{ marginLeft: '7px' }}>Name</Typography>
@@ -117,8 +117,20 @@ function ConfirmOrderContainer() {
                 message={snackMessage}
                 openSnackbarMui={openSnackbarMui}
                 handleClose={handleClose}
-
+                specialMargin={50}
             />
+
+            <AppBar position="fixed" color="inherit" style={{ top: 'auto', bottom: 0, }}>
+                <Grid container direction="row" justify="center" alignItems="center" style={{ marginTop: '10px', marginBottom: '10px' }}>
+                    <Grid item lg={12} xl={12} md={12} sm={12} xs={12}>
+
+                        <div style={{textAlign:'center'}}>
+                            {<Button style={{  width: '97%' }} variant='outlined' fullWidth color="primary" onClick={() => linkToPage('')}>Back To GroupList</Button>}
+                        </div>
+                    </Grid>
+                </Grid>
+
+            </AppBar>
 
 
         </div >
