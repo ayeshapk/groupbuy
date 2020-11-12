@@ -1,5 +1,5 @@
 
-import { AppBar, Divider, Fab, Grid, Paper, TextField, Typography } from '@material-ui/core';
+import { AppBar, Button, Divider, Fab, Grid, Paper, TextField, Typography } from '@material-ui/core';
 import React from 'react'
 import { useState, useEffect } from 'react';
 import useWindowSize from '../HookServerData/Windowsize';
@@ -79,16 +79,16 @@ function ConfirmOrderContainer() {
             <div style={{ marginTop: '5%' }}>
                 <Typography variant='h6' color='primary' style={{ marginLeft: '7px', textAlign: 'center', paddingTop: '2%', paddingBottom: '2%' }}>Your Order</Typography>
             </div>
-            <Paper>
+            <Paper style={{paddingBottom:'3%',paddingTop:'1%'}}>
                 <Grid container spacing={0} direction="row" justify="space-around" alignItems="flex-start" >
                     <Grid item xs={4} style={{ padding: '7px', }}>
-                        <Typography variant='caption' color='secondary' style={{ marginLeft: '7px' }}>Name</Typography>
+                        <Typography variant='h6' color='secondary' style={{ marginLeft: '7px' }}>Name</Typography>
                     </Grid>
                     <Grid item xs={4} style={{ padding: '7px', textAlign: 'right' }}>
-                        <Typography variant='caption' color='secondary' style={{ marginLeft: '7px', }}>Amount</Typography>
+                        <Typography variant='h6' color='secondary' style={{ marginLeft: '7px', }}>Amount</Typography>
                     </Grid>
                     <Grid item xs={4} style={{ padding: '7px', textAlign: 'right' }}>
-                        <Typography variant='caption' color='secondary' style={{ marginRight: '7px', }}>Price</Typography>
+                        <Typography variant='h6' color='secondary' style={{ marginRight: '7px', }}>Price</Typography>
                     </Grid>
                 </Grid>
                 {itemState && itemState.map((item, index) => (
@@ -106,6 +106,10 @@ function ConfirmOrderContainer() {
 
 
                 <Typography variant='h6' color='primary' style={{ marginLeft: '7px', textAlign: 'right', paddingTop: '2%', paddingBottom: '2%', marginRight: '7px' }}>Total : {totalPriceState} $ ({totalAmountState}Unit)</Typography>
+
+                {/*<div style={{textAlign:'center'}}><Button style={{ marginTop: '15px',width:'92%' }} variant='outlined' fullWidth color="primary" ></Button></div>*/}
+
+
             </Paper>
 
 
