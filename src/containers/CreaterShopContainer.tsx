@@ -52,8 +52,12 @@ function CreaterShopContainer() {
         location: ``, limit: new Date('2020-10-18T21:12:54'), collect: new Date('2020-10-18T21:12:54'),
         item: []
     })
-    const [groupReady, setgroupReady] = useState(false)
 
+    const [itemData, setItemData] = useState({ id: 0, name: '', image: '', price: 0, amount: 3, Description: '', retailPrice: 0 },)
+
+
+    const [groupReady, setgroupReady] = useState(false)
+    const [itemReady, setItemReady] = useState(false)
     useEffect(() => {
         if (itemState) {
 
@@ -74,6 +78,11 @@ function CreaterShopContainer() {
     const _addGroup = () => {
         setCurrentScreen(MODAL_ADD_GROUP_SCREEN)
     }
+
+    const _addItemData= () => {
+        setCurrentScreen(MODAL_ADD_ITEM_SCREEN)
+    }
+
 
     const handleChange = (panel: number) => (event: React.ChangeEvent<{}>, newExpanded: boolean) => {
         setExpanded(newExpanded ? panel : false);
@@ -105,6 +114,20 @@ function CreaterShopContainer() {
         setGroupData(editValue)
     }
 
+    const _handleItemChange = (key: string, event) => {
+        let code = event.target.value
+        let data = { ...itemData }
+        //console.log('DATA>>>', data)
+        data[key] = key
+        //let keyItem = data[key]
+        //let final = {[keyItem]: code }
+        //console.log('will set', final)
+        const value = { ...data, [key]: code }
+        //console.log('editValue>>>', editValue)
+        setItemData(value)
+    }
+
+
     const _createGroup = () => {
         //console.log('itemState', itemState)
         let cloneItemState = [...itemState]
@@ -126,6 +149,10 @@ function CreaterShopContainer() {
             location: ``, limit: new Date('2020-10-18T21:12:54'), collect: new Date('2020-10-18T21:12:54'),
             item: []
         })
+    }
+
+    const _createItem =()=>{
+        
     }
 
     return (
@@ -184,7 +211,7 @@ function CreaterShopContainer() {
                                             </Grid>
                                         </Grid>))}
 
-                                    <Button color='primary' variant="contained" fullWidth style={{ width: '97%', color: 'white' }}> +</Button>
+                                    <Button color='primary' variant="contained" fullWidth style={{ width: '97%', color: 'white' }} onClick={()=>_addItemData()}> +</Button>
                                 </Grid>
                             </AccordionDetails>
                         </Accordion>
@@ -304,6 +331,60 @@ function CreaterShopContainer() {
                     {groupReady === false && <Button style={{ marginTop: '15px', }} disabled variant='outlined' fullWidth color="primary"> Create Group</Button>}
                 </div>
             </div>}
+
+            {currentScreen === MODAL_ADD_ITEM_SCREEN && <div style={{ margin: 8 }}>
+                <TextField
+                    label="name"
+                    //style={{ margin: 8 }}
+                    placeholder="name"
+                    helperText="Your item name"
+                    fullWidth
+                    margin="normal"
+                    type='text'
+                    InputLabelProps={{
+                        shrink: true,
+                    }}
+                    value={itemData.name}
+                    onChange={(e) => _handleItemChange("name", e)}
+                />
+
+                <TextField
+                    label="image"
+                    //style={{ margin: 8 }}
+                    placeholder="image"
+                    helperText="Your image name"
+                    fullWidth
+                    margin="normal"
+                    type='text'
+                    InputLabelProps={{
+                        shrink: true,
+                    }}
+                    value={itemData.image}
+                    onChange={(e) => _handleItemChange("image", e)}
+                />
+
+                <TextField
+                    label="Description"
+                    //style={{ margin: 8 }}
+                    placeholder="Description"
+                    helperText="Your Description name"
+                    fullWidth
+                    margin="normal"
+                    type='text'
+                    InputLabelProps={{
+                        shrink: true,
+                    }}
+                    value={itemData.Description}
+                    onChange={(e) => _handleItemChange("Description", e)}
+                />
+
+                <div style={{ margin: '8px', textAlign: 'center' }}>
+                    {itemReady === true && <Button style={{ marginTop: '15px', }} variant='outlined' fullWidth color="primary" onClick={() => _createItem()}>Create Item</Button>}
+                    {itemReady === false && <Button style={{ marginTop: '15px', }} disabled variant='outlined' fullWidth color="primary"> Create Item</Button>}
+                </div>
+            </div>}
+
+
 
         </div >
     );
