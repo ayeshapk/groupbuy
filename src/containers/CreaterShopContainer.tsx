@@ -1,5 +1,5 @@
 
-import { Accordion, AccordionDetails, AccordionSummary, AppBar, Button, CardMedia, Fab, Grid, List, Paper, Typography } from '@material-ui/core';
+import { Accordion, AccordionDetails, AccordionSummary, AppBar, Button, CardMedia, Fab, Grid, List, Paper, TextField, Typography } from '@material-ui/core';
 import React from 'react'
 import { useState, useEffect } from 'react';
 import useWindowSize from '../HookServerData/Windowsize';
@@ -33,8 +33,9 @@ let creater = [
     }
 ];
 
-// get sum of price prop across all objects in array
-
+const CONTAINER_SCREEN = 'CONTAINER_SCREEN'
+const MODAL_ADD_GROUP_SCREEN = 'MODAL_ADD_GROUP_SCREEN'
+const MODAL_ADD_ITEM_SCREEN = 'MODAL_ADD_ITEM_SCREEN'
 
 function CreaterShopContainer() {
 
@@ -42,108 +43,206 @@ function CreaterShopContainer() {
     const { width, height } = useWindowSize()
     const router = useRouter()
     const [expanded, setExpanded] = React.useState<number | false>(0);
+    const [currentScreen, setCurrentScreen] = useState(CONTAINER_SCREEN)
+    const [groupData, setGroupData] = useState({
+        id: 1, groupName: '', description: '',
+        location: ``, limit: '', collect: '',
+        item: []
+    })
+    const [groupReady, setgroupReady] = useState(false)
+
     useEffect(() => {
         if (itemState) {
 
         }
     }, [itemState]);
 
+    useEffect(() => {
+        if (groupData.groupName.length >= 1 && groupData.description.length >= 1 && groupData.location.length >= 1) {
+            setgroupReady(true)
+        }
+    }, [groupData]);
+
 
     const linkToPage = (pagename: string) => {
         router.push('/' + pagename)
+    }
+
+    const _addGroup = () => {
+        setCurrentScreen(MODAL_ADD_GROUP_SCREEN)
     }
 
     const handleChange = (panel: number) => (event: React.ChangeEvent<{}>, newExpanded: boolean) => {
         setExpanded(newExpanded ? panel : false);
     };
 
+    const _handleGroupChange = (key: string, event) => {
+        let code = event.target.value
+        let data = { ...groupData }
+        //console.log('DATA>>>', data)
+        data[key] = key
+        //let keyItem = data[key]
+        //let final = {[keyItem]: code }
+        //console.log('will set', final)
+        const editValue = { ...data, [key]: code }
+        //console.log('editValue>>>', editValue)
+        setGroupData(editValue)
+
+        setItemState(
+            itemState.map(item =>
+                item.id === editValue.id
+                    ? { ...editValue }
+                    : item
+            ))
+    }
+
+    const _createGroup = () => {
+
+    }
+
     return (
         <div>
-            <div style={{ marginTop: '5%' }}>
-                <Typography variant='h6' color='primary' style={{ marginLeft: '7px', textAlign: 'center', paddingTop: '2%', paddingBottom: '2%' }}>Creater</Typography>
+            {currentScreen === CONTAINER_SCREEN && <div>
+                <div style={{ marginTop: '5%' }}>
+                    <Typography variant='h6' color='primary' style={{ marginLeft: '7px', textAlign: 'center', paddingTop: '2%', paddingBottom: '2%' }}>Creater</Typography>
 
-                {itemState && itemState.map((groupList, index: number) => (
-                    <Accordion expanded={expanded === groupList.id} key={index} onChange={handleChange(groupList.id)} style={{ margin: 0 }}>
-                        <AccordionSummary
-                            expandIcon={<ExpandMoreIcon />}
-                            aria-controls="panel1bh-content"
-                            id="panel1bh-header"
-                        >
-                            <Grid container spacing={0} direction="row" justify="space-around" alignItems="center" >
-                                <Grid item xs={12} style={{ margin: '0 auto' }}>
-                                    <Typography variant='h6' color='primary' >{groupList.groupName}</Typography>
-                                    <Typography variant='subtitle2' color='primary' >{groupList.description}</Typography>
+                    {itemState && itemState.map((groupList, index: number) => (
+                        <Accordion expanded={expanded === groupList.id} key={index} onChange={handleChange(groupList.id)} style={{ margin: 0 }}>
+                            <AccordionSummary
+                                expandIcon={<ExpandMoreIcon />}
+                                aria-controls="panel1bh-content"
+                                id="panel1bh-header"
+                            >
+                                <Grid container spacing={0} direction="row" justify="space-around" alignItems="center" >
+                                    <Grid item xs={12} style={{ margin: '0 auto' }}>
+                                        <Typography variant='h6' color='primary' >{groupList.groupName}</Typography>
+                                        <Typography variant='subtitle2' color='primary' >{groupList.description}</Typography>
+                                    </Grid>
+                                    <Grid item xs={12} style={{ margin: '0 auto' }}>
+                                        <Typography variant='caption' color='secondary' >Collect Location:{groupList.location}</Typography>
+                                    </Grid>
+                                    <Grid item xs={12} style={{ margin: '0 auto' }}>
+                                        <Typography variant='caption' color='secondary' >End:{groupList.limit}</Typography>
+                                    </Grid>
+                                    <Grid item xs={12} style={{ margin: '0 auto' }}>
+                                        <Typography variant='caption' color='secondary' >Collect Time:{groupList.collect}</Typography>
+                                    </Grid>
+                                    <Grid item xs={12} style={{ margin: '0 auto' }}>
+                                        <Typography variant='caption' color='secondary' >Total Item:{groupList.item.length}</Typography>
+                                    </Grid>
                                 </Grid>
-                                <Grid item xs={12} style={{ margin: '0 auto' }}>
-                                    <Typography variant='caption' color='secondary' >Collect Location:{groupList.location}</Typography>
-                                </Grid>
-                                <Grid item xs={12} style={{ margin: '0 auto' }}>
-                                    <Typography variant='caption' color='secondary' >End:{groupList.limit}</Typography>
-                                </Grid>
-                                <Grid item xs={12} style={{ margin: '0 auto' }}>
-                                    <Typography variant='caption' color='secondary' >Collect Time:{groupList.collect}</Typography>
-                                </Grid>
-                                <Grid item xs={12} style={{ margin: '0 auto' }}>
-                                    <Typography variant='caption' color='secondary' >Total Item:{groupList.item.length}</Typography>
-                                </Grid>
-                            </Grid>
-                        </AccordionSummary>
-                        <AccordionDetails>
-                            <Grid container spacing={0} direction="row" justify="space-around" alignItems="center" >
-                                {groupList.item && groupList.item.map((itemList, index: number) => (
-                                    <Grid container spacing={0} style={{ marginTop: '2%', marginBottom: '2%' }} direction="row" justify="space-around" alignItems="center" key={index}>
-                                        <Grid item xs={5} style={{ margin: '0 auto' }}>
-                                            <div style={{ margin: '10px', textAlign: 'center' }}>
-                                                <CardMedia
-                                                    component="img"
-                                                    alt={itemList.image}
-                                                    image={itemList.image}
-                                                    title={itemList.image}
-                                                />
-                                            </div>
-                                        </Grid>
-                                        <Grid item xs={5} style={{ margin: '0 auto' }}>
-                                            <Typography variant='h5' style={{ textAlign: 'left', color: TEXT_COLOR, fontWeight: 'bold', }}>{itemList.name}</Typography>
-                                            <Typography variant='body2' style={{ textAlign: 'left', color: DESCRIPTION_COLOR }}>{itemList.Description}</Typography>
-                                            <Typography variant='h6' style={{ textAlign: 'left', color: PRICE_COLOR }}>$ {itemList.price}</Typography>
-                                        </Grid>
-                                        <Grid item xs={2} style={{ margin: '0 auto', textAlign: 'right' }}>
-                                            <Typography variant='subtitle1' color='secondary'>edit</Typography>
-                                        </Grid>
-                                    </Grid>))}
+                            </AccordionSummary>
+                            <AccordionDetails>
+                                <Grid container spacing={0} direction="row" justify="space-around" alignItems="center" >
+                                    {groupList.item && groupList.item.map((itemList, index: number) => (
+                                        <Grid container spacing={0} style={{ marginTop: '2%', marginBottom: '2%' }} direction="row" justify="space-around" alignItems="center" key={index}>
+                                            <Grid item xs={5} style={{ margin: '0 auto' }}>
+                                                <div style={{ margin: '10px', textAlign: 'center' }}>
+                                                    <CardMedia
+                                                        component="img"
+                                                        alt={itemList.image}
+                                                        image={itemList.image}
+                                                        title={itemList.image}
+                                                    />
+                                                </div>
+                                            </Grid>
+                                            <Grid item xs={5} style={{ margin: '0 auto' }}>
+                                                <Typography variant='h5' style={{ textAlign: 'left', color: TEXT_COLOR, fontWeight: 'bold', }}>{itemList.name}</Typography>
+                                                <Typography variant='body2' style={{ textAlign: 'left', color: DESCRIPTION_COLOR }}>{itemList.Description}</Typography>
+                                                <Typography variant='h6' style={{ textAlign: 'left', color: PRICE_COLOR }}>$ {itemList.price}</Typography>
+                                            </Grid>
+                                            <Grid item xs={2} style={{ margin: '0 auto', textAlign: 'right' }}>
+                                                <Typography variant='subtitle1' color='secondary'>edit</Typography>
+                                            </Grid>
+                                        </Grid>))}
 
-                                <Button color='primary' variant="contained" fullWidth style={{ width: '97%', color: 'white' }}> +</Button>
-                            </Grid>
-                        </AccordionDetails>
-                    </Accordion>
-                ))}
-                <div> <List aria-label="SPACEing" style={{ marginTop: '45px', marginBottom: '45px' }} /></div>
-            </div>
+                                    <Button color='primary' variant="contained" fullWidth style={{ width: '97%', color: 'white' }}> +</Button>
+                                </Grid>
+                            </AccordionDetails>
+                        </Accordion>
+                    ))}
+                    <div> <List aria-label="SPACEing" style={{ marginTop: '45px', marginBottom: '45px' }} /></div>
+                </div>
 
 
-            <AppBar position="fixed" color="inherit" style={{ top: 'auto', bottom: 0, }}>
-                <Grid container direction="row" justify="space-evenly" alignItems="center" style={{ marginTop: '10px', marginBottom: '10px' }}>
-                    <Grid item lg={6} xl={6} md={6} sm={6} xs={6}>
-                        <Typography variant='subtitle1' color='secondary' style={{ paddingTop: '1vh', paddingBottom: '1vh', textAlign: 'center' }}>Total Group</Typography>
+                <AppBar position="fixed" color="inherit" style={{ top: 'auto', bottom: 0, }}>
+                    <Grid container direction="row" justify="space-evenly" alignItems="center" style={{ marginTop: '10px', marginBottom: '10px' }}>
+                        <Grid item lg={6} xl={6} md={6} sm={6} xs={6}>
+                            <Typography variant='subtitle1' color='secondary' style={{ paddingTop: '1vh', paddingBottom: '1vh', textAlign: 'center' }}>Total Group</Typography>
+                        </Grid>
+                        <Grid item lg={6} xl={6} md={6} sm={6} xs={6}>
+                            <Typography variant='subtitle1' color='secondary' style={{ paddingTop: '1vh', paddingBottom: '1vh', textAlign: 'center' }}>{itemState.length} </Typography>
+                        </Grid>
                     </Grid>
-                    <Grid item lg={6} xl={6} md={6} sm={6} xs={6}>
-                        <Typography variant='subtitle1' color='secondary' style={{ paddingTop: '1vh', paddingBottom: '1vh', textAlign: 'center' }}>{itemState.length} </Typography>
-                    </Grid>
-                </Grid>
 
-                <Fab
+                    <Fab
+                        onClick={() => _addGroup()}
+                        color="secondary" aria-label="add" style={{
+                            position: 'absolute',
+                            zIndex: 1,
+                            top: -30,
+                            left: 0,
+                            right: 0,
+                            margin: '0 auto',
+                        }}>
+                        <AddIcon />
+                    </Fab>
+                </AppBar>
 
-                    color="secondary" aria-label="add" style={{
-                        position: 'absolute',
-                        zIndex: 1,
-                        top: -30,
-                        left: 0,
-                        right: 0,
-                        margin: '0 auto',
-                    }}>
-                    <AddIcon />
-                </Fab>
-            </AppBar>
+            </div>}
+
+            {currentScreen === MODAL_ADD_GROUP_SCREEN && <div style={{margin:8}}> 
+                <TextField
+                    label="groupName"
+                    //style={{ margin: 8 }}
+                    placeholder="groupName"
+                    helperText="Your groupName name"
+                    fullWidth
+                    margin="normal"
+                    type='text'
+                    InputLabelProps={{
+                        shrink: true,
+                    }}
+                    value={groupData.groupName}
+                    onChange={(e) => _handleGroupChange("groupName", e)}
+                />
+
+                <TextField
+                    label="description"
+                    //style={{ margin: 8 }}
+                    placeholder="description"
+                    helperText="Your description name"
+                    fullWidth
+                    margin="normal"
+                    type='text'
+                    InputLabelProps={{
+                        shrink: true,
+                    }}
+                    value={groupData.description}
+                    onChange={(e) => _handleGroupChange("description", e)}
+                />
+
+                <TextField
+                    label="location"
+                    //style={{ margin: 8 }}
+                    placeholder="location"
+                    helperText="Your location name"
+                    fullWidth
+                    margin="normal"
+                    type='text'
+                    InputLabelProps={{
+                        shrink: true,
+                    }}
+                    value={groupData.location}
+                    onChange={(e) => _handleGroupChange("location", e)}
+                />
+
+                
+                <div style={{ margin: '8px', textAlign: 'center' }}>
+                    {groupReady === true && <Button style={{ marginTop: '15px', }} variant='outlined' fullWidth color="primary" onClick={() => _createGroup()}>Create Group</Button>}
+                    {groupReady === false && <Button style={{ marginTop: '15px', }} disabled variant='outlined' fullWidth color="primary"> Create Group</Button>}
+                </div>
+            </div>}
 
         </div >
     );
