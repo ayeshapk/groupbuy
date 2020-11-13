@@ -71,7 +71,7 @@ function CreaterShopContainer() {
                         >
                             <Grid container spacing={0} direction="row" justify="space-around" alignItems="center" >
                                 <Grid item xs={12} style={{ margin: '0 auto' }}>
-                                    <Typography variant='subtitle1' color='primary' >{groupList.groupName}</Typography>
+                                    <Typography variant='h6' color='primary' >{groupList.groupName}</Typography>
                                     <Typography variant='subtitle2' color='primary' >{groupList.description}</Typography>
                                 </Grid>
                                 <Grid item xs={12} style={{ margin: '0 auto' }}>
@@ -82,6 +82,9 @@ function CreaterShopContainer() {
                                 </Grid>
                                 <Grid item xs={12} style={{ margin: '0 auto' }}>
                                     <Typography variant='caption' color='secondary' >Collect Time:{groupList.collect}</Typography>
+                                </Grid>
+                                <Grid item xs={12} style={{ margin: '0 auto' }}>
+                                    <Typography variant='caption' color='secondary' >Total Item:{groupList.item.length}</Typography>
                                 </Grid>
                             </Grid>
                         </AccordionSummary>
