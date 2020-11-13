@@ -43,7 +43,7 @@ function DashboardContainer() {
 
     const [participantsCountState, setParticipantsCountState] = useState(0);
 
-   
+
     useEffect(() => {
         if (myItemState.length) {
             setCurrentScreen(CONTAINER_SCREEN)
@@ -233,10 +233,10 @@ function DashboardContainer() {
                 <div> <List aria-label="SPACEing" style={{ marginTop: '30px', marginBottom: '30px' }} /></div>
             </div>}
 
-            {currentScreen === MODAL_SCREEN && <div>
+            {currentScreen === MODAL_SCREEN && <div style={{ margin: 8 }}>
                 <TextField
                     label="Merchant"
-                    style={{ margin: 8 }}
+                    //style={{ margin: 8 }}
                     placeholder="Merchant"
                     helperText="Your Merchant name"
                     fullWidth
@@ -268,7 +268,7 @@ function DashboardContainer() {
 
                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
                     <KeyboardDatePicker
-                        style={{ margin: 8 }}
+                        //style={{ margin: 8 }}
                         fullWidth
                         margin="normal"
                         id="date-picker-dialog"
@@ -283,7 +283,10 @@ function DashboardContainer() {
                     />
                 </MuiPickersUtilsProvider>
 
-                {<Button style={{ marginTop: '15px' }} variant='outlined' fullWidth color="primary" onClick={() => _updateEditGroup()}>Edit</Button>}
+                {
+                    <div style={{ margin: '8px', textAlign: 'center' }}>
+                        <Button style={{ marginTop: '15px' }} variant='outlined' fullWidth color="primary" onClick={() => _updateEditGroup()}>Edit</Button>
+                    </div>}
             </div>}
 
             <SnackBarData

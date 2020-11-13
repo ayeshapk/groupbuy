@@ -10,11 +10,14 @@ import MerchantName from '../component/MerchantName';
 import { DescriptionText, DESCRIPTION_COLOR, MainText, PRICE_COLOR, SubText, TEXT_COLOR } from '../consts/const';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import AddIcon from '@material-ui/icons/Add';
+import moment from 'moment';
+import { KeyboardDatePicker, MuiPickersUtilsProvider, } from '@material-ui/pickers';
+import DateFnsUtils from '@date-io/date-fns';
 
 let creater = [
     {
         id: 0, groupName: 'Drink', description: 'Storage 2-3 day in chiller',
-        location: `1°20'48.0"N 103°57'21.7"E 132 Simei Street 1, Block 132`, limit: '16 September', collect: '17 Septemper',
+        location: `1°20'48.0"N 103°57'21.7"E 132 Simei Street 1, Block 132`, limit: new Date('2020-10-18T21:12:54'), collect: new Date('2020-10-18T21:12:54'),
         item: [
             { id: 0, name: 'coke', image: 'https://res.cloudinary.com/www-weddingpenguin-co/image/upload/v1600851614/001397056_qsr44y.jpg', price: 15, amount: 3, Description: 'lipsum adadada fasdgfasdgraesd gedagdfgbhd fdhrfht rhrhrhtrdhserhe. asfdawsfasfdsafasf.', retailPrice: 16 },
             { id: 1, name: 'pepsi', image: 'https://res.cloudinary.com/www-weddingpenguin-co/image/upload/v1600851613/172935e5ab484423dd674574b205a77d_whbquq.jpg', price: 22, amount: 2, Description: 'lipsum adadada fasdgfasdgraesdgeda gdfgbhd fdhrfht rhrhrhtrdhserhe. asfdawsfasfdsafasf.', retailPrice: 25 },
@@ -24,7 +27,7 @@ let creater = [
     },
     {
         id: 1, groupName: 'Vegetable', description: 'Storage 2-3 day in chiller',
-        location: `1°20'48.0"N 103°57'21.7"E 132 Simei Street 1, Block 132`, limit: '16 September', collect: '17 Septemper',
+        location: `1°20'48.0"N 103°57'21.7"E 132 Simei Street 1, Block 132`, limit: new Date('2020-10-18T21:12:54'), collect: new Date('2020-10-18T21:12:54'),
         item: [
             { id: 0, name: 'Chinese pomfret', image: 'https://res.cloudinary.com/www-weddingpenguin-co/image/upload/v1601875546/IMG_9641_copy_grande_bts0yp.webp', price: 15, amount: 3, Description: 'lipsum adadada fasdgfasdgraesd gedagdfgbhd fdhrfht rhrhrhtrdhserhe. asfdawsfasfdsafasf.', retailPrice: 16 },
             { id: 1, name: 'brown mushroom', image: 'https://res.cloudinary.com/www-weddingpenguin-co/image/upload/v1601875547/0000020985646_hgcsbe.webp', price: 22, amount: 2, Description: 'lipsum adadada fasdgfasdgraesdgeda gdfgbhd fdhrfht rhrhrhtrdhserhe. asfdawsfasfdsafasf.', retailPrice: 25 },
@@ -46,7 +49,7 @@ function CreaterShopContainer() {
     const [currentScreen, setCurrentScreen] = useState(CONTAINER_SCREEN)
     const [groupData, setGroupData] = useState({
         id: 1, groupName: '', description: '',
-        location: ``, limit: '', collect: '',
+        location: ``, limit: new Date('2020-10-18T21:12:54'), collect: new Date('2020-10-18T21:12:54'),
         item: []
     })
     const [groupReady, setgroupReady] = useState(false)
@@ -87,17 +90,42 @@ function CreaterShopContainer() {
         const editValue = { ...data, [key]: code }
         //console.log('editValue>>>', editValue)
         setGroupData(editValue)
+    }
 
-        setItemState(
-            itemState.map(item =>
-                item.id === editValue.id
-                    ? { ...editValue }
-                    : item
-            ))
+    const _handleDateChange = (key: string, date) => {
+        let code = date
+        let data = { ...groupData }
+        //console.log('DATA>>>', data)
+        data[key] = key
+        //let keyItem = data[key]
+        //let final = {[keyItem]: code }
+        //console.log('will set', final)
+        const editValue = { ...data, [key]: code }
+        //console.log('editValue>>>', editValue)
+        setGroupData(editValue)
     }
 
     const _createGroup = () => {
-
+        //console.log('itemState', itemState)
+        let cloneItemState = [...itemState]
+        let newObject = {...groupData}
+        newObject.id=itemState.length+1
+        //console.log('new',newObject)
+        setGroupData(newObject) 
+        //console.log('CHECK ARRAYS',cloneItemState)
+        //console.log('CHECK OBJECT',newObject)
+        //let Clone = {...groupData}
+        //console.log('Clone',Clone)
+        //console.log('cloneItemState',cloneItemState)
+        cloneItemState.push(newObject); 
+        //console.log('LAST',cloneItemState)
+        setItemState(cloneItemState)
+        setCurrentScreen(CONTAINER_SCREEN)
+        setGroupData({
+            id: 1, groupName: '', description: '',
+            location: ``, limit: new Date('2020-10-18T21:12:54'), collect: new Date('2020-10-18T21:12:54'),
+            item: []
+        })
     }
 
     return (
@@ -122,10 +150,10 @@ function CreaterShopContainer() {
                                         <Typography variant='caption' color='secondary' >Collect Location:{groupList.location}</Typography>
                                     </Grid>
                                     <Grid item xs={12} style={{ margin: '0 auto' }}>
-                                        <Typography variant='caption' color='secondary' >End:{groupList.limit}</Typography>
+                                        <Typography variant='caption' color='secondary' >End:{moment(groupList.limit).format("Do-MMM-YY")}</Typography>
                                     </Grid>
                                     <Grid item xs={12} style={{ margin: '0 auto' }}>
-                                        <Typography variant='caption' color='secondary' >Collect Time:{groupList.collect}</Typography>
+                                        <Typography variant='caption' color='secondary' >Collect Time: {moment(groupList.collect).format("Do-MMM-YY")}</Typography>
                                     </Grid>
                                     <Grid item xs={12} style={{ margin: '0 auto' }}>
                                         <Typography variant='caption' color='secondary' >Total Item:{groupList.item.length}</Typography>
@@ -191,7 +219,7 @@ function CreaterShopContainer() {
 
             </div>}
 
-            {currentScreen === MODAL_ADD_GROUP_SCREEN && <div style={{margin:8}}> 
+            {currentScreen === MODAL_ADD_GROUP_SCREEN && <div style={{ margin: 8 }}>
                 <TextField
                     label="groupName"
                     //style={{ margin: 8 }}
@@ -237,7 +265,40 @@ function CreaterShopContainer() {
                     onChange={(e) => _handleGroupChange("location", e)}
                 />
 
-                
+                <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                    <KeyboardDatePicker
+                        //style={{ margin: 8 }}
+                        fullWidth
+                        margin="normal"
+                        id="date-picker-limit"
+                        label="limit Date"
+                        format="MM/dd/yyyy"
+                        helperText="Your limit Date"
+                        value={groupData.limit}
+                        onChange={(e) => _handleDateChange("limit", e)}
+                        KeyboardButtonProps={{
+                            'aria-label': 'change date',
+                        }}
+                    />
+                </MuiPickersUtilsProvider>
+
+                <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                    <KeyboardDatePicker
+                        //style={{ margin: 8 }}
+                        fullWidth
+                        margin="normal"
+                        id="date-picker-collect"
+                        label="collect Date"
+                        format="MM/dd/yyyy"
+                        helperText="Your collect Date"
+                        value={groupData.collect}
+                        onChange={(e) => _handleDateChange("collect", e)}
+                        KeyboardButtonProps={{
+                            'aria-label': 'change date',
+                        }}
+                    />
+                </MuiPickersUtilsProvider>
+
                 <div style={{ margin: '8px', textAlign: 'center' }}>
                     {groupReady === true && <Button style={{ marginTop: '15px', }} variant='outlined' fullWidth color="primary" onClick={() => _createGroup()}>Create Group</Button>}
                     {groupReady === false && <Button style={{ marginTop: '15px', }} disabled variant='outlined' fullWidth color="primary"> Create Group</Button>}
