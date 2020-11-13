@@ -104,6 +104,11 @@ export default function MenuBar() {
                 <Typography style={{ color: MainText }}>{userName}</Typography>
             </MenuItem>
 
+            <MenuItem onClick={() => goPage('creater')}>
+                <Typography style={{ color: MainText }}>Creater</Typography>
+            </MenuItem>
+
+
             <MenuItem onClick={() => setOpenDrawer(false)}>
                 <Typography style={{ color: MainText }}>Saved</Typography>
             </MenuItem>
