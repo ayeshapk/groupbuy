@@ -54,7 +54,7 @@ function CreaterShopContainer() {
     })
 
     const [itemData, setItemData] = useState({ id: 0, name: '', image: '', price: 0, amount: 3, Description: '', retailPrice: 0 },)
-
+   
 
     const [groupReady, setgroupReady] = useState(false)
     const [itemReady, setItemReady] = useState(false)
@@ -79,8 +79,31 @@ function CreaterShopContainer() {
         setCurrentScreen(MODAL_ADD_GROUP_SCREEN)
     }
 
-    const _addItemData= () => {
-        setCurrentScreen(MODAL_ADD_ITEM_SCREEN)
+    const _addItemData = (id: number) => {
+        console.log(id)
+        //setCurrentScreen(MODAL_ADD_ITEM_SCREEN)
+        //console.log('itemState', itemState)
+        let cloneItemState = [...itemState]
+        let newObject = { ...itemData } 
+        console.log('cloneItemState',cloneItemState)
+        console.log('newObject',newObject)
+
+        cloneItemState.forEach(item => {
+            if(item.id === id){
+              let cloneItem = [...item.item]
+              let object = {...itemData}
+              object.id = cloneItem.length+1
+              cloneItem.push(object)
+              //console.log('New object---->',cloneItem)
+              //setItemArrayData(cloneItem)
+              //console.log('>>>>',itemArrayData)
+              item.item = cloneItem
+              console.log('>>>>>>',item)
+              return item
+            }
+        })
+
+        setItemState(cloneItemState)
     }
 
 
@@ -131,16 +154,16 @@ function CreaterShopContainer() {
     const _createGroup = () => {
         //console.log('itemState', itemState)
         let cloneItemState = [...itemState]
-        let newObject = {...groupData}
-        newObject.id=itemState.length+1
+        let newObject = { ...groupData }
+        newObject.id = itemState.length + 1
         //console.log('new',newObject)
-        setGroupData(newObject) 
+        setGroupData(newObject)
         //console.log('CHECK ARRAYS',cloneItemState)
         //console.log('CHECK OBJECT',newObject)
         //let Clone = {...groupData}
         //console.log('Clone',Clone)
         //console.log('cloneItemState',cloneItemState)
-        cloneItemState.push(newObject); 
+        cloneItemState.push(newObject);
         //console.log('LAST',cloneItemState)
         setItemState(cloneItemState)
         setCurrentScreen(CONTAINER_SCREEN)
@@ -151,8 +174,8 @@ function CreaterShopContainer() {
         })
     }
 
-    const _createItem =()=>{
-        
+    const _createItem = () => {
+
     }
 
     return (
@@ -211,7 +234,7 @@ function CreaterShopContainer() {
                                             </Grid>
                                         </Grid>))}
 
-                                    <Button color='primary' variant="contained" fullWidth style={{ width: '97%', color: 'white' }} onClick={()=>_addItemData()}> +</Button>
+                                    <Button color='primary' variant="contained" fullWidth style={{ width: '97%', color: 'white' }} onClick={() => _addItemData(groupList.id)}> +</Button>
                                 </Grid>
                             </AccordionDetails>
                         </Accordion>
