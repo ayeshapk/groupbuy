@@ -54,7 +54,7 @@ function CreaterShopContainer() {
     })
 
     const [itemData, setItemData] = useState({ id: 0, name: '', image: '', price: 0, amount: 3, Description: '', retailPrice: 0 },)
-   
+    const [stateId,setStateId] =useState(0)
 
     const [groupReady, setgroupReady] = useState(false)
     const [itemReady, setItemReady] = useState(false)
@@ -70,6 +70,12 @@ function CreaterShopContainer() {
         }
     }, [groupData]);
 
+    useEffect(() => {
+        if (itemData.name.length >= 1 && groupData.description.length >= 1) {
+            setItemReady(true)
+        }
+    }, [itemData]);
+  
 
     const linkToPage = (pagename: string) => {
         router.push('/' + pagename)
@@ -80,30 +86,9 @@ function CreaterShopContainer() {
     }
 
     const _addItemData = (id: number) => {
-        console.log(id)
-        //setCurrentScreen(MODAL_ADD_ITEM_SCREEN)
-        //console.log('itemState', itemState)
-        let cloneItemState = [...itemState]
-        let newObject = { ...itemData } 
-        console.log('cloneItemState',cloneItemState)
-        console.log('newObject',newObject)
-
-        cloneItemState.forEach(item => {
-            if(item.id === id){
-              let cloneItem = [...item.item]
-              let object = {...itemData}
-              object.id = cloneItem.length+1
-              cloneItem.push(object)
-              //console.log('New object---->',cloneItem)
-              //setItemArrayData(cloneItem)
-              //console.log('>>>>',itemArrayData)
-              item.item = cloneItem
-              console.log('>>>>>>',item)
-              return item
-            }
-        })
-
-        setItemState(cloneItemState)
+        //console.log(id)
+        setCurrentScreen(MODAL_ADD_ITEM_SCREEN)
+        setStateId(id)
     }
 
 
@@ -175,7 +160,31 @@ function CreaterShopContainer() {
     }
 
     const _createItem = () => {
+        let ID = stateId
+        let cloneItemState = [...itemState]
+        let newObject = { ...itemData } 
+        console.log('cloneItemState',cloneItemState)
+        console.log('newObject',newObject)
 
+        cloneItemState.forEach(item => {
+            if(item.id === ID){
+              let cloneItem = [...item.item]
+              let object = {...itemData}
+              object.id = cloneItem.length+1
+              cloneItem.push(object)
+              //console.log('New object---->',cloneItem)
+              //setItemArrayData(cloneItem)
+              //console.log('>>>>',itemArrayData)
+              item.item = cloneItem
+              console.log('>>>>>>',item)
+              return item
+            }
+        })
+
+        setItemState(cloneItemState)
+        setCurrentScreen(CONTAINER_SCREEN)
+        setItemReady(false)
+        setItemData({ id: 0, name: '', image: '', price: 0, amount: 3, Description: '', retailPrice: 0 },)
     }
 
     return (
@@ -404,6 +413,7 @@ function CreaterShopContainer() {
                 <div style={{ margin: '8px', textAlign: 'center' }}>
                     {itemReady === true && <Button style={{ marginTop: '15px', }} variant='outlined' fullWidth color="primary" onClick={() => _createItem()}>Create Item</Button>}
                     {itemReady === false && <Button style={{ marginTop: '15px', }} disabled variant='outlined' fullWidth color="primary"> Create Item</Button>}
+                    <Button style={{ marginTop: '15px', }} variant='outlined' fullWidth color="primary" onClick={() => _createItem()}>Create Item</Button>
                 </div>
             </div>}
 
