@@ -71,7 +71,7 @@ function CreaterShopContainer() {
     }, [groupData]);
 
     useEffect(() => {
-        if (itemData.name.length >= 1 && groupData.description.length >= 1) {
+        if (itemData.name.length >= 1 && itemData.Description.length >= 1) {
             setItemReady(true)
         }
     }, [itemData]);
@@ -413,7 +413,6 @@ function CreaterShopContainer() {
                 <div style={{ margin: '8px', textAlign: 'center' }}>
                     {itemReady === true && <Button style={{ marginTop: '15px', }} variant='outlined' fullWidth color="primary" onClick={() => _createItem()}>Create Item</Button>}
                     {itemReady === false && <Button style={{ marginTop: '15px', }} disabled variant='outlined' fullWidth color="primary"> Create Item</Button>}
-                    <Button style={{ marginTop: '15px', }} variant='outlined' fullWidth color="primary" onClick={() => _createItem()}>Create Item</Button>
                 </div>
             </div>}
 
